@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: Arrested Development Quotes API
+  description: |
+    A read-only REST API serving memorable quotes from the TV show Arrested Development.
+
+    All endpoints return a single random quote with optional filtering by character or meme availability.
+    No authentication required - all endpoints are publicly accessible.
+  version: 1.0.0
+  contact:
+    name: Bluths API
+servers:
+  - url: https://bluthsapi.pages.dev/api
+    description: Production server (Cloudflare Pages)
+  - url: http://localhost:8788/api
+    description: Local development server
+
+paths:
+  /quotes/random:
+    get:
+      summary: Get random quote
+      description: Returns a single randomly selected quote from all available quotes
+      operationId: getRandomQuote
+      tags:
+        - Quotes
+      responses:
+        '200':
+          description: Successfully retrieved random quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+              examples:
+                withImage:
+                  summary: Quote with image
+                  value:
+                    data:
+                      id: "quote-042"
+                      quote: "There's always money in the banana stand."
+                      primarySpeaker: "George Sr."
+                      speakers: ["George Sr.", "Michael"]
+                      context: "Season 1, Episode 2 - Top Banana"
+                      imageUrl: "https://bucket.s3.amazonaws.com/banana-stand.jpg"
+                withoutImage:
+                  summary: Quote without image
+                  value:
+                    data:
+                      id: "quote-001"
+                      quote: "I've made a huge mistake."
+                      primarySpeaker: "Gob"
+                      speakers: ["Gob"]
+                      context: "Season 1, Episode 1 - Pilot"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Failed to load quotes data"
+
+  /quotes/meme:
+    get:
+      summary: Get random meme quote
+      description: Returns a single randomly selected quote that has an associated image URL
+      operationId: getMemeQuote
+      tags:
+        - Quotes
+      responses:
+        '200':
+          description: Successfully retrieved meme quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+              example:
+                data:
+                  id: "quote-099"
+                  quote: "I blue myself."
+                  primarySpeaker: "Tobias"
+                  imageUrl: "https://bucket.s3.amazonaws.com/tobias-blue.jpg"
+        '404':
+          description: No meme quotes available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "No meme quotes available"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /quotes/{speaker}:
+    get:
+      summary: Get random quote by speaker
+      description: |
+        Returns a single randomly selected quote filtered by primary speaker.
+        Speaker name matching is case-insensitive (e.g., "gob", "Gob", "GOB" all match).
+      operationId: getQuoteBySpeaker
+      tags:
+        - Quotes
+      parameters:
+        - name: speaker
+          in: path
+          required: true
+          description: Character name to filter by (case-insensitive)
+          schema:
+            type: string
+          examples:
+            gob:
+              value: "Gob"
+              summary: "Gob Bluth"
+            michael:
+              value: "Michael"
+              summary: "Michael Bluth"
+            tobias:
+              value: "Tobias"
+              summary: "Tobias Fünke"
+      responses:
+        '200':
+          description: Successfully retrieved quote for speaker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+              example:
+                data:
+                  id: "quote-001"
+                  quote: "I've made a huge mistake."
+                  primarySpeaker: "Gob"
+                  speakers: ["Gob"]
+                  context: "Season 1, Episode 1 - Pilot"
+        '404':
+          description: No quotes found for the specified speaker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "No quotes found for character: Hermano"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    QuoteResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Quote'
+
+    Quote:
+      type: object
+      required:
+        - id
+        - quote
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the quote
+          example: "quote-001"
+        quote:
+          type: string
+          description: The actual quote text
+          maxLength: 1000
+          example: "I've made a huge mistake."
+        primarySpeaker:
+          type: string
+          description: Main character delivering the quote
+          example: "Gob"
+        speakers:
+          type: array
+          description: All characters involved in the quote
+          items:
+            type: string
+          example: ["Gob", "Michael"]
+        context:
+          type: string
+          description: Episode reference or situational context
+          example: "Season 1, Episode 1 - Pilot"
+        imageUrl:
+          type: string
+          format: uri
+          description: Full URL to associated image (S3 base URL + relative path)
+          example: "https://bucket.s3.amazonaws.com/banana-stand.jpg"
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+          example: "No quotes found for character: Hermano"
+
+tags:
+  - name: Quotes
+    description: Endpoints for retrieving Arrested Development quotes
