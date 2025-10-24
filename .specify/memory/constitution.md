@@ -34,10 +34,29 @@ Error: `{ "error": "message" }` with appropriate status code
 
 Basic README with endpoint list and example responses required.
 
+## Deployment Standards
+
+### Docker Requirements
+- Multi-stage builds for minimal image size
+- Run as non-root user for security
+- Health checks must use lightweight tools (curl preferred) - avoid loading language interpreters
+- Clean up package manager cache to minimize image size (e.g., `rm -rf /var/lib/apt/lists/*`)
+
+### Health Checks
+- Use curl for HTTP health checks (not Python or other language-specific tools)
+- Health check endpoint: GET /health
+- Standard parameters: interval=30s, timeout=3s, start-period=5s, retries=3
+- Health check command format: `curl -f http://localhost:PORT/health || exit 1`
+
+### Package Management
+- Use uv for Python dependency management (10-100x faster than pip)
+- Lock dependencies for reproducible builds (uv.lock)
+- Separate production (requirements.txt) and development (requirements-dev.txt) dependencies
+
 ## Governance
 
 This constitution defines minimal viable quote API. 
 All endpoints must remain read-only and publicly accessible.
 Serving costs should be minimized. This is not expected to be a high use API.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-24
+**Version**: 1.1.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-24
