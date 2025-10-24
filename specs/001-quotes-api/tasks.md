@@ -24,15 +24,15 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project root directory structure (app/, public/, tests/)
-- [ ] T002 Install uv package manager (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- [ ] T003 Create requirements.txt with FastAPI, Uvicorn, Pydantic, pydantic-settings dependencies
-- [ ] T004 [P] Create requirements-dev.txt with pytest, httpx, pytest-asyncio, pytest-cov
-- [ ] T005 [P] Create .gitignore file for Python project (.venv/, __pycache__/, .env, .pytest_cache/, uv.lock)
-- [ ] T006 [P] Create .env.example file with S3_BASE_URL, HOST, PORT variables
-- [ ] T007 [P] Create app/data/ directory for quotes.json file
-- [ ] T008 Create placeholder app/data/quotes.json with single Tobias quote
-- [ ] T009 Initialize uv virtual environment with `uv venv` and install dependencies with `uv pip install -r requirements.txt`
+- [X] T001 Create project root directory structure (app/, public/, tests/)
+- [X] T002 Install uv package manager (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
+- [X] T003 Create requirements.txt with FastAPI, Uvicorn, Pydantic, pydantic-settings dependencies
+- [X] T004 [P] Create requirements-dev.txt with pytest, httpx, pytest-asyncio, pytest-cov
+- [X] T005 [P] Create .gitignore file for Python project (.venv/, __pycache__/, .env, .pytest_cache/, uv.lock)
+- [X] T006 [P] Create .env.example file with S3_BASE_URL, HOST, PORT variables
+- [X] T007 [P] Create app/data/ directory for quotes.json file
+- [X] T008 Create placeholder app/data/quotes.json with single Tobias quote
+- [X] T009 Initialize uv virtual environment with `uv venv` and install dependencies with `uv pip install -r requirements.txt`
 
 ---
 
@@ -42,14 +42,14 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T010 [P] Create app/models.py with Pydantic models (Quote, QuoteResponse, ErrorResponse)
-- [ ] T011 [P] Create app/config.py with Settings class using pydantic-settings
-- [ ] T012 Implement load_quotes() function in app/services.py to read and parse quotes.json
-- [ ] T013 Implement get_random_quote(quotes) function in app/services.py for random selection
-- [ ] T014 [P] Implement build_quote_response(quote, s3_base_url) in app/services.py to transform Quote to QuoteResponse
-- [ ] T015 [P] Implement build_error_response(message) in app/services.py to create ErrorResponse
-- [ ] T016 Create app/main.py with FastAPI app instance and CORS/error handling middleware
-- [ ] T017 Add quotes loading on startup in app/main.py using @app.on_event("startup")
+- [X] T010 [P] Create app/models.py with Pydantic models (Quote, QuoteResponse, ErrorResponse)
+- [X] T011 [P] Create app/config.py with Settings class using pydantic-settings
+- [X] T012 Implement load_quotes() function in app/services.py to read and parse quotes.json
+- [X] T013 Implement get_random_quote(quotes) function in app/services.py for random selection
+- [X] T014 [P] Implement build_quote_response(quote, s3_base_url) in app/services.py to transform Quote to QuoteResponse
+- [X] T015 [P] Implement build_error_response(message) in app/services.py to create ErrorResponse
+- [X] T016 Create app/main.py with FastAPI app instance and CORS/error handling middleware
+- [X] T017 Add quotes loading on startup in app/main.py using @app.on_event("startup")
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -66,9 +66,9 @@
 
 ### Implementation for User Story 1
 
-- [ ] T018 [US1] Implement GET `/api/quotes/random` endpoint in app/main.py
-- [ ] T019 [US1] Add error handling for empty quotes file in `/api/quotes/random` endpoint
-- [ ] T020 [US1] Test `/api/quotes/random` endpoint manually with placeholder quote
+- [X] T018 [US1] Implement GET `/api/quotes/random` endpoint in app/main.py
+- [X] T019 [US1] Add error handling for empty quotes file in `/api/quotes/random` endpoint
+- [X] T020 [US1] Test `/api/quotes/random` endpoint manually with placeholder quote
 
 **Checkpoint**: User Story 1 complete - `/api/quotes/random` endpoint functional and independently testable
 
@@ -86,14 +86,14 @@
 
 ### Implementation for User Story 4
 
-- [ ] T021 [P] [US4] Create public/index.html with basic HTML structure
-- [ ] T022 [US4] Add API introduction and purpose section to public/index.html
-- [ ] T023 [US4] Document `/api/quotes/random` endpoint with example in public/index.html
-- [ ] T024 [US4] Document `/api/quotes/{speaker}` endpoint with example in public/index.html
-- [ ] T025 [US4] Document `/api/quotes/meme` endpoint with example in public/index.html
-- [ ] T026 [US4] Add styling and make page mobile-friendly in public/index.html
-- [ ] T027 [US4] Mount static files in app/main.py to serve public/index.html at root URL
-- [ ] T028 [US4] Test documentation page in browser and verify all endpoints documented
+- [X] T021 [P] [US4] Create public/index.html with basic HTML structure
+- [X] T022 [US4] Add API introduction and purpose section to public/index.html
+- [X] T023 [US4] Document `/api/quotes/random` endpoint with example in public/index.html
+- [X] T024 [US4] Document `/api/quotes/{speaker}` endpoint with example in public/index.html
+- [X] T025 [US4] Document `/api/quotes/meme` endpoint with example in public/index.html
+- [X] T026 [US4] Add styling and make page mobile-friendly in public/index.html
+- [X] T027 [US4] Mount static files in app/main.py to serve public/index.html at root URL
+- [X] T028 [US4] Test documentation page in browser and verify all endpoints documented
 
 **Checkpoint**: User Story 4 complete - Documentation page accessible and user-friendly
 
@@ -111,10 +111,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T029 [P] [US2] Implement filter_by_speaker(quotes, speaker) function in app/services.py with case-insensitive matching
-- [ ] T030 [US2] Implement GET `/api/quotes/{speaker}` endpoint in app/main.py
-- [ ] T031 [US2] Add 404 error handling when no quotes found for speaker in `/api/quotes/{speaker}`
-- [ ] T032 [US2] Test `/api/quotes/Tobias` and `/api/quotes/tobias` endpoints manually
+- [X] T029 [P] [US2] Implement filter_by_speaker(quotes, speaker) function in app/services.py with case-insensitive matching
+- [X] T030 [US2] Implement GET `/api/quotes/{speaker}` endpoint in app/main.py
+- [X] T031 [US2] Add 404 error handling when no quotes found for speaker in `/api/quotes/{speaker}`
+- [X] T032 [US2] Test `/api/quotes/Tobias` and `/api/quotes/tobias` endpoints manually
 
 **Checkpoint**: User Story 2 complete - Character filtering endpoint functional with case-insensitive matching
 
@@ -130,10 +130,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T033 [P] [US3] Implement filter_meme_quotes(quotes) function in app/services.py
-- [ ] T034 [US3] Implement GET `/api/quotes/meme` endpoint in app/main.py
-- [ ] T035 [US3] Add 404 error handling when no meme quotes exist in `/api/quotes/meme`
-- [ ] T036 [US3] Test `/api/quotes/meme` endpoint with placeholder data (should return 404)
+- [X] T033 [P] [US3] Implement filter_meme_quotes(quotes) function in app/services.py
+- [X] T034 [US3] Implement GET `/api/quotes/meme` endpoint in app/main.py
+- [X] T035 [US3] Add 404 error handling when no meme quotes exist in `/api/quotes/meme`
+- [X] T036 [US3] Test `/api/quotes/meme` endpoint with placeholder data (should return 404)
 
 **Checkpoint**: User Story 3 complete - Meme quotes endpoint functional
 
@@ -143,12 +143,12 @@
 
 **Purpose**: Containerize application for self-hosted deployment
 
-- [ ] T037 [P] Create Dockerfile with multi-stage build using uv (builder + runtime)
-- [ ] T038 [P] Create docker-compose.yml for local development
-- [ ] T039 [P] Create .dockerignore file (.venv/, .git/, tests/, *.pyc, uv.lock)
-- [ ] T040 Test Docker build locally: `docker build -t bluthsapi:latest .`
-- [ ] T041 Test Docker run locally: `docker run -p 8000:8000 -e S3_BASE_URL=test bluthsapi:latest`
-- [ ] T042 Verify all endpoints work in Docker container
+- [X] T037 [P] Create Dockerfile with multi-stage build using uv (builder + runtime)
+- [X] T038 [P] Create docker-compose.yml for local development
+- [X] T039 [P] Create .dockerignore file (.venv/, .git/, tests/, *.pyc, uv.lock)
+- [X] T040 Test Docker build locally: `docker build -t bluthsapi:latest .`
+- [X] T041 Test Docker run locally: `docker run -p 8000:8000 -e S3_BASE_URL=test bluthsapi:latest`
+- [X] T042 Verify all endpoints work in Docker container
 
 **Checkpoint**: Application successfully containerized and ready for deployment
 
@@ -158,12 +158,12 @@
 
 **Purpose**: Final refinements and non-functional requirements
 
-- [ ] T043 [P] Add health check endpoint GET `/health` in app/main.py
-- [ ] T044 [P] Add logging to all endpoints using Python logging module
-- [ ] T045 [P] Add Cache-Control headers to quote responses (max-age=3600)
-- [ ] T046 [P] Verify FastAPI auto-generated docs at `/docs` and `/redoc`
-- [ ] T047 Test error scenarios: missing quotes file, malformed JSON, empty quotes array
-- [ ] T048 [P] Update README.md with project overview, uv setup, and deployment instructions
+- [X] T043 [P] Add health check endpoint GET `/health` in app/main.py
+- [X] T044 [P] Add logging to all endpoints using Python logging module
+- [X] T045 [P] Add Cache-Control headers to quote responses (max-age=3600)
+- [X] T046 [P] Verify FastAPI auto-generated docs at `/docs` and `/redoc`
+- [X] T047 Test error scenarios: missing quotes file, malformed JSON, empty quotes array
+- [X] T048 [P] Update README.md with project overview, uv setup, and deployment instructions
 - [ ] T049 [P] Create deployment guide in docs/ directory (optional)
 
 **Checkpoint**: Application polished and production-ready
