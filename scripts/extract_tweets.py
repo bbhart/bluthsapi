@@ -26,6 +26,7 @@ from pathlib import Path
 # Import utility modules
 from tweet_parser import parse_tweets_file, extract_tweet_data
 from speaker_detector import detect_speaker
+import re
 
 
 def is_meaningful_text(text: str) -> bool:
@@ -55,6 +56,36 @@ def is_meaningful_text(text: str) -> bool:
         return False
 
     return True
+
+
+def has_mentions(text: str) -> bool:
+    """
+    Check if tweet text contains user mentions.
+
+    Args:
+        text: Tweet text to check
+
+    Returns:
+        True if text contains @ symbol (mentions), False otherwise
+    """
+    return '@' in text
+
+
+def strip_urls(text: str) -> str:
+    """
+    Remove URLs from text.
+
+    Args:
+        text: Text potentially containing URLs
+
+    Returns:
+        Text with URLs removed, stripped of extra whitespace
+    """
+    # Remove http(s):// URLs
+    text_without_urls = re.sub(r'https?://\S+', '', text)
+    # Clean up extra whitespace
+    text_without_urls = ' '.join(text_without_urls.split())
+    return text_without_urls.strip()
 
 
 def is_retweet(text: str) -> bool:
@@ -149,8 +180,10 @@ def extract_to_staging(source_path: str, output_path: str, verbose: bool = False
         'extracted': 0,
         'excluded_empty': 0,
         'excluded_url_only': 0,
+        'excluded_mentions': 0,
         'flagged_retweets': 0,
         'with_media': 0,
+        'speaker_detected': 0,
     }
 
     for i, wrapper in enumerate(tweet_wrappers):
@@ -182,10 +215,23 @@ def extract_to_staging(source_path: str, output_path: str, verbose: bool = False
             stats['excluded_empty'] += 1
             continue
 
+        # Check for mentions - exclude tweets with @
+        if has_mentions(full_text):
+            stats['excluded_mentions'] += 1
+            continue
+
         # Check retweet status
         is_rt = is_retweet(full_text)
         if is_rt:
             stats['flagged_retweets'] += 1
+
+        # Strip URLs from text
+        text_without_urls = strip_urls(full_text)
+
+        # Detect speaker from cleaned text
+        speaker, remaining_text = detect_speaker(text_without_urls)
+        if speaker:
+            stats['speaker_detected'] += 1
 
         # Extract media URLs
         media_urls = extract_media_urls(tweet)
@@ -195,12 +241,13 @@ def extract_to_staging(source_path: str, output_path: str, verbose: bool = False
         # Create staging entry
         entry = {
             'tweet_id': tweet_id,
-            'text': full_text,  # Preserved exactly as-is
+            'text': text_without_urls,  # URLs stripped, cleaned
             'created_at': created_at,  # Preserved as-is (RFC 2822 format from Twitter)
             'is_retweet': is_rt,
             'favorite_count': favorite_count,
             'retweet_count': retweet_count,
             'media_urls': media_urls,
+            'primarySpeaker': speaker if speaker else '',  # Empty string if no speaker detected
         }
 
         staging_entries.append(entry)
@@ -215,7 +262,9 @@ def extract_to_staging(source_path: str, output_path: str, verbose: bool = False
         print(f"  Total in archive: {stats['total_in_archive']}")
         print(f"  Extracted: {stats['extracted']}")
         print(f"  Excluded (empty/URL-only): {stats['excluded_empty'] + stats['excluded_url_only']}")
+        print(f"  Excluded (mentions with @): {stats['excluded_mentions']}")
         print(f"  Flagged as retweets: {stats['flagged_retweets']}")
+        print(f"  Speaker detected: {stats['speaker_detected']}")
         print(f"  With media: {stats['with_media']}")
 
     # Create staging file structure
