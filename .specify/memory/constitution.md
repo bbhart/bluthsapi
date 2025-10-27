@@ -34,6 +34,10 @@ Error: `{ "error": "message" }` with appropriate status code
 
 Basic README with endpoint list and example responses required.
 
+## Development Environment Standards
+- Development primarily happens on MacOS
+- On MacOS python is called using the `python3` command
+
 ## Deployment Standards
 
 ### Docker Requirements
