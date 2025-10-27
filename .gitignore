@@ -41,3 +41,8 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Tweet conversion staging and media (002-tweet-to-quote-conversion)
+etc/staging/
+media/tweet_images/
+media/download_log.json
