@@ -15,6 +15,7 @@ Examples:
 
     # Specify custom paths
     python3 scripts/convert_to_quotes.py --staging etc/staging/tweets_staging.json --quotes app/data/quotes.json
+    python3 scripts/convert_to_quotes.py --staging etc/staging/tweets_filtered.json --quotes app/data/quotes.json
 
     # Verbose output
     python3 scripts/convert_to_quotes.py --verbose
