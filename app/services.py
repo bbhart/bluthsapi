@@ -24,7 +24,13 @@ def load_quotes() -> list[Quote]:
     with open(quotes_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    return [Quote(**quote) for quote in data["quotes"]]
+    # Handle both array format and object format
+    if isinstance(data, list):
+        # Direct array of quotes
+        return [Quote(**quote) for quote in data]
+    else:
+        # Object with "quotes" key
+        return [Quote(**quote) for quote in data["quotes"]]
 
 
 def get_random_quote(quotes: list[Quote]) -> Optional[Quote]:
