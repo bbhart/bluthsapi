@@ -59,6 +59,35 @@ def load_staging_file(file_path: str | Path) -> dict:
     return data
 
 
+def get_original_filename(url: str) -> str:
+    """
+    Extract the original filename from a URL.
+
+    Args:
+        url: Media URL
+
+    Returns:
+        Original filename from URL, or generated name if extraction fails
+    """
+    from urllib.parse import urlparse, unquote
+
+    # Parse the URL and extract the path
+    parsed = urlparse(url)
+    path = unquote(parsed.path)
+
+    # Get the last component of the path
+    filename = Path(path).name
+
+    # If we got a valid filename with an extension, return it
+    if filename and '.' in filename:
+        return filename
+
+    # Fallback: use a hash of the URL as filename
+    import hashlib
+    url_hash = hashlib.md5(url.encode()).hexdigest()[:12]
+    return f"{url_hash}.jpg"
+
+
 def get_file_extension(url: str, content_type: str = None) -> str:
     """
     Determine file extension from URL or Content-Type.
@@ -227,9 +256,8 @@ def download_media(
         url = item['url']
         index = item['index']
 
-        # Generate filename
-        ext = get_file_extension(url)
-        filename = f"{tweet_id}_{index}{ext}"
+        # Use original filename from URL
+        filename = get_original_filename(url)
         output_path = output_dir / filename
 
         # Check if should skip
