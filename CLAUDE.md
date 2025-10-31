@@ -7,6 +7,8 @@ Auto-generated from all feature plans. Last updated: 2025-10-24
 - File-based (JSON) - reads etc/tweets.js, writes to staging and app/data/quotes.json (002-tweet-to-quote-conversion)
 - Python 3.11+ (matches existing project) + Standard library only (difflib.SequenceMatcher, string, json, pathlib) (003-tweet-filtering)
 - File-based (JSON) - reads/writes etc/staging/tweets_staging.json (003-tweet-filtering)
+- Python 3.11+ (matches existing project - see requirements.txt) + FastAPI 0.104.0, Mangum (ASGI-to-Lambda adapter), AWS SAM CLI, python-dotenv (for .env support) (005-aws-lambda-deployment)
+- File-based (quotes.json bundled in Lambda package, media files on S3 as currently configured) (005-aws-lambda-deployment)
 
 - (001-quotes-api)
 
@@ -26,10 +28,10 @@ tests/
 : Follow standard conventions
 
 ## Recent Changes
+- 005-aws-lambda-deployment: Added Python 3.11+ (matches existing project - see requirements.txt) + FastAPI 0.104.0, Mangum (ASGI-to-Lambda adapter), AWS SAM CLI, python-dotenv (for .env support)
 - 003-tweet-filtering: Added Python 3.11+ (matches existing project) + Standard library only (difflib.SequenceMatcher, string, json, pathlib)
 - 002-tweet-to-quote-conversion: Added Python 3.11+ (matches existing project) + Standard library (json, pathlib, urllib.request), no external packages needed for core functionality
 
-- 001-quotes-api: Added
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

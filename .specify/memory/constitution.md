@@ -40,17 +40,40 @@ Basic README with endpoint list and example responses required.
 
 ## Deployment Standards
 
-### Docker Requirements
+### AWS Lambda Deployment
+- Deploy using AWS Lambda with API Gateway as entry point
+- Bundle static data (quotes.json) with deployment package
+- Use GitHub Actions for CI/CD (.github/workflows/deploy.yml)
+- Automated deployment triggered by commits to main branch
+- Lambda versioning with "prod" alias for instant rollback capability
+- Deployment validation via /health endpoint (must return HTTP 200)
+- Automatic rollback to previous version if validation fails
+- AWS credentials stored in GitHub Secrets (remote) or .env file (local development)
+- Use Mangum adapter for FastAPI-to-Lambda compatibility
+
+### Rate Limiting
+- Global throttling only via API Gateway (10 requests/second default)
+- No per-IP rate limiting (avoids infrastructure complexity and cost)
+- Return HTTP 429 with Retry-After header when limits exceeded
+- Rate limits must be configurable via API Gateway settings
+
+### Observability
+- CloudWatch Logs with structured JSON logging (errors, warnings, deployment events)
+- No custom CloudWatch metrics, dashboards, or X-Ray tracing (cost optimization)
+- Log cost target: $0.50-2/month at expected traffic volumes
+
+### Docker Requirements (Legacy/Alternative Deployment)
 - Multi-stage builds for minimal image size
 - Run as non-root user for security
 - Health checks must use lightweight tools (curl preferred) - avoid loading language interpreters
 - Clean up package manager cache to minimize image size (e.g., `rm -rf /var/lib/apt/lists/*`)
 
 ### Health Checks
-- Use curl for HTTP health checks (not Python or other language-specific tools)
-- Health check endpoint: GET /health
-- Standard parameters: interval=30s, timeout=3s, start-period=5s, retries=3
-- Health check command format: `curl -f http://localhost:PORT/health || exit 1`
+- Health check endpoint: GET /health (required for all deployment methods)
+- Returns HTTP 200 on success
+- Used for deployment validation in Lambda
+- Docker health check parameters: interval=30s, timeout=3s, start-period=5s, retries=3
+- Docker health check command format: `curl -f http://localhost:PORT/health || exit 1`
 
 ### Package Management
 - Use uv for Python dependency management (10-100x faster than pip)
@@ -59,8 +82,17 @@ Basic README with endpoint list and example responses required.
 
 ## Governance
 
-This constitution defines minimal viable quote API. 
+This constitution defines minimal viable quote API.
 All endpoints must remain read-only and publicly accessible.
 Serving costs should be minimized. This is not expected to be a high use API.
 
-**Version**: 1.1.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-24
+### Security Principles (Non-Negotiable)
+
+**Least Privilege is MANDATORY** - Under no circumstances should permissions be granted beyond what is strictly required, even for MVPs, prototypes, or testing. Security fundamentals are never compromised for convenience.
+
+- IAM policies MUST scope permissions to specific resources (e.g., `bluths-api-*`)
+- IAM policies MUST grant only required actions (no wildcards like `*` or `lambda:*` unless absolutely necessary)
+- Never use `*FullAccess` managed policies (e.g., `IAMFullAccess`, `AWSLambda_FullAccess`)
+- All AWS resource access follows Least Privilege from day one
+
+**Version**: 1.3.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-31

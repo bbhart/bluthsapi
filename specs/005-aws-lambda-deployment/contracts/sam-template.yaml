@@ -1,0 +1,193 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Bluths API - Arrested Development Quotes API
+  Serverless API deployed to AWS Lambda with rate limiting
+
+  NOTE: Custom domain (bqaas.lucille2.com) with ACM certificate is configured
+  manually post-deployment via API Gateway Console or CLI. See quickstart.md
+  for detailed setup instructions. ACM certificate MUST list bqaas.lucille2.com
+  as an allowed domain name.
+
+# Global configuration applied to all functions
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: python3.11
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        # S3_BASE_URL from existing config - will be passed via parameter or environment
+        S3_BASE_URL: !Ref S3BaseUrl
+
+Parameters:
+  S3BaseUrl:
+    Type: String
+    Description: Base URL for media files on S3
+    Default: "https://your-bucket.s3.amazonaws.com"
+
+  PerIPRateLimit:
+    Type: Number
+    Description: Requests per second per IP address
+    Default: 1
+    MinValue: 1
+    MaxValue: 100
+
+  GlobalRateLimit:
+    Type: Number
+    Description: Total requests per second across all IPs
+    Default: 10
+    MinValue: 1
+    MaxValue: 10000
+
+Resources:
+  # Lambda function for the FastAPI application
+  BluthsApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-api'
+      Description: Bluths API - Arrested Development quotes with rate limiting
+      CodeUri: ../../  # Points to repository root (includes app/ directory)
+      Handler: app.main.handler  # Mangum handler in app/main.py
+
+      # Performance configuration
+      MemorySize: 512  # Balance of cost and performance
+      Timeout: 30
+      ReservedConcurrentExecutions: 3  # Limits max concurrent instances (cost control)
+
+      # Auto-publish Lambda versions for rollback capability
+      AutoPublishAlias: live
+
+      # Environment variables passed to Lambda
+      Environment:
+        Variables:
+          S3_BASE_URL: !Ref S3BaseUrl
+          RATE_LIMIT_PER_IP: !Ref PerIPRateLimit
+          # Global rate limit enforced by API Gateway, not Lambda
+
+      # API Gateway HTTP API event source
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BluthsHttpApi
+            Path: /{proxy+}
+            Method: ANY
+
+      # IAM role for Lambda execution
+      Role: !GetAtt BluthsApiFunctionRole.Arn
+
+      # CloudWatch Logs configuration
+      LoggingConfig:
+        LogFormat: JSON
+        LogGroup: !Ref BluthsApiFunctionLogGroup
+
+  # Separate Log Group for better control over retention
+  BluthsApiFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-api'
+      RetentionInDays: 7  # Keep logs for 7 days to minimize costs
+
+  # IAM role for Lambda execution
+  BluthsApiFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-lambda-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        # Basic Lambda execution permissions (CloudWatch Logs)
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      # Add additional policies here if Lambda needs to access other AWS services
+      # For example, if media files need to be served from S3 directly by Lambda
+
+  # HTTP API (API Gateway v2)
+  BluthsHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      Description: Bluths API - HTTP API with rate limiting
+
+      # CORS configuration (FR-016 - allow all origins)
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+          - OPTIONS
+        AllowHeaders:
+          - "*"
+        AllowCredentials: false
+
+      # Default route settings (apply to all routes)
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: !Ref GlobalRateLimit
+        ThrottlingRateLimit: !Ref GlobalRateLimit
+
+      # Access logging to CloudWatch
+      AccessLogSettings:
+        DestinationArn: !GetAtt ApiAccessLogGroup.Arn
+        Format: '$context.requestId $context.error.message $context.error.messageString $context.integration.error $context.integration.integrationStatus $context.integration.latency $context.integration.requestId $context.integration.status $context.path $context.requestTime $context.responseLength $context.status'
+
+  # Log group for API Gateway access logs
+  ApiAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/apigateway/${AWS::StackName}-http-api'
+      RetentionInDays: 7
+
+Outputs:
+  # API Gateway endpoint URL
+  ApiUrl:
+    Description: "API Gateway endpoint URL (prod stage)"
+    Value: !Sub "https://${BluthsHttpApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+    Export:
+      Name: !Sub '${AWS::StackName}-api-url'
+
+  # Lambda function ARN
+  FunctionArn:
+    Description: "Lambda function ARN"
+    Value: !GetAtt BluthsApiFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-function-arn'
+
+  # Lambda function name
+  FunctionName:
+    Description: "Lambda function name"
+    Value: !Ref BluthsApiFunction
+    Export:
+      Name: !Sub '${AWS::StackName}-function-name'
+
+  # API Gateway ID
+  ApiId:
+    Description: "API Gateway HTTP API ID"
+    Value: !Ref BluthsHttpApi
+    Export:
+      Name: !Sub '${AWS::StackName}-api-id'
+
+  # Rate limit configuration
+  PerIPLimit:
+    Description: "Requests per second per IP address"
+    Value: !Ref PerIPRateLimit
+
+  GlobalLimit:
+    Description: "Total requests per second (all IPs)"
+    Value: !Ref GlobalRateLimit
+
+# Metadata for SAM CLI
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: bluths-api
+    Description: Arrested Development quotes API
+    Author: Brian
+    SemanticVersion: 1.0.0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
