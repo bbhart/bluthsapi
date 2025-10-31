@@ -1,0 +1,27 @@
+# AWS Credentials for Local Deployment
+# Copy this file to /.env in repository root and fill in your credentials
+# NEVER commit .env to version control!
+
+# AWS Access Key ID (20 characters, starts with AKIA)
+# Get from AWS Console: IAM → Users → Your User → Security credentials
+AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+
+# AWS Secret Access Key (40 characters)
+# Shown only once when creating access key - store securely
+AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+# AWS Region where Lambda will be deployed
+# Recommended: us-east-1 (lowest Lambda pricing)
+AWS_REGION=us-east-1
+
+# AWS Account ID (12 digits)
+# Get from AWS Console: Account dropdown → Account ID
+AWS_ACCOUNT_ID=123456789012
+
+# S3 Base URL for media files (existing configuration)
+# This should match your current S3 bucket URL
+S3_BASE_URL=https://your-bucket-name.s3.amazonaws.com
+
+# Optional: Override default rate limits
+# RATE_LIMIT_PER_IP=1
+# RATE_LIMIT_GLOBAL=10
