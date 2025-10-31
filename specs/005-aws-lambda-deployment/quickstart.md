@@ -115,23 +115,27 @@ Create a custom IAM policy with minimal required permissions:
       "Resource": "arn:aws:iam::*:role/bluths-api-*"
     },
     {
-      "Sid": "S3Deployment",
+      "Sid": "S3ArtifactStorage",
       "Effect": "Allow",
       "Action": [
-        "s3:GetObject",
         "s3:PutObject",
+        "s3:GetObject",
         "s3:DeleteObject"
       ],
-      "Resource": "arn:aws:s3:::aws-sam-cli-managed-default-samclisourcebucket-*/*"
+      "Resource": "arn:aws:s3:::bbh-applications/bluths-api/*"
     },
     {
-      "Sid": "S3BucketAccess",
+      "Sid": "S3BucketList",
       "Effect": "Allow",
       "Action": [
-        "s3:CreateBucket",
         "s3:ListBucket"
       ],
-      "Resource": "arn:aws:s3:::aws-sam-cli-managed-default-samclisourcebucket-*"
+      "Resource": "arn:aws:s3:::bbh-applications",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": "bluths-api/*"
+        }
+      }
     },
     {
       "Sid": "CloudWatchLogs",
@@ -160,11 +164,12 @@ Now create the IAM user:
 10. **Create user** → **Download credentials CSV** (contains Access Key ID and Secret Access Key)
 
 **✅ Why This Policy Follows Least Privilege**:
-- Scopes all permissions to `bluths-api-*` resources only
+- Scopes all Lambda/IAM permissions to `bluths-api-*` resources only
 - Grants only required actions (no wildcards like `lambda:*`)
-- Restricts S3 access to SAM CLI managed buckets only
+- Restricts S3 access to `bbh-applications` bucket with `bluths-api/` prefix only
+- S3 ListBucket further scoped with condition to `bluths-api/*` prefix
 - Limits CloudWatch Logs to application log groups only
-- Cannot accidentally impact other AWS resources or accounts
+- Cannot accidentally impact other AWS resources, buckets, or accounts
 
 **⚠️ SECURITY NOTES**:
 - Store credentials securely! They won't be shown again.
@@ -177,15 +182,84 @@ Now create the IAM user:
 2. Navigate to **Settings → Secrets and variables → Actions**
 3. Click **New repository secret** and add each:
 
-| Secret Name | Value | Where to Find |
-|-------------|-------|---------------|
-| `AWS_ACCESS_KEY_ID` | Your access key (starts with `AKIA`) | From credentials CSV (Step 1) |
-| `AWS_SECRET_ACCESS_KEY` | Your secret key (40 characters) | From credentials CSV (Step 1) |
-| `AWS_REGION` | `us-east-1` (or your preferred region) | Choose based on latency/cost |
-| `AWS_ACCOUNT_ID` | Your 12-digit account ID | AWS Console → Account dropdown |
-| `S3_BASE_URL` | Your S3 media URL | Existing S3 bucket URL |
+| Secret Name | Value | Example | Where to Find |
+|-------------|-------|---------|---------------|
+| `AWS_ACCESS_KEY_ID` | Your access key (starts with `AKIA`) | `AKIAIOSFODNN7EXAMPLE` | From credentials CSV (Step 1) |
+| `AWS_SECRET_ACCESS_KEY` | Your secret key (40 characters) | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` | From credentials CSV (Step 1) |
+| `AWS_REGION` | `us-east-1` (or your preferred region) | `us-east-1` | Choose based on latency/cost |
+| `AWS_ACCOUNT_ID` | Your 12-digit account ID | `123456789012` | AWS Console → Account dropdown |
+| `AWS_SAM_BUCKET` | S3 bucket name for SAM artifacts | `bbh-applications` | Existing S3 bucket (see below) |
+| `S3_BASE_URL` | Your S3 media URL | `https://media.example.com` | Existing S3 bucket URL for media files |
 
 **Note**: These credentials will be used by GitHub Actions to deploy to AWS. Per the constitution, remote credentials must be stored in GitHub Secrets, never committed to the repository.
+
+#### AWS_SAM_BUCKET Configuration
+
+The `AWS_SAM_BUCKET` secret should contain the name of an **existing** S3 bucket where SAM will store deployment artifacts. The bucket must already exist (the IAM policy does not include `s3:CreateBucket` per Least Privilege).
+
+**For this project:** `bbh-applications`
+
+**Bucket Requirements:**
+
+The bucket `bbh-applications` must:
+1. Already exist in your AWS account
+2. Be accessible by the IAM user `github-actions-deployer` (permissions already in Step 1 policy)
+3. Have a bucket policy that allows the IAM user to access the `bluths-api/` prefix
+
+**Required Bucket Policy** (add to `bbh-applications` bucket):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowBluthsAPIDeployment",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::YOUR_ACCOUNT_ID:user/github-actions-deployer"
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": "arn:aws:s3:::bbh-applications/bluths-api/*"
+    },
+    {
+      "Sid": "AllowBluthsAPIList",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::YOUR_ACCOUNT_ID:user/github-actions-deployer"
+      },
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::bbh-applications",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": "bluths-api/*"
+        }
+      }
+    }
+  ]
+}
+```
+
+**To apply this bucket policy:**
+
+1. Navigate to **S3 → Buckets → bbh-applications**
+2. **Permissions** tab → **Bucket policy** → **Edit**
+3. If a policy already exists, merge this with the existing policy (add the statements to the existing `Statement` array)
+4. Replace `YOUR_ACCOUNT_ID` with your 12-digit AWS account ID (same as in GitHub Secrets)
+5. **Save changes**
+
+**Artifacts will be stored at:** `s3://bbh-applications/bluths-api/deployments/`
+
+**Why This Follows Least Privilege:**
+- IAM user policy (Step 1) grants permissions to the user
+- Bucket policy (above) explicitly allows the user to access only `bluths-api/*` prefix
+- Double-gated: Both IAM policy AND bucket policy must allow the action
+- Other IAM users in the account cannot access `bluths-api/` prefix without explicit bucket policy permission
+- The IAM user cannot create buckets or access other buckets
+- The IAM user cannot access other prefixes in `bbh-applications` (e.g., `other-app/*`)
 
 ### Step 3: Verify Workflow File
 
@@ -292,6 +366,7 @@ AWS_ACCESS_KEY_ID=AKIA................  # Your IAM access key
 AWS_SECRET_ACCESS_KEY=........................  # Your IAM secret
 AWS_REGION=us-east-1
 AWS_ACCOUNT_ID=123456789012
+AWS_SAM_BUCKET=bbh-applications  # Pre-existing S3 bucket for SAM artifacts
 S3_BASE_URL=https://your-bucket.s3.amazonaws.com
 ```
 
@@ -336,7 +411,9 @@ Built Template   : .aws-sam/build/template.yaml
 
 ```bash
 # First deployment (interactive)
-sam deploy --guided
+sam deploy --guided \
+  --s3-bucket $AWS_SAM_BUCKET \
+  --s3-prefix bluths-api/deployments
 
 # SAM will prompt for:
 # Stack name: bluths-api
@@ -350,9 +427,11 @@ sam deploy --guided
 # Wait 3-5 minutes for deployment...
 ```
 
+**Note**: The `--s3-bucket` flag uses the pre-existing `bbh-applications` bucket (from AWS_SAM_BUCKET env var). This follows Least Privilege by not requiring `s3:CreateBucket` permission.
+
 **Subsequent deployments** (uses saved config):
 ```bash
-sam deploy  # No --guided flag needed
+sam deploy  # No --guided flag needed, uses samconfig.toml
 ```
 
 ### Step 6: Get API Endpoint
