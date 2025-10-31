@@ -17,7 +17,7 @@ jobs:
   deploy:
     name: Build and Deploy to AWS Lambda
     runs-on: ubuntu-latest
-    timeout-minutes: 2  # Overall job timeout
+    timeout-minutes: 5  # Overall job timeout
 
     steps:
       # ============================================================
@@ -132,17 +132,30 @@ jobs:
       - name: Package SAM application
         working-directory: deploy/sam
         run: |
-          # Create S3 bucket for SAM artifacts if it doesn't exist
-          ARTIFACT_BUCKET="${STACK_NAME}-sam-artifacts-${{ secrets.AWS_ACCOUNT_ID }}"
+          # Use pre-existing S3 bucket from GitHub secret (constitution: Least Privilege)
+          ARTIFACT_BUCKET="${{ secrets.AWS_SAM_BUCKET }}"
 
-          aws s3 ls s3://$ARTIFACT_BUCKET 2>/dev/null || \
-            aws s3 mb s3://$ARTIFACT_BUCKET --region ${{ env.AWS_REGION }}
+          if [ -z "$ARTIFACT_BUCKET" ]; then
+            echo "❌ ERROR: AWS_SAM_BUCKET secret not configured"
+            echo "Please add AWS_SAM_BUCKET to GitHub Secrets (e.g., 'bbh-applications')"
+            exit 1
+          fi
 
-          # Package and upload to S3
+          # Verify bucket exists and we have access
+          aws s3 ls s3://$ARTIFACT_BUCKET/bluths-api/ 2>/dev/null || {
+            echo "❌ ERROR: Cannot access s3://$ARTIFACT_BUCKET/bluths-api/"
+            echo "Verify:"
+            echo "  1. Bucket exists: $ARTIFACT_BUCKET"
+            echo "  2. IAM user has s3:ListBucket permission"
+            echo "  3. IAM user has s3:PutObject permission for bluths-api/ prefix"
+            exit 1
+          }
+
+          # Package and upload to S3 (using bluths-api prefix for isolation)
           sam package \
             --output-template-file packaged.yaml \
             --s3-bucket $ARTIFACT_BUCKET \
-            --s3-prefix deployments
+            --s3-prefix bluths-api/deployments
 
       # ============================================================
       # STAGE 5: DEPLOY
@@ -158,7 +171,6 @@ jobs:
             --no-fail-on-empty-changeset \
             --parameter-overrides \
               S3BaseUrl="${{ secrets.S3_BASE_URL || 'https://example.s3.amazonaws.com' }}" \
-              PerIPRateLimit=1 \
               GlobalRateLimit=10 \
             --tags \
               Environment=production \
@@ -201,24 +213,7 @@ jobs:
           }
           echo "✓ Random quote endpoint working"
 
-      - name: Test rate limiting (per-IP)
-        run: |
-          echo "Testing per-IP rate limiting (expecting 429 on 2nd request)..."
-
-          # First request should succeed
-          curl -f -s ${{ steps.endpoint.outputs.url }}/api/quotes/random > /dev/null
-          echo "✓ First request succeeded"
-
-          # Second request within 1 second should fail with 429
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.endpoint.outputs.url }}/api/quotes/random)
-
-          if [ "$HTTP_CODE" = "429" ]; then
-            echo "✓ Rate limiting working (received 429)"
-          else
-            echo "⚠️  Expected 429, got $HTTP_CODE (may be timing issue, not failing)"
-          fi
-
-      - name: Test global rate limit
+      - name: Test global rate limit (constitution: global throttling only)
         run: |
           echo "Testing global rate limit (10 QPS)..."
 
