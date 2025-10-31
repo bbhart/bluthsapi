@@ -105,9 +105,10 @@ jobs:
         id: previous_version
         run: |
           # Try to get current version, default to 1 if function doesn't exist yet
+          # Constitution: Use 'prod' alias for Lambda versioning
           CURRENT_VERSION=$(aws lambda get-alias \
             --function-name ${{ env.STACK_NAME }}-api \
-            --name live \
+            --name prod \
             --query 'FunctionVersion' \
             --output text 2>/dev/null || echo "\$LATEST")
 
@@ -213,7 +214,7 @@ jobs:
           }
           echo "✓ Random quote endpoint working"
 
-      - name: Test global rate limit (constitution: global throttling only)
+      - name: "Test global rate limit (constitution: global throttling only)"
         run: |
           echo "Testing global rate limit (10 QPS)..."
 
@@ -232,10 +233,10 @@ jobs:
         if: failure() && steps.previous_version.outputs.version != '$LATEST'
         run: |
           echo "❌ Deployment validation failed, rolling back..."
-
+          # Constitution: Use 'prod' alias for instant rollback capability
           aws lambda update-alias \
             --function-name ${{ env.STACK_NAME }}-api \
-            --name live \
+            --name prod \
             --function-version ${{ steps.previous_version.outputs.version }}
 
           echo "✓ Rolled back to version ${{ steps.previous_version.outputs.version }}"

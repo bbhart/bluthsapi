@@ -38,6 +38,19 @@ Basic README with endpoint list and example responses required.
 - Development primarily happens on MacOS
 - On MacOS python is called using the `python3` command
 
+### Code Quality Standards (Mandatory)
+
+**Linting is REQUIRED** - All code must pass linting checks before commit or deployment.
+
+- **Python files** MUST be validated with a Python linter (flake8, pylint, or ruff recommended)
+- **YAML files** MUST be validated with YAML parser (`python3 -c "import yaml; yaml.safe_load(...)"` minimum)
+- **GitHub Actions workflows** MUST be validated for YAML syntax before committing
+- Linting checks MUST be run:
+  - Before committing code (developer responsibility)
+  - In CI/CD pipeline (automated validation)
+  - When reviewing configuration changes
+- Fix all linting errors before proceeding - no bypassing for convenience
+
 ## Deployment Standards
 
 ### AWS Lambda Deployment
@@ -95,4 +108,4 @@ Serving costs should be minimized. This is not expected to be a high use API.
 - Never use `*FullAccess` managed policies (e.g., `IAMFullAccess`, `AWSLambda_FullAccess`)
 - All AWS resource access follows Least Privilege from day one
 
-**Version**: 1.3.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-31
+**Version**: 1.4.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-31
