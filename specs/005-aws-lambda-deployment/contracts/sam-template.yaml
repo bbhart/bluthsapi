@@ -14,7 +14,7 @@ Globals:
   Function:
     Timeout: 30
     MemorySize: 512
-    Runtime: python3.11
+    Runtime: python3.13
     Architectures:
       - x86_64
     Environment:
@@ -26,7 +26,7 @@ Parameters:
   S3BaseUrl:
     Type: String
     Description: Base URL for media files on S3
-    Default: "https://your-bucket.s3.amazonaws.com"
+    Default: "https://bqaasmedia.s3.us-east-1.amazonaws.com"
 
   PerIPRateLimit:
     Type: Number
@@ -49,7 +49,7 @@ Resources:
     Properties:
       FunctionName: !Sub '${AWS::StackName}-api'
       Description: Bluths API - Arrested Development quotes with rate limiting
-      CodeUri: ../../  # Points to repository root (includes app/ directory)
+      CodeUri: ../../../  # Points to repository root (includes app/ directory)
       Handler: app.main.handler  # Mangum handler in app/main.py
 
       # Performance configuration
@@ -182,12 +182,12 @@ Outputs:
     Description: "Total requests per second (all IPs)"
     Value: !Ref GlobalRateLimit
 
-# Metadata for SAM CLI
+# Metadata for SAM CLI / AWS Serverless Application Repository
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: bluths-api
     Description: Arrested Development quotes API
     Author: Brian
     SemanticVersion: 1.0.0
-    LicenseUrl: LICENSE
-    ReadmeUrl: README.md
+    LicenseUrl: ../../../LICENSE
+    ReadmeUrl: ../../../README.md
