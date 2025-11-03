@@ -189,5 +189,5 @@ Metadata:
     Description: Arrested Development quotes API
     Author: Brian
     SemanticVersion: 1.0.0
-    LicenseUrl: ../../../LICENSE
-    ReadmeUrl: ../../../README.md
+    LicenseUrl: ../../LICENSE
+    ReadmeUrl: ../../README.md
