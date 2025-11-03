@@ -1,0 +1,40 @@
+# Exclude virtual environment
+.venv/
+venv/
+env/
+
+# Exclude build artifacts
+.aws-sam/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Exclude development files
+.git/
+.github/
+.vscode/
+.idea/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Exclude test files
+tests/
+test_*.py
+*_test.py
+
+# Exclude documentation and specs
+docs/
+specs/
+*.md
+!README.md
+!LICENSE
+
+# Exclude config files
+.env
+.env.*
+*.toml
+!samconfig.toml

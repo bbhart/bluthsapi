@@ -198,3 +198,7 @@ public_dir = Path(__file__).parent.parent / "public"
 if public_dir.exists():
     app.mount("/", StaticFiles(directory=str(public_dir), html=True), name="static")
     logger.info(f"Mounted static files from {public_dir}")
+
+# Lambda handler using Mangum
+from mangum import Mangum
+handler = Mangum(app, lifespan="auto", api_gateway_base_path="/prod")
