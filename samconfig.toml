@@ -9,7 +9,8 @@ resolve_s3 = true
 s3_prefix = "bluths-api"
 confirm_changeset = true
 capabilities = "CAPABILITY_NAMED_IAM"
-parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\" PerIPRateLimit=\"1\" GlobalRateLimit=\"10\""
+# parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\" PerIPRateLimit=\"1\" GlobalRateLimit=\"10\""
+parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\"
 image_repositories = []
 
 [default.global.parameters]
