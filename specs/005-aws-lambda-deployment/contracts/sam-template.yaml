@@ -4,10 +4,9 @@ Description: >
   Bluths API - Arrested Development Quotes API
   Serverless API deployed to AWS Lambda with rate limiting
 
-  NOTE: Custom domain (bqaas.lucille2.com) with ACM certificate is configured
-  manually post-deployment via API Gateway Console or CLI. See quickstart.md
-  for detailed setup instructions. ACM certificate MUST list bqaas.lucille2.com
-  as an allowed domain name.
+  NOTE: Custom domain (api.lucille2.com) requires an ACM certificate ARN.
+  To enable the custom domain, provide the CertificateArn parameter during deployment.
+  The certificate MUST be in us-east-1 region and include api.lucille2.com as a domain name.
 
 # Global configuration applied to all functions
 Globals:
@@ -41,6 +40,16 @@ Parameters:
     Default: 10
     MinValue: 1
     MaxValue: 10000
+
+  CustomDomainName:
+    Type: String
+    Description: Custom domain name for the API (e.g., api.lucille2.com)
+    Default: "api.lucille2.com"
+
+  CertificateArn:
+    Type: String
+    Description: ACM Certificate ARN for the custom domain (must be in us-east-1)
+    Default: ""
 
 Resources:
   # Lambda function for the FastAPI application
@@ -144,6 +153,29 @@ Resources:
       LogGroupName: !Sub '/aws/apigateway/${AWS::StackName}-http-api'
       RetentionInDays: 7
 
+  # Custom domain name for API Gateway
+  ApiCustomDomain:
+    Type: AWS::ApiGatewayV2::DomainName
+    Condition: HasCertificate
+    Properties:
+      DomainName: !Ref CustomDomainName
+      DomainNameConfigurations:
+        - CertificateArn: !Ref CertificateArn
+          EndpointType: REGIONAL
+          SecurityPolicy: TLS_1_2
+
+  # Map custom domain to API
+  ApiDomainMapping:
+    Type: AWS::ApiGatewayV2::ApiMapping
+    Condition: HasCertificate
+    Properties:
+      DomainName: !Ref ApiCustomDomain
+      ApiId: !Ref BluthsHttpApi
+      Stage: prod
+
+Conditions:
+  HasCertificate: !Not [!Equals [!Ref CertificateArn, ""]]
+
 Outputs:
   # API Gateway endpoint URL
   ApiUrl:
@@ -181,6 +213,20 @@ Outputs:
   GlobalLimit:
     Description: "Total requests per second (all IPs)"
     Value: !Ref GlobalRateLimit
+
+  CustomDomainUrl:
+    Description: "Custom domain URL (if certificate provided)"
+    Value: !If
+      - HasCertificate
+      - !Sub "https://${CustomDomainName}"
+      - "No certificate provided - custom domain not configured"
+
+  CustomDomainTarget:
+    Description: "CloudFront domain to point CNAME to (if certificate provided)"
+    Value: !If
+      - HasCertificate
+      - !GetAtt ApiCustomDomain.DomainNameConfigurations[0].ApiGatewayDomainName
+      - "No certificate provided - custom domain not configured"
 
 # Metadata for SAM CLI / AWS Serverless Application Repository
 Metadata:
