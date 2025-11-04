@@ -108,4 +108,106 @@ Serving costs should be minimized. This is not expected to be a high use API.
 - Never use `*FullAccess` managed policies (e.g., `IAMFullAccess`, `AWSLambda_FullAccess`)
 - All AWS resource access follows Least Privilege from day one
 
-**Version**: 1.4.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-10-31
+### AWS IAM Policy Requirements for SAM Deployment
+
+**Context**: This policy enables GitHub Actions (or local users) to deploy the Bluths API using AWS SAM. It was developed through iterative debugging of permission errors during actual deployments.
+
+**Policy Location**: `iam-policy.json` (project root)
+
+**Attach To**:
+- IAM user: `github-actions-deployer` (for CI/CD)
+- Local IAM users who need to deploy manually
+
+#### Core Principles
+
+1. **Resource Scoping**: All permissions scoped to `bluths-api-*` resources where possible
+2. **Separate Read/Write Permissions**: Mutating operations (create/delete) use resource-scoped ARNs, read operations (describe/list) use `Resource: "*"` when required by AWS API
+3. **CloudFormation-Aware**: Includes describe permissions for stack introspection and GetAtt operations
+4. **No Wildcards on Actions**: Use explicit action lists, not `service:*`, except for Lambda/API Gateway where SAM requires comprehensive access
+
+#### Required Permission Categories
+
+**1. CloudFormation (Stack Management)**
+- Full stack operations on `bluths-api*` stacks
+- Change set management
+- Serverless transform access
+- **Critical Read Permissions**: `DescribeStacks`, `DescribeStackEvents`, `DescribeChangeSet`, `ListStacks` (required for SAM CLI and change set review)
+
+**2. S3 (Artifact Storage)**
+- SAM managed buckets: `aws-sam-cli-managed-default-*`
+- Custom deployment bucket: `bbh-applications`
+- Required actions: create, get, put, delete, list, versioning, policy management
+
+**3. Lambda (Function Deployment)**
+- Full access to `bluths-api-*` functions and layers
+- Includes versioning, aliases, concurrency, and tagging
+- Rationale: SAM requires comprehensive Lambda permissions for AutoPublishAlias and ReservedConcurrentExecutions
+
+**4. API Gateway (HTTP API)**
+- Full access to `/apis` and `/restapis` resources
+- Tag management
+- Rationale: SAM manages API lifecycle including CORS, throttling, and access logging
+
+**5. IAM (Execution Roles)**
+- Role operations: `bluths-api-*` roles only
+- Policy operations: `bluths-api-*` policies only
+- **Critical**: `iam:PassRole` required for CloudFormation to assign roles to Lambda
+- **Read-only global**: `iam:ListPolicies` on `Resource: "*"` (AWS API requirement)
+
+**6. CloudWatch Logs (Application Logging)**
+- **Resource-scoped**: Create/delete log groups for `/aws/lambda/bluths-api-*` and `/aws/apigateway/bluths-api-*`
+- **Global (required)**: `logs:DescribeLogGroups`, `logs:CreateLogDelivery`, `logs:GetLogDelivery`, `logs:UpdateLogDelivery`, `logs:DeleteLogDelivery`, `logs:ListLogDeliveries`
+- Rationale:
+  - `DescribeLogGroups` required for `!GetAtt LogGroup.Arn` in CloudFormation
+  - Log Delivery permissions required for API Gateway access logging feature
+
+#### Lessons Learned (Avoid These Errors)
+
+**Error 1: "Access denied for operation 'logs:DescribeLogGroups'"**
+- **Cause**: CloudFormation uses `!GetAtt ApiAccessLogGroup.Arn` which requires describe permission
+- **Fix**: Add `logs:DescribeLogGroups` with `Resource: "*"` (cannot be resource-scoped)
+
+**Error 2: "Not authorized to perform logs:CreateLogDelivery"**
+- **Cause**: API Gateway access logging creates a log delivery resource, not just a log group
+- **Fix**: Add all `logs:*LogDelivery` actions with `Resource: "*"`
+
+**Error 3: "Unable to import module 'app.main': No module named 'app'"**
+- **Cause**: Dependencies built for local OS (macOS ARM64) instead of Lambda runtime (Linux x86_64)
+- **Fix**: Use `sam build --use-container` or add `use_container = true` to `samconfig.toml`
+- **Not an IAM issue** - but critical for deployment success
+
+**Error 4: Template not found in GitHub Actions**
+- **Cause**: Workflow copies template to `deploy/sam/` but CodeUri paths become incorrect
+- **Fix**: Use `sed` to adjust `CodeUri: ../../../` → `CodeUri: ../../` when copying template
+
+#### SAM Build Configuration
+
+**Local Development** (`samconfig.toml`):
+```toml
+[default.build.parameters]
+use_container = true
+```
+
+**GitHub Actions** (`.github/workflows/deploy.yml`):
+```bash
+sam build --use-container
+```
+
+**Rationale**: Ensures dependencies (especially native extensions like `pydantic_core`) are compiled for Lambda's Linux runtime, not the build machine's OS.
+
+#### Policy Maintenance
+
+- Review policy when adding new AWS services to SAM template (DynamoDB, SQS, etc.)
+- Keep permissions scoped to `bluths-api-*` resources
+- Document any new `Resource: "*"` permissions with AWS API justification
+- Test policy changes in dev/staging before production
+
+#### Policy Version History
+
+- **v1.0** (Initial): Basic CloudFormation, Lambda, API Gateway, S3
+- **v1.1** (+DescribeLogGroups): Fixed GetAtt errors
+- **v1.2** (+LogDelivery): Fixed API Gateway access logging
+- **v1.3** (+CloudFormation Describe): Fixed change set review and stack introspection
+- **v1.4** (-ECR): Removed unnecessary container registry permissions
+
+**Version**: 1.5.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-11-04
