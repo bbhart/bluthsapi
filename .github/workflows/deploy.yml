@@ -127,6 +127,9 @@ jobs:
 
           cd ../../../deploy/sam
 
+          # Fix CodeUri path for deployment directory (deploy/sam -> repo root)
+          sed -i 's|CodeUri: ../../../|CodeUri: ../../|g' template.yaml
+
           # SAM build
           sam build --use-container
 
