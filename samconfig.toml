@@ -10,8 +10,6 @@ s3_prefix = "bluths-api"
 confirm_changeset = true
 capabilities = "CAPABILITY_NAMED_IAM"
 parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\" PerIPRateLimit=\"3\" GlobalRateLimit=\"50\" CustomDomainName=\"api.lucille2.com\" CertificateArn=\"arn:aws:acm:us-east-1:490267183643:certificate/7ae2dc74-74b6-4cde-842d-f81589439b4d\""
-# To enable custom domain, add your ACM certificate ARN:
-CertificateArn="arn:aws:acm:us-east-1:490267183643:certificate/7ae2dc74-74b6-4cde-842d-f81589439b4d"
 image_repositories = []
 
 [default.global.parameters]
