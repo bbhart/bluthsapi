@@ -1,0 +1,154 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "CloudFormationFullAccess",
+			"Effect": "Allow",
+			"Action": [
+				"cloudformation:*"
+			],
+			"Resource": [
+				"arn:aws:cloudformation:*:*:stack/bluths-api*/*",
+				"arn:aws:cloudformation:*:*:changeSet/*",
+				"arn:aws:cloudformation:*:aws:transform/Serverless-2016-10-31"
+			]
+		},
+		{
+			"Sid": "CloudFormationTemplateAccess",
+			"Effect": "Allow",
+			"Action": [
+				"cloudformation:ValidateTemplate",
+				"cloudformation:GetTemplateSummary",
+				"cloudformation:DescribeStacks",
+				"cloudformation:DescribeStackEvents",
+				"cloudformation:DescribeChangeSet",
+				"cloudformation:ListStacks"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "S3ArtifactBucketAccess",
+			"Effect": "Allow",
+			"Action": [
+				"s3:CreateBucket",
+				"s3:GetObject",
+				"s3:PutObject",
+				"s3:DeleteObject",
+				"s3:ListBucket",
+				"s3:GetBucketLocation",
+				"s3:GetBucketPolicy",
+				"s3:PutBucketPolicy",
+				"s3:GetBucketVersioning",
+				"s3:PutBucketVersioning"
+			],
+			"Resource": [
+				"arn:aws:s3:::aws-sam-cli-managed-default-*",
+				"arn:aws:s3:::aws-sam-cli-managed-default-*/*",
+				"arn:aws:s3:::bbh-applications",
+				"arn:aws:s3:::bbh-applications/*"
+			]
+		},
+		{
+			"Sid": "LambdaFullAccess",
+			"Effect": "Allow",
+			"Action": [
+				"lambda:*"
+			],
+			"Resource": [
+				"arn:aws:lambda:*:*:function:bluths-api-*",
+				"arn:aws:lambda:*:*:layer:bluths-api-*"
+			]
+		},
+		{
+			"Sid": "APIGatewayFullAccess",
+			"Effect": "Allow",
+			"Action": [
+				"apigateway:*"
+			],
+			"Resource": [
+				"arn:aws:apigateway:*::/restapis",
+				"arn:aws:apigateway:*::/restapis/*",
+				"arn:aws:apigateway:*::/apis",
+				"arn:aws:apigateway:*::/apis/*",
+				"arn:aws:apigateway:*::/tags/*"
+			]
+		},
+		{
+			"Sid": "IAMRoleAccess",
+			"Effect": "Allow",
+			"Action": [
+				"iam:GetRole",
+				"iam:CreateRole",
+				"iam:DeleteRole",
+				"iam:PutRolePolicy",
+				"iam:DeleteRolePolicy",
+				"iam:GetRolePolicy",
+				"iam:AttachRolePolicy",
+				"iam:DetachRolePolicy",
+				"iam:ListAttachedRolePolicies",
+				"iam:ListRolePolicies",
+				"iam:PassRole",
+				"iam:TagRole",
+				"iam:UntagRole",
+				"iam:ListRoleTags"
+			],
+			"Resource": [
+				"arn:aws:iam::*:role/bluths-api-*"
+			]
+		},
+		{
+			"Sid": "IAMPolicyAccess",
+			"Effect": "Allow",
+			"Action": [
+				"iam:CreatePolicy",
+				"iam:DeletePolicy",
+				"iam:GetPolicy",
+				"iam:GetPolicyVersion",
+				"iam:ListPolicies",
+				"iam:ListPolicyVersions",
+				"iam:TagPolicy",
+				"iam:UntagPolicy"
+			],
+			"Resource": [
+				"arn:aws:iam::*:policy/bluths-api-*"
+			]
+		},
+		{
+			"Sid": "IAMListPolicies",
+			"Effect": "Allow",
+			"Action": [
+				"iam:ListPolicies"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "CloudWatchLogsAccess",
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:DeleteLogGroup",
+				"logs:PutRetentionPolicy",
+				"logs:TagResource",
+				"logs:UntagResource",
+				"logs:ListTagsForResource"
+			],
+			"Resource": [
+				"arn:aws:logs:*:*:log-group:/aws/lambda/bluths-api-*",
+				"arn:aws:logs:*:*:log-group:/aws/apigateway/bluths-api-*"
+			]
+		},
+		{
+			"Sid": "CloudWatchLogsDescribe",
+			"Effect": "Allow",
+			"Action": [
+				"logs:DescribeLogGroups",
+				"logs:CreateLogDelivery",
+				"logs:GetLogDelivery",
+				"logs:UpdateLogDelivery",
+				"logs:DeleteLogDelivery",
+				"logs:ListLogDeliveries"
+			],
+			"Resource": "*"
+		}
+	]
+}
