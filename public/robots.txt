@@ -2,9 +2,6 @@
 
 # Allow all crawlers to access documentation
 User-agent: *
-Allow: /
-Allow: /docs
-Allow: /redoc
 
 # Crawl-delay to be respectful to the API
 Crawl-delay: 1
