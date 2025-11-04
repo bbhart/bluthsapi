@@ -37,6 +37,8 @@ Basic README with endpoint list and example responses required.
 ## Development Environment Standards
 - Development primarily happens on MacOS
 - On MacOS python is called using the `python3` command
+- Cross-platform compatibility required (MacOS and Windows)
+- Avoid symlinks - use file copies or configuration references instead (symlinks break on Windows)
 
 ### Code Quality Standards (Mandatory)
 
