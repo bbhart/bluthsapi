@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from app.models import Quote, QuoteResponse, ErrorResponse
 from app.services import (
@@ -59,6 +60,16 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+
+@app.get("/", tags=["Home"], include_in_schema=False)
+async def root():
+    """Serve the index.html landing page."""
+    public_dir = Path(__file__).parent.parent / "public"
+    index_path = public_dir / "index.html"
+    if index_path.exists():
+        return FileResponse(index_path)
+    raise HTTPException(status_code=404, detail="index.html not found")
 
 
 @app.get("/health", tags=["Health"])
@@ -199,6 +210,10 @@ if public_dir.exists():
     app.mount("/", StaticFiles(directory=str(public_dir), html=True), name="static")
     logger.info(f"Mounted static files from {public_dir}")
 
-# Lambda handler using Mangum
-from mangum import Mangum
-handler = Mangum(app, lifespan="auto", api_gateway_base_path="/prod")
+# Lambda handler using Mangum (only for Lambda deployment)
+try:
+    from mangum import Mangum
+    handler = Mangum(app, lifespan="auto", api_gateway_base_path="/prod")
+except ImportError:
+    # Mangum not available in local development
+    handler = None
