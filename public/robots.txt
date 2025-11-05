@@ -1,0 +1,10 @@
+# robots.txt for Arrested Development Quotes API
+
+# Allow all crawlers to access documentation
+User-agent: *
+
+# Crawl-delay to be respectful to the API
+Crawl-delay: 1
+
+# Sitemap (if added in the future)
+# Sitemap: https://yourdomain.com/sitemap.xml
