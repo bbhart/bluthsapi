@@ -222,10 +222,10 @@ Outputs:
       - "No certificate provided - custom domain not configured"
 
   CustomDomainTarget:
-    Description: "CloudFront domain to point CNAME to (if certificate provided)"
+    Description: "Regional domain to point CNAME to (if certificate provided)"
     Value: !If
       - HasCertificate
-      - !GetAtt ApiCustomDomain.DomainNameConfigurations[0].ApiGatewayDomainName
+      - !GetAtt ApiCustomDomain.RegionalDomainName
       - "No certificate provided - custom domain not configured"
 
 # Metadata for SAM CLI / AWS Serverless Application Repository
