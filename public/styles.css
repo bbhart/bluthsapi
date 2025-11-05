@@ -1,0 +1,178 @@
+/* CSS Custom Properties - Arrested Development Color Palette */
+:root {
+    /* Primary brand colors */
+    --color-orange: #FF6B35;
+    --color-dark-orange: #F7931E;
+    --color-white: #FFFFFF;
+    --color-cream: #FFF8F0;
+
+    /* Text colors */
+    --color-text-dark: #2C3E50;
+    --color-text-medium: #6C757D;
+    --color-text-light: #F8F9FA;
+
+    /* Functional colors */
+    --color-code-bg: #1E1E1E;
+    --color-success: #28A745;
+}
+
+/* CSS Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-dark-orange) 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Layout */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+}
+
+/* Typography */
+h1 {
+    color: var(--color-orange);
+    margin-bottom: 10px;
+    font-size: 2.5em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: var(--color-text-medium);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+h2 {
+    color: var(--color-text-dark);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--color-orange);
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: var(--color-orange);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* Components */
+.endpoint {
+    background: var(--color-cream);
+    border-left: 4px solid var(--color-orange);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.endpoint:hover {
+    transform: translateX(4px);
+}
+
+.endpoint-url {
+    font-family: 'Courier New', monospace;
+    background: #2d3748;
+    color: #68d391;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 0.95em;
+}
+
+.method {
+    background: var(--color-orange);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-right: 10px;
+}
+
+.example {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.example pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.note strong {
+    color: #856404;
+}
+
+.footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.footer a {
+    color: var(--color-orange);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .endpoint-url {
+        font-size: 0.85em;
+    }
+}
