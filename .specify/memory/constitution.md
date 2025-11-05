@@ -101,6 +101,37 @@ This constitution defines minimal viable quote API.
 All endpoints must remain read-only and publicly accessible.
 Serving costs should be minimized. This is not expected to be a high use API.
 
+### Speckit Workflow Standards (Mandatory)
+
+**Branch and Commit Management** - The following practices are REQUIRED for all speckit workflows to ensure proper review and quality control.
+
+**Commits in Feature Branches**:
+- `/speckit.implement` and automated workflows MUST NOT create commits in feature branches
+- All commits must be reviewed and created manually by the developer
+- Rationale: Commits are critical review points that require human oversight
+- Exception: Planning documents (spec.md, plan.md, research.md, tasks.md) may be tracked separately but should not be auto-committed during implementation
+
+**Branch Merging**:
+- `/speckit.implement` and automated workflows MUST NOT merge feature branches into main
+- All merges to main must be done manually by the developer (direct merge or pull request)
+- Rationale: Merging to main is a critical decision point that requires human review
+- The developer is responsible for:
+  - Reviewing all changes in the feature branch
+  - Testing the implementation
+  - Deciding when and how to merge (direct merge, squash merge, PR with review, etc.)
+
+**Implementation Workflow**:
+- Speckit commands may modify files to implement features
+- Speckit commands may stage files (`git add`) to show what changed
+- Speckit commands MUST stop before committing or merging
+- Final output should indicate: "Changes staged and ready for your review. Run `git status` to see changes, then commit and merge when ready."
+
+**Rationale**:
+- Commits create permanent history and should reflect intentional checkpoints
+- Merges to main affect production and require careful consideration
+- Developer maintains full control over version control operations
+- Allows developer to review, test, and adjust before finalizing changes
+
 ### Security Principles (Non-Negotiable)
 
 **Least Privilege is MANDATORY** - Under no circumstances should permissions be granted beyond what is strictly required, even for MVPs, prototypes, or testing. Security fundamentals are never compromised for convenience.
@@ -212,4 +243,4 @@ sam build --use-container
 - **v1.3** (+CloudFormation Describe): Fixed change set review and stack introspection
 - **v1.4** (-ECR): Removed unnecessary container registry permissions
 
-**Version**: 1.5.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-11-04
+**Version**: 1.6.0 | **Ratified**: 2025-10-24 | **Last Amended**: 2025-11-05
