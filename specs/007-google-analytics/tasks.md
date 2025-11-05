@@ -109,13 +109,13 @@ This project uses a single-project structure:
 
 **Purpose**: Final validation, deployment, and documentation
 
-- [ ] T020 Measure performance impact: Compare page load times before/after GA4 integration (should be < 100ms increase per success criteria SC-003)
-- [ ] T021 Run quickstart.md validation: Follow all verification steps in quickstart.md to confirm implementation is correct
-- [ ] T022 Create git commit with changes to public/index.html following project commit message format
-- [ ] T023 Deploy to production: Push branch and deploy via GitHub Actions OR deploy manually via SAM CLI
-- [ ] T024 Verify production deployment: Visit production site and check DevTools Network tab for GA4 requests
-- [ ] T025 Monitor Google Analytics dashboard: Wait 24-48 hours and verify all three metrics (page views, demographics, referral sources) appear correctly in GA dashboard
-- [ ] T026 Document any privacy policy updates needed (site owner responsibility, not implementation task)
+- [X] T020 Measure performance impact: Compare page load times before/after GA4 integration (should be < 100ms increase per success criteria SC-003)
+- [X] T021 Run quickstart.md validation: Follow all verification steps in quickstart.md to confirm implementation is correct
+- [X] T022 Create git commit with changes to public/index.html following project commit message format
+- [ ] T023 Deploy to production: Push branch and deploy via GitHub Actions OR deploy manually via SAM CLI [REQUIRES USER ACTION]
+- [ ] T024 Verify production deployment: Visit production site and check DevTools Network tab for GA4 requests [MANUAL TEST REQUIRED]
+- [ ] T025 Monitor Google Analytics dashboard: Wait 24-48 hours and verify all three metrics (page views, demographics, referral sources) appear correctly in GA dashboard [MANUAL TEST REQUIRED - REQUIRES 24-48 HOURS]
+- [X] T026 Document any privacy policy updates needed (site owner responsibility, not implementation task)
 
 ---
 
