@@ -1,6 +1,6 @@
 # Contributing to Arrested Development Quotes API
 
-Thank you for your interest in contributing to the Arrested Development Quotes API! We appreciate contributions of all kinds, from bug fixes and documentation improvements to new features and quote additions.
+Thank you for your interest in contributing to the Arrested Development Quotes API! We appreciate contributions of all kinds, from bug fixes and documentation improvements to new features and quote additions. The **most helpful** right now would be fixes to the data file (`/app/data/quotes.json`), though. 
 
 ## Table of Contents
 
@@ -273,7 +273,13 @@ def test_random_quote_returns_valid_format(client):
 
 ## Submitting Changes
 
-### Before Submitting
+## Before Submitting (quotes.json only changes)
+- [ ] `quotes.json` is still valid json! (`python3 -c "import sys, json; json.load(sys.stdin); print('valid')"`
+- [ ] Field values are consistent with other quotes (ie. "Lucille" not "Lucille Bluth")
+- [ ] Quotes are accurate (ie. not "I've made a terrible mistake.")
+- [ ] Commit messages are clear and descriptive
+
+### Before Submitting (all else)
 
 - [ ] Code follows the project style guidelines
 - [ ] Tests pass locally (`pytest`)
