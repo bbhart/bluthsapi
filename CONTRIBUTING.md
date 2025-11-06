@@ -55,7 +55,7 @@ We accept pull requests for:
 - Python 3.11+ ([download](https://www.python.org/downloads/))
 - uv package manager ([install](https://docs.astral.sh/uv/))
 - Git
-- Docker (optional, for testing containerized deployment)
+- Docker (optional - only needed if you want to test the containerized deployment locally)
 
 ### Setting Up Your Development Environment
 
@@ -76,7 +76,7 @@ We accept pull requests for:
    # Windows:
    .venv\Scripts\activate
 
-   # Install production dependencies
+   # Install production dependencies (FastAPI 0.115.0, etc.)
    uv pip install -r requirements.txt
 
    # Install development dependencies
@@ -160,7 +160,7 @@ Additions and corrections via PR are most welcome!
 
 ### Quote Format
 
-Each quote should follow this structure:
+Each quote in the `quotes.json` file is an object in a flat array. The structure should follow:
 
 ```json
 {
@@ -173,22 +173,36 @@ Each quote should follow this structure:
 }
 ```
 
+**Note:** The file contains a simple JSON array - add your quote directly to the array without any outer wrapper object.
+
 **Required fields:**
-- `id`: Unique identifier (e.g., "quote-001", "quote-002")
+- `id`: Unique identifier (see [ID Format Guidelines](#id-format-guidelines) below)
 - `quote`: The actual quote text
-- `primarySpeaker`: The main character speaking
+- `primarySpeaker`: The main character speaking (use consistent character names - see note below)
 
 **Optional fields:**
 - `speakers`: Array of all characters involved (if multiple)
 - `context`: Episode information for reference
 - `imageUrl`: Filename of associated image (if available on S3)
 
+**Character Name Consistency:** Many quotes currently have empty `primarySpeaker` fields. When adding quotes or filling in missing data, use consistent character names matching existing entries (e.g., "Lucille" not "Lucille Bluth", "Tobias" not "Tobias Fünke"). Helping fill in these missing fields is a valuable contribution!
+
+### ID Format Guidelines
+
+The existing data has inconsistent ID formats (`quote-001`, `quote-2`, `quote-3`, etc.). When adding new quotes:
+
+1. **Find the highest existing ID number** by searching through quotes.json
+2. **Use the next sequential number** with the format `quote-XXX` (e.g., if the highest is `quote-950`, use `quote-951`)
+3. **Preferred format:** Use `quote-` prefix followed by the number (no specific padding required, though `quote-001` style is acceptable)
+
+Example: If the last quote ID is `quote-500`, your new quote should be `quote-501`.
+
 ### Adding a New Quote
 
 1. Open `app/data/quotes.json`
-2. Add your quote to the `quotes` array
-3. Ensure the JSON is valid (no trailing commas, proper syntax)
-4. Use the next available quote ID number
+2. Find the highest existing quote ID number
+3. Add your quote to the array with the next sequential ID
+4. Ensure the JSON is valid (no trailing commas, proper syntax)
 5. Include context information when possible
 
 ### Example Quote Addition
@@ -211,12 +225,14 @@ After adding quotes:
 # Start the server
 uvicorn app.main:app --reload
 
-# Test that quotes load correctly
+# Test that quotes load correctly (note: may not show your new quote due to randomness)
 curl http://localhost:8000/api/quotes/random
 
-# Test character-specific quotes
+# Test character-specific quotes (if your quote has a primarySpeaker)
 curl http://localhost:8000/api/quotes/lucille
 ```
+
+**Note:** The `/random` endpoint returns a randomly selected quote, so you may need to call it multiple times to see your newly added quote. Character-specific endpoints only show quotes with matching `primarySpeaker` values.
 
 ## Coding Standards
 
@@ -273,10 +289,11 @@ def test_random_quote_returns_valid_format(client):
 
 ## Submitting Changes
 
-## Before Submitting (quotes.json only changes)
-- [ ] `quotes.json` is still valid json! (`python3 -c "import sys, json; json.load(sys.stdin); print('valid')"`
-- [ ] Field values are consistent with other quotes (ie. "Lucille" not "Lucille Bluth")
-- [ ] Quotes are accurate (ie. not "I've made a terrible mistake.")
+### Before Submitting (quotes.json changes only)
+
+- [ ] `quotes.json` is still valid JSON! Test with: `python3 -c "import json; json.load(open('app/data/quotes.json')); print('valid')"`
+- [ ] Field values are consistent with other quotes (e.g., "Lucille" not "Lucille Bluth")
+- [ ] Quotes are accurate (e.g., not "I've made a terrible mistake.")
 - [ ] Commit messages are clear and descriptive
 
 ### Before Submitting (all else)
