@@ -151,7 +151,12 @@ docker run -p 8000:8000 bluthsapi:test
 
 ## Contributing Quotes
 
-The quotes database lives in `app/data/quotes.json`. We welcome additions and corrections!
+The quotes database lives in `app/data/quotes.json`. It was populated haphazardly by scraping my old @bluthquotes tweets and 
+trying to prune things down. 
+
+I can definitely use help with filling out the `primarySpeaker` and `speakers` fields. 
+
+Additions and corrections via PR are most welcome!
 
 ### Quote Format
 
