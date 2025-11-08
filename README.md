@@ -210,9 +210,52 @@ bluthsapi/
 - **Deployment**: Docker
 - **Storage**: Static JSON file, images in AWS S3
 
-## Deployment Options
+## AWS Lambda Deployment
 
-### Option 1: VPS Deployment (DigitalOcean, Linode, etc.)
+This project is configured for serverless deployment to AWS Lambda using AWS SAM (Serverless Application Model).
+
+### Prerequisites
+
+- AWS CLI configured with credentials
+- AWS SAM CLI installed
+- Docker (for building Lambda packages)
+
+### Deploy to AWS Lambda
+
+```bash
+# Build and deploy using SAM
+sam build --use-container
+sam deploy --guided
+
+# Or use the configured samconfig.toml
+sam build --use-container
+sam deploy
+```
+
+### Budget Controls
+
+The application includes automatic cost controls:
+- **Monthly budget**: $20/month
+- **Alert at $10**: Email notification
+- **Alert at $20**: Email + automatic API shutdown (429 errors)
+
+To set up budget monitoring:
+
+```bash
+# 1. Deploy the application stack first (includes shutdown Lambda)
+sam deploy
+
+# 2. Run the budget setup script
+./aws/setup-budget.sh
+
+# 3. Confirm email subscription (check bbhart@bbhart.com)
+```
+
+If the API is shut down due to budget limits, see [docs/budget-reset.md](docs/budget-reset.md) for recovery instructions.
+
+### Other Deployment Options
+
+#### Option 1: VPS Deployment (DigitalOcean, Linode, etc.)
 
 ```bash
 # SSH into your server
@@ -227,13 +270,13 @@ docker build -t bluthsapi:latest .
 docker run -d -p 80:8000 --env-file .env --name bluthsapi bluthsapi:latest
 ```
 
-### Option 2: Cloud Container Services
+#### Option 2: Cloud Container Services
 
 - **AWS ECS/Fargate**: Deploy to Amazon ECS
 - **Google Cloud Run**: Serverless container deployment
 - **Azure Container Instances**: Run containers on Azure
 
-### Option 3: Container Platforms (Free Tier Available)
+#### Option 3: Container Platforms (Free Tier Available)
 
 - **Railway.app**: Auto-deploy from GitHub
 - **Fly.io**: Global container deployment
