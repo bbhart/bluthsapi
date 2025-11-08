@@ -7,6 +7,6 @@ architecture = "x86_64"
 handler = "app.main.handler"
 manifest_hash = ""
 packagetype = "Zip"
-functions = ["BluthsApiFunction"]
+functions = ["BluthsApiFunction", "BudgetShutdownFunction"]
 
 [layer_build_definitions]
