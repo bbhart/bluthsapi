@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote</title>
+    <style>
+        /* CSS Custom Properties - matching existing styles.css palette */
+        :root {
+            --color-orange: #FF6B35;
+            --color-dark-orange: #F7931E;
+            --color-white: #FFFFFF;
+            --color-cream: #FFF8F0;
+            --color-text-dark: #2C3E50;
+            --color-text-medium: #6C757D;
+            --color-success: #28A745;
+        }
+
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full viewport layout with flexbox centering */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-dark-orange) 100%);
+            padding: 20px;
+            padding-bottom: 100px; /* Space for fixed button */
+        }
+
+        /* Quote container */
+        .quote-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Quote text styling */
+        .quote-text {
+            font-size: clamp(1.5rem, 5vw, 3.5rem);
+            line-height: 1.4;
+            color: var(--color-white);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            max-height: 50vh;
+            overflow-y: auto;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Error state */
+        .quote-text.error {
+            color: var(--color-cream);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        /* Loading state */
+        .quote-text.loading {
+            opacity: 0.7;
+        }
+
+        /* Button container - fixed at bottom */
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Shared button styles */
+        .action-button {
+            padding: 16px 32px;
+            min-height: 48px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-orange);
+            background: var(--color-white);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .action-button:active {
+            transform: scale(0.98);
+        }
+
+        .action-button.copied {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+
+        .action-button.loading {
+            opacity: 0.7;
+            cursor: wait;
+        }
+    </style>
+</head>
+<body>
+    <main class="quote-container">
+        <p id="quote" class="quote-text loading">Loading...</p>
+    </main>
+    <div class="button-container">
+        <button id="copy-btn" class="action-button">Copy</button>
+        <button id="reload-btn" class="action-button">Reload</button>
+    </div>
+
+    <script>
+        // Store the current quote text
+        let currentQuote = '';
+
+        // Load quote from API
+        async function loadQuote() {
+            const quoteElement = document.getElementById('quote');
+            const reloadButton = document.getElementById('reload-btn');
+
+            // Show loading state
+            quoteElement.classList.add('loading');
+            reloadButton.classList.add('loading');
+
+            try {
+                const response = await fetch('/api/quotes/random', { cache: 'no-store' });
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+
+                const data = await response.json();
+                currentQuote = data.data.quote;
+
+                quoteElement.textContent = currentQuote;
+                quoteElement.classList.remove('loading', 'error');
+            } catch (error) {
+                quoteElement.textContent = 'Unable to load quote. Please try again.';
+                quoteElement.classList.remove('loading');
+                quoteElement.classList.add('error');
+                currentQuote = '';
+            } finally {
+                reloadButton.classList.remove('loading');
+            }
+        }
+
+        // Copy quote to clipboard
+        async function copyQuote() {
+            if (!currentQuote) return;
+
+            const button = document.getElementById('copy-btn');
+
+            try {
+                await navigator.clipboard.writeText(currentQuote);
+
+                // Show feedback
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                // Reset after 1.5 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 1500);
+            } catch (error) {
+                // Fallback for older browsers or permission issues
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 1500);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuote();
+            document.getElementById('copy-btn').addEventListener('click', copyQuote);
+            document.getElementById('reload-btn').addEventListener('click', loadQuote);
+        });
+    </script>
+</body>
+</html>
