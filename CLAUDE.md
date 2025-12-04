@@ -13,6 +13,8 @@ Auto-generated from all feature plans. Last updated: 2025-10-24
 - Static files in `public/` directory (served by FastAPI StaticFiles) (006-index-styling)
 - HTML5 (existing index.html), Google Analytics 4 JavaScript snippe + Google Analytics 4 gtag.js library (loaded from Google's CDN) (007-google-analytics)
 - N/A (analytics data stored by Google Analytics service) (007-google-analytics)
+- HTML5, CSS3, Vanilla JavaScript (ES6+) + None - pure static HTML/CSS/JS, uses existing API (008-prettyquote-page)
+- N/A - consumes existing API, no data storage (008-prettyquote-page)
 
 - (001-quotes-api)
 
@@ -32,9 +34,9 @@ tests/
 : Follow standard conventions
 
 ## Recent Changes
+- 008-prettyquote-page: Added HTML5, CSS3, Vanilla JavaScript (ES6+) + None - pure static HTML/CSS/JS, uses existing API
 - 007-google-analytics: Added HTML5 (existing index.html), Google Analytics 4 JavaScript snippe + Google Analytics 4 gtag.js library (loaded from Google's CDN)
 - 006-index-styling: Added HTML5, CSS3 (static files served by FastAPI) + None (pure HTML/CSS, no build tools or frameworks)
-- 005-aws-lambda-deployment: Added Python 3.11+ (matches existing project - see requirements.txt) + FastAPI 0.104.0, Mangum (ASGI-to-Lambda adapter), AWS SAM CLI, python-dotenv (for .env support)
 
 
 <!-- MANUAL ADDITIONS START -->
