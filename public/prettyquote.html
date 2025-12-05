@@ -114,29 +114,167 @@
             opacity: 0.7;
             cursor: wait;
         }
+
+        /* Image container */
+        .image-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .image-container.hidden {
+            display: none;
+        }
+
+        /* Quote image - resized for display */
+        .quote-image {
+            max-width: 100%;
+            max-height: 40vh;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .quote-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .quote-image.copying {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+
+        /* Image hint text */
+        .image-hint {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Toast notification for copy feedback */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--color-success);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background: #dc3545;
+        }
     </style>
 </head>
 <body>
     <main class="quote-container">
         <p id="quote" class="quote-text loading">Loading...</p>
+        <div id="image-container" class="image-container hidden">
+            <img id="quote-image" class="quote-image" alt="Quote image">
+            <p class="image-hint">Long-press image to copy</p>
+        </div>
     </main>
     <div class="button-container">
-        <button id="copy-btn" class="action-button">Copy</button>
+        <button id="copy-btn" class="action-button">Copy Quote</button>
         <button id="reload-btn" class="action-button">Reload</button>
     </div>
+    <div id="toast" class="toast"></div>
 
     <script>
-        // Store the current quote text
+        // Store the current quote text and image URL
         let currentQuote = '';
+        let currentImageUrl = '';
+        let originalImageBlob = null;
+
+        // Long-press detection variables
+        let longPressTimer = null;
+        const LONG_PRESS_DURATION = 500; // ms
+
+        // Show toast notification
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.toggle('error', isError);
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Fetch and cache the original full-size image as a blob
+        async function fetchOriginalImage(imageUrl) {
+            try {
+                const response = await fetch(imageUrl);
+                if (!response.ok) throw new Error('Failed to fetch image');
+                originalImageBlob = await response.blob();
+            } catch (error) {
+                console.error('Error fetching original image:', error);
+                originalImageBlob = null;
+            }
+        }
+
+        // Copy the original image to clipboard
+        async function copyImageToClipboard() {
+            const imageElement = document.getElementById('quote-image');
+            imageElement.classList.add('copying');
+
+            try {
+                if (!originalImageBlob) {
+                    throw new Error('Image not available');
+                }
+
+                // Create a ClipboardItem with the image blob
+                const clipboardItem = new ClipboardItem({
+                    [originalImageBlob.type]: originalImageBlob
+                });
+
+                await navigator.clipboard.write([clipboardItem]);
+                showToast('Image copied!');
+            } catch (error) {
+                console.error('Error copying image:', error);
+                showToast('Failed to copy image', true);
+            } finally {
+                imageElement.classList.remove('copying');
+            }
+        }
 
         // Load quote from API
         async function loadQuote() {
             const quoteElement = document.getElementById('quote');
             const reloadButton = document.getElementById('reload-btn');
+            const imageContainer = document.getElementById('image-container');
+            const imageElement = document.getElementById('quote-image');
 
             // Show loading state
             quoteElement.classList.add('loading');
             reloadButton.classList.add('loading');
+
+            // Reset image state
+            imageContainer.classList.add('hidden');
+            currentImageUrl = '';
+            originalImageBlob = null;
 
             try {
                 const response = await fetch('/api/quotes/random', { cache: 'no-store' });
@@ -147,14 +285,24 @@
 
                 const data = await response.json();
                 currentQuote = data.data.quote;
+                currentImageUrl = data.data.imageUrl || '';
 
                 quoteElement.textContent = currentQuote;
                 quoteElement.classList.remove('loading', 'error');
+
+                // Handle image display if imageUrl exists
+                if (currentImageUrl) {
+                    imageElement.src = currentImageUrl;
+                    imageContainer.classList.remove('hidden');
+                    // Fetch and cache the original full-size image
+                    fetchOriginalImage(currentImageUrl);
+                }
             } catch (error) {
                 quoteElement.textContent = 'Unable to load quote. Please try again.';
                 quoteElement.classList.remove('loading');
                 quoteElement.classList.add('error');
                 currentQuote = '';
+                currentImageUrl = '';
             } finally {
                 reloadButton.classList.remove('loading');
             }
@@ -175,21 +323,57 @@
 
                 // Reset after 1.5 seconds
                 setTimeout(() => {
-                    button.textContent = 'Copy';
+                    button.textContent = 'Copy Quote';
                     button.classList.remove('copied');
                 }, 1500);
             } catch (error) {
                 // Fallback for older browsers or permission issues
                 button.textContent = 'Failed';
                 setTimeout(() => {
-                    button.textContent = 'Copy';
+                    button.textContent = 'Copy Quote';
                 }, 1500);
             }
+        }
+
+        // Set up long-press handlers for image
+        function setupImageLongPress() {
+            const imageElement = document.getElementById('quote-image');
+
+            // Start long-press timer
+            function startLongPress(e) {
+                e.preventDefault();
+                longPressTimer = setTimeout(() => {
+                    copyImageToClipboard();
+                }, LONG_PRESS_DURATION);
+            }
+
+            // Cancel long-press timer
+            function cancelLongPress() {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+            }
+
+            // Mouse events
+            imageElement.addEventListener('mousedown', startLongPress);
+            imageElement.addEventListener('mouseup', cancelLongPress);
+            imageElement.addEventListener('mouseleave', cancelLongPress);
+
+            // Touch events for mobile
+            imageElement.addEventListener('touchstart', startLongPress, { passive: false });
+            imageElement.addEventListener('touchend', cancelLongPress);
+            imageElement.addEventListener('touchcancel', cancelLongPress);
+            imageElement.addEventListener('touchmove', cancelLongPress);
+
+            // Prevent context menu on long press
+            imageElement.addEventListener('contextmenu', (e) => e.preventDefault());
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadQuote();
+            setupImageLongPress();
             document.getElementById('copy-btn').addEventListener('click', copyQuote);
             document.getElementById('reload-btn').addEventListener('click', loadQuote);
         });
