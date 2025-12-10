@@ -189,7 +189,7 @@
         <p id="quote" class="quote-text loading">Loading...</p>
         <div id="image-container" class="image-container hidden">
             <img id="quote-image" class="quote-image" alt="Quote image">
-            <p class="image-hint">Long-press image to copy</p>
+            <p class="image-hint">Long-press or hold image to copy</p>
         </div>
     </main>
     <div class="button-container">
@@ -248,7 +248,11 @@
                 }
 
                 // Check if the blob type is supported
-                if (!ClipboardItem.supports || !ClipboardItem.supports(originalImageBlob.type)) {
+                const supportsType = ClipboardItem.supports
+                    ? ClipboardItem.supports(originalImageBlob.type)
+                    : true; // Assume supported if method doesn't exist
+
+                if (!supportsType) {
                     throw new Error('Image format not supported for clipboard');
                 }
 
@@ -266,8 +270,10 @@
                 // Provide more helpful error messages
                 if (error.name === 'NotAllowedError') {
                     errorMessage = 'Clipboard permission denied';
-                } else if (error.message.includes('not supported')) {
+                } else if (error.message.includes('Clipboard API') || error.message.includes('not supported')) {
                     errorMessage = error.message;
+                } else if (error.message.includes('Image not available')) {
+                    errorMessage = 'Image not loaded yet. Please try again.';
                 }
 
                 showToast(errorMessage, true);
