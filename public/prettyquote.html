@@ -138,9 +138,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            -webkit-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
         }
 
         .quote-image:hover {
@@ -192,7 +189,7 @@
         <p id="quote" class="quote-text loading">Loading...</p>
         <div id="image-container" class="image-container hidden">
             <img id="quote-image" class="quote-image" alt="Quote image">
-            <p class="image-hint">Long-press image to copy</p>
+            <p class="image-hint">Long-press or hold image to copy</p>
         </div>
     </main>
     <div class="button-container">
@@ -241,8 +238,22 @@
             imageElement.classList.add('copying');
 
             try {
+                // Check if Clipboard API is available
+                if (!navigator.clipboard || !navigator.clipboard.write) {
+                    throw new Error('Clipboard API not supported in this browser');
+                }
+
                 if (!originalImageBlob) {
                     throw new Error('Image not available');
+                }
+
+                // Check if the blob type is supported
+                const supportsType = ClipboardItem.supports
+                    ? ClipboardItem.supports(originalImageBlob.type)
+                    : true; // Assume supported if method doesn't exist
+
+                if (!supportsType) {
+                    throw new Error('Image format not supported for clipboard');
                 }
 
                 // Create a ClipboardItem with the image blob
@@ -254,7 +265,18 @@
                 showToast('Image copied!');
             } catch (error) {
                 console.error('Error copying image:', error);
-                showToast('Failed to copy image', true);
+                let errorMessage = 'Failed to copy image';
+
+                // Provide more helpful error messages
+                if (error.name === 'NotAllowedError') {
+                    errorMessage = 'Clipboard permission denied';
+                } else if (error.message.includes('Clipboard API') || error.message.includes('not supported')) {
+                    errorMessage = error.message;
+                } else if (error.message.includes('Image not available')) {
+                    errorMessage = 'Image not loaded yet. Please try again.';
+                }
+
+                showToast(errorMessage, true);
             } finally {
                 imageElement.classList.remove('copying');
             }
@@ -365,9 +387,6 @@
             imageElement.addEventListener('touchend', cancelLongPress);
             imageElement.addEventListener('touchcancel', cancelLongPress);
             imageElement.addEventListener('touchmove', cancelLongPress);
-
-            // Prevent context menu on long press
-            imageElement.addEventListener('contextmenu', (e) => e.preventDefault());
         }
 
         // Initialize on page load
