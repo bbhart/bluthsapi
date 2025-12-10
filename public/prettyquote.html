@@ -44,14 +44,15 @@
             padding: 20px;
         }
 
-        /* Quote text styling */
+        /* Quote text styling
+         * Note: font-size is dynamically overridden by JavaScript based on quote length
+         * to prevent overflow on long quotes. See adjustFontSize() function.
+         */
         .quote-text {
             font-size: clamp(1.5rem, 5vw, 3.5rem);
             line-height: 1.4;
             color: var(--color-white);
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            max-height: 50vh;
-            overflow-y: auto;
             min-height: 100px;
             display: flex;
             align-items: center;
@@ -208,6 +209,30 @@
         let longPressTimer = null;
         const LONG_PRESS_DURATION = 500; // ms
 
+        // Font size breakpoints based on quote length
+        // These thresholds balance readability with viewport fit:
+        // - Short quotes (< 100 chars): Largest size for impact
+        // - Medium quotes (100-200): Slightly smaller but still prominent
+        // - Long quotes (200-300): Reduced to fit more text
+        // - Very long (300-400): Significantly smaller to avoid scrolling
+        // - Extra long (400+): Minimum size to ensure all content is visible
+        const FONT_SIZE_BREAKPOINTS = [
+            { maxLength: 100, size: 'clamp(2rem, 5vw, 3.5rem)' },
+            { maxLength: 200, size: 'clamp(1.5rem, 4vw, 2.5rem)' },
+            { maxLength: 300, size: 'clamp(1.2rem, 3vw, 2rem)' },
+            { maxLength: 400, size: 'clamp(1rem, 2.5vw, 1.5rem)' },
+            { maxLength: Infinity, size: 'clamp(0.9rem, 2vw, 1.2rem)' }
+        ];
+
+        // Adjust font size based on quote length to prevent scrolling
+        function adjustFontSize(quoteElement, text) {
+            const length = text.length;
+
+            // Find the appropriate font size for this quote length
+            const breakpoint = FONT_SIZE_BREAKPOINTS.find(bp => length < bp.maxLength);
+            quoteElement.style.fontSize = breakpoint.size;
+        }
+
         // Show toast notification
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
@@ -311,6 +336,9 @@
 
                 quoteElement.textContent = currentQuote;
                 quoteElement.classList.remove('loading', 'error');
+
+                // Adjust font size based on quote length
+                adjustFontSize(quoteElement, currentQuote);
 
                 // Handle image display if imageUrl exists
                 if (currentImageUrl) {
