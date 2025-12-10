@@ -190,7 +190,7 @@
         <p id="quote" class="quote-text loading">Loading...</p>
         <div id="image-container" class="image-container hidden">
             <img id="quote-image" class="quote-image" alt="Quote image">
-            <p class="image-hint">Long-press or hold image to copy</p>
+            <p class="image-hint">Click image to copy, or right-click for options</p>
         </div>
     </main>
     <div class="button-container">
@@ -204,10 +204,6 @@
         let currentQuote = '';
         let currentImageUrl = '';
         let originalImageBlob = null;
-
-        // Long-press detection variables
-        let longPressTimer = null;
-        const LONG_PRESS_DURATION = 500; // ms
 
         // Font size breakpoints based on quote length
         // These thresholds balance readability with viewport fit:
@@ -385,42 +381,24 @@
             }
         }
 
-        // Set up long-press handlers for image
-        function setupImageLongPress() {
+        // Set up click-to-copy handler for image
+        function setupImageClickToCopy() {
             const imageElement = document.getElementById('quote-image');
 
-            // Start long-press timer
-            function startLongPress(e) {
+            // Click to copy image
+            imageElement.addEventListener('click', (e) => {
                 e.preventDefault();
-                longPressTimer = setTimeout(() => {
-                    copyImageToClipboard();
-                }, LONG_PRESS_DURATION);
-            }
+                copyImageToClipboard();
+            });
 
-            // Cancel long-press timer
-            function cancelLongPress() {
-                if (longPressTimer) {
-                    clearTimeout(longPressTimer);
-                    longPressTimer = null;
-                }
-            }
-
-            // Mouse events
-            imageElement.addEventListener('mousedown', startLongPress);
-            imageElement.addEventListener('mouseup', cancelLongPress);
-            imageElement.addEventListener('mouseleave', cancelLongPress);
-
-            // Touch events for mobile
-            imageElement.addEventListener('touchstart', startLongPress, { passive: false });
-            imageElement.addEventListener('touchend', cancelLongPress);
-            imageElement.addEventListener('touchcancel', cancelLongPress);
-            imageElement.addEventListener('touchmove', cancelLongPress);
+            // Note: Right-click/context menu is intentionally NOT prevented
+            // This allows native browser "Copy image" functionality
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadQuote();
-            setupImageLongPress();
+            setupImageClickToCopy();
             document.getElementById('copy-btn').addEventListener('click', copyQuote);
             document.getElementById('reload-btn').addEventListener('click', loadQuote);
         });
