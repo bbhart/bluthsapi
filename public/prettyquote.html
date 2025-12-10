@@ -50,8 +50,6 @@
             line-height: 1.4;
             color: var(--color-white);
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            max-height: 50vh;
-            overflow-y: auto;
             min-height: 100px;
             display: flex;
             align-items: center;
@@ -211,6 +209,27 @@
         let longPressTimer = null;
         const LONG_PRESS_DURATION = 500; // ms
 
+        // Adjust font size based on quote length to prevent scrolling
+        function adjustFontSize(quoteElement, text) {
+            const length = text.length;
+            let fontSize;
+
+            // Calculate font size based on text length
+            if (length < 100) {
+                fontSize = 'clamp(2rem, 5vw, 3.5rem)';
+            } else if (length < 200) {
+                fontSize = 'clamp(1.5rem, 4vw, 2.5rem)';
+            } else if (length < 300) {
+                fontSize = 'clamp(1.2rem, 3vw, 2rem)';
+            } else if (length < 400) {
+                fontSize = 'clamp(1rem, 2.5vw, 1.5rem)';
+            } else {
+                fontSize = 'clamp(0.9rem, 2vw, 1.2rem)';
+            }
+
+            quoteElement.style.fontSize = fontSize;
+        }
+
         // Show toast notification
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
@@ -289,6 +308,9 @@
 
                 quoteElement.textContent = currentQuote;
                 quoteElement.classList.remove('loading', 'error');
+
+                // Adjust font size based on quote length
+                adjustFontSize(quoteElement, currentQuote);
 
                 // Handle image display if imageUrl exists
                 if (currentImageUrl) {
