@@ -129,7 +129,7 @@
             display: none;
         }
 
-        /* Quote image - resized for display */
+        /* Quote image - resized for display, native long-press to copy */
         .quote-image {
             max-width: 100%;
             max-height: 40vh;
@@ -137,25 +137,6 @@
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .quote-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
-        }
-
-        .quote-image.copying {
-            opacity: 0.7;
-            transform: scale(0.98);
-        }
-
-        /* Image hint text */
-        .image-hint {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* Toast notification for copy feedback */
@@ -190,7 +171,6 @@
         <p id="quote" class="quote-text loading">Loading...</p>
         <div id="image-container" class="image-container hidden">
             <img id="quote-image" class="quote-image" alt="Quote image">
-            <p class="image-hint">Click image to copy, or right-click for options</p>
         </div>
     </main>
     <div class="button-container">
@@ -203,7 +183,6 @@
         // Store the current quote text and image URL
         let currentQuote = '';
         let currentImageUrl = '';
-        let originalImageBlob = null;
 
         // Font size breakpoints based on quote length
         // These thresholds balance readability with viewport fit:
@@ -241,68 +220,6 @@
             }, 2000);
         }
 
-        // Fetch and cache the original full-size image as a blob
-        async function fetchOriginalImage(imageUrl) {
-            try {
-                const response = await fetch(imageUrl);
-                if (!response.ok) throw new Error('Failed to fetch image');
-                originalImageBlob = await response.blob();
-            } catch (error) {
-                console.error('Error fetching original image:', error);
-                originalImageBlob = null;
-            }
-        }
-
-        // Copy the original image to clipboard
-        async function copyImageToClipboard() {
-            const imageElement = document.getElementById('quote-image');
-            imageElement.classList.add('copying');
-
-            try {
-                // Check if Clipboard API is available
-                if (!navigator.clipboard || !navigator.clipboard.write) {
-                    throw new Error('Clipboard API not supported in this browser');
-                }
-
-                if (!originalImageBlob) {
-                    throw new Error('Image not available');
-                }
-
-                // Check if the blob type is supported
-                const supportsType = ClipboardItem.supports
-                    ? ClipboardItem.supports(originalImageBlob.type)
-                    : true; // Assume supported if method doesn't exist
-
-                if (!supportsType) {
-                    throw new Error('Image format not supported for clipboard');
-                }
-
-                // Create a ClipboardItem with the image blob
-                const clipboardItem = new ClipboardItem({
-                    [originalImageBlob.type]: originalImageBlob
-                });
-
-                await navigator.clipboard.write([clipboardItem]);
-                showToast('Image copied!');
-            } catch (error) {
-                console.error('Error copying image:', error);
-                let errorMessage = 'Failed to copy image';
-
-                // Provide more helpful error messages
-                if (error.name === 'NotAllowedError') {
-                    errorMessage = 'Clipboard permission denied';
-                } else if (error.message.includes('Clipboard API') || error.message.includes('not supported')) {
-                    errorMessage = error.message;
-                } else if (error.message.includes('Image not available')) {
-                    errorMessage = 'Image not loaded yet. Please try again.';
-                }
-
-                showToast(errorMessage, true);
-            } finally {
-                imageElement.classList.remove('copying');
-            }
-        }
-
         // Load quote from API
         async function loadQuote() {
             const quoteElement = document.getElementById('quote');
@@ -317,7 +234,6 @@
             // Reset image state
             imageContainer.classList.add('hidden');
             currentImageUrl = '';
-            originalImageBlob = null;
 
             try {
                 const response = await fetch('/api/quotes/random', { cache: 'no-store' });
@@ -340,8 +256,6 @@
                 if (currentImageUrl) {
                     imageElement.src = currentImageUrl;
                     imageContainer.classList.remove('hidden');
-                    // Fetch and cache the original full-size image
-                    fetchOriginalImage(currentImageUrl);
                 }
             } catch (error) {
                 quoteElement.textContent = 'Unable to load quote. Please try again.';
@@ -381,24 +295,9 @@
             }
         }
 
-        // Set up click-to-copy handler for image
-        function setupImageClickToCopy() {
-            const imageElement = document.getElementById('quote-image');
-
-            // Click to copy image
-            imageElement.addEventListener('click', (e) => {
-                e.preventDefault();
-                copyImageToClipboard();
-            });
-
-            // Note: Right-click/context menu is intentionally NOT prevented
-            // This allows native browser "Copy image" functionality
-        }
-
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadQuote();
-            setupImageClickToCopy();
             document.getElementById('copy-btn').addEventListener('click', copyQuote);
             document.getElementById('reload-btn').addEventListener('click', loadQuote);
         });
