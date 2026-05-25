@@ -157,14 +157,25 @@ jobs:
       - name: Deploy to AWS Lambda
         id: deploy
         run: |
+          # --no-confirm-changeset is required in CI because samconfig.toml
+          # has confirm_changeset = true (which keeps the safety prompt for
+          # interactive local deploys but blocks non-interactive CI runs).
+          #
+          # parameter-overrides MUST list every non-default parameter — the CLI
+          # flag REPLACES samconfig's parameter_overrides, not merges with it.
+          # Values mirror samconfig.toml so local and CI deploys are consistent.
           sam deploy \
             --template-file packaged.yaml \
             --stack-name ${{ env.STACK_NAME }} \
             --capabilities CAPABILITY_NAMED_IAM \
+            --no-confirm-changeset \
             --no-fail-on-empty-changeset \
             --parameter-overrides \
-              S3BaseUrl="${{ secrets.S3_BASE_URL || 'https://example.s3.amazonaws.com' }}" \
-              GlobalRateLimit=10 \
+              S3BaseUrl="${{ secrets.S3_BASE_URL || 'https://bqaasmedia.s3.us-east-1.amazonaws.com' }}" \
+              PerIPRateLimit=3 \
+              GlobalRateLimit=50 \
+              CustomDomainName=api.lucille2.com \
+              CertificateArn="${ACM_CERTIFICATE_ARN}" \
             --tags \
               Environment=production \
               Project=bluths-api \
