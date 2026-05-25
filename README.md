@@ -234,24 +234,17 @@ sam deploy
 
 ### Budget Controls
 
-The application includes automatic cost controls:
-- **Monthly budget**: $20/month
-- **Alert at $10**: Email notification
-- **Alert at $20**: Email + automatic API shutdown (429 errors)
+The application includes automatic cost controls, fully managed by CloudFormation in `template.yaml`:
 
-To set up budget monitoring:
+- **Monthly budget**: $30/month hard cap
+- **Alert at $20** (actual spend): Email notification to `<operator-email>`
+- **Alert at $30** (actual spend): Email + automatic API shutdown (sets API Gateway throttle to 0; requests return 429)
+- **CloudWatch Alarm**: If the shutdown Lambda errors, the alarm publishes to the same SNS topic so you're notified of silent failures.
+- **Month-rollover safety net**: On the 1st of each month, a read-only Lambda checks the API Gateway throttle; if still 0, emails a reminder pointing at the recovery doc.
 
-```bash
-# 1. Deploy the application stack first (includes shutdown Lambda)
-sam deploy
+No manual setup script needed — everything is provisioned by `sam deploy`. See [`specs/010-budget-cloudformation/quickstart.md`](specs/010-budget-cloudformation/quickstart.md) for the deploy + verify runbook.
 
-# 2. Run the budget setup script
-./aws/setup-budget.sh
-
-# 3. Confirm email subscription (check <operator-email>)
-```
-
-If the API is shut down due to budget limits, see [docs/budget-reset.md](docs/budget-reset.md) for recovery instructions.
+If the API is shut down due to budget limits, see [`docs/budget-reset.md`](docs/budget-reset.md) for recovery instructions.
 
 ### Other Deployment Options
 

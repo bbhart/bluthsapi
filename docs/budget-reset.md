@@ -4,13 +4,17 @@ This document explains how to recover from an automatic API shutdown triggered b
 
 ## What Happened?
 
-When your AWS account spending reaches **$20/month**, the budget system automatically:
-1. Sends an email alert to <operator-email>
-2. Invokes the `bluths-api-budget-shutdown` Lambda function
-3. Sets API Gateway throttle limits to 0 requests/second
-4. All API requests return `429 Too Many Requests` errors
+The budget protection is a two-tier system:
 
-The Lambda function and data remain intact - only the API Gateway is disabled.
+- **At $20 actual monthly spend** — AWS Budgets sends a **warning email** to `<operator-email>` directly (no automated action). The API stays online.
+- **At $30 actual monthly spend** — AWS Budgets publishes the threshold breach to the `bluths-api-budget-shutdown-trigger` SNS topic. That topic has the `bluths-api-budget-shutdown` Lambda subscribed (targeting the `:live` alias). The Lambda sets the API Gateway `prod` stage throttle to 0, so every subsequent request returns `429 Too Many Requests`. Brian also receives a direct email at $30 from AWS Budgets.
+
+The Lambda code and data remain intact — only the API Gateway throttle is changed.
+
+**Backstops you should know about:**
+
+- If the shutdown Lambda errors when invoked, the `bluths-api-budget-shutdown-errors` CloudWatch Alarm publishes to the `bluths-api-budget-alerts` SNS topic so Brian is notified of silent failures.
+- On the 1st of each month at 00:05 UTC, the `bluths-api-month-rollover-check` Lambda runs. If the API is still disabled (throttle still 0), it emails a reminder via the alerts topic — so Brian doesn't enter the new month unaware. The rollover Lambda is read-only; it does not modify state.
 
 ---
 
@@ -103,22 +107,18 @@ Review these cost drivers:
 
 ### Disable Automatic Shutdown
 
-To keep budget alerts but remove automatic shutdown:
+To keep budget alerts but remove automatic shutdown, unsubscribe the Lambda from the shutdown-trigger SNS topic. The $20/$30 notifications continue to email Brian; only the kill switch is muted.
 
 ```bash
-ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+SUB_ARN=$(aws sns list-subscriptions-by-topic \
+  --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-shutdown-trigger \
+  --query "Subscriptions[?Protocol=='lambda'].SubscriptionArn | [0]" \
+  --output text)
 
-# List budget actions
-aws budgets describe-budget-actions \
-  --account-id "$ACCOUNT_ID" \
-  --budget-name "bluths-api-monthly-budget"
-
-# Delete the Lambda action (get ActionId from above output)
-aws budgets delete-budget-action \
-  --account-id "$ACCOUNT_ID" \
-  --budget-name "bluths-api-monthly-budget" \
-  --action-id "ACTION_ID_FROM_ABOVE"
+aws sns unsubscribe --subscription-arn "$SUB_ARN"
 ```
+
+This is also reversible — re-running `sam deploy` will recreate the subscription. For a permanent disable, comment out the `BudgetShutdownSubscription` resource in `template.yaml` and deploy.
 
 ---
 
@@ -174,6 +174,7 @@ Then use Option 1 to restore throttling.
 ## Support
 
 For questions or issues:
-- Check CloudWatch Logs: `/aws/lambda/bluths-api-budget-shutdown`
-- Review budget actions: `aws budgets describe-budget-actions`
+- Check CloudWatch Logs: `/aws/lambda/bluths-api-budget-shutdown` and `/aws/lambda/bluths-api-month-rollover-check`
+- Review SNS topic subscriptions: `aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-shutdown-trigger`
 - Check API Gateway stage: `aws apigatewayv2 get-stage --api-id $API_ID --stage-name prod`
+- Check the CloudWatch alarm state: `aws cloudwatch describe-alarms --alarm-names bluths-api-budget-shutdown-errors`

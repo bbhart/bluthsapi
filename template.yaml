@@ -130,6 +130,7 @@ Resources:
       MemorySize: 128
       Timeout: 30
       Role: !GetAtt BudgetShutdownFunctionRole.Arn
+      AutoPublishAlias: live
       Environment:
         Variables:
           API_GATEWAY_ID: !Ref BluthsHttpApi
@@ -158,6 +159,231 @@ Resources:
                   - apigateway:GET
                   - apigateway:PATCH
                 Resource: !Sub 'arn:aws:apigateway:${AWS::Region}::/apis/${BluthsHttpApi}/stages/prod'
+
+  # ===========================================================================
+  # Budget & Alerting (feature 010-budget-cloudformation)
+  # ---------------------------------------------------------------------------
+  # SNS topic fans out budget notifications + CloudWatch-alarm notifications.
+  # Topic policy grants publish to both `budgets.amazonaws.com` and
+  # `cloudwatch.amazonaws.com`, each scoped via aws:SourceAccount.
+  # ===========================================================================
+
+  BudgetAlertsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: bluths-api-budget-alerts
+      DisplayName: Bluths API Budget Alerts
+
+  BudgetAlertsTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref BudgetAlertsTopic
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowBudgetsToPublish
+            Effect: Allow
+            Principal:
+              Service: budgets.amazonaws.com
+            Action: sns:Publish
+            Resource: !Ref BudgetAlertsTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+          - Sid: AllowCloudWatchAlarmsToPublish
+            Effect: Allow
+            Principal:
+              Service: cloudwatch.amazonaws.com
+            Action: sns:Publish
+            Resource: !Ref BudgetAlertsTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  BudgetAlertsEmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref BudgetAlertsTopic
+      Protocol: email
+      Endpoint: <operator-email>
+
+  # Monthly cost budget — limit $30. Notifications at $20 (warning) and
+  # $30 (paired with the Lambda budget action below).
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: bluths-api-monthly-budget
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit:
+          Amount: 30
+          Unit: USD
+      # AWS Budgets allows at most 1 SNS-type subscriber per notification (but
+      # multiple EMAIL-type subscribers). Email is delivered directly via the
+      # EMAIL subscriber; SNS subscription on the $30 notification is reserved
+      # for the Lambda trigger only.
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 20.0
+            ThresholdType: ABSOLUTE_VALUE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: <operator-email>
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 30.0
+            ThresholdType: ABSOLUTE_VALUE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: <operator-email>
+            - SubscriptionType: SNS
+              Address: !Ref BudgetShutdownTriggerTopic
+
+  # Shutdown-trigger SNS topic — the $30 budget notification publishes here,
+  # which fans out to the shutdown Lambda via the subscription below.
+  # AWS::Budgets::BudgetsAction does NOT support Lambda targets in CloudFormation
+  # (only APPLY_IAM_POLICY, APPLY_SCP_POLICY, RUN_SSM_DOCUMENTS); SNS is the
+  # canonical bridge. Kept on its own topic — separate from BudgetAlertsTopic —
+  # so $20 notifications (which publish only to the alerts topic) do not
+  # invoke the shutdown Lambda.
+  BudgetShutdownTriggerTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: bluths-api-budget-shutdown-trigger
+      DisplayName: Bluths API Budget Shutdown Trigger
+
+  BudgetShutdownTriggerTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref BudgetShutdownTriggerTopic
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowBudgetsToPublish
+            Effect: Allow
+            Principal:
+              Service: budgets.amazonaws.com
+            Action: sns:Publish
+            Resource: !Ref BudgetShutdownTriggerTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  # SNS subscription — Lambda target. Endpoint is the `:live` alias so
+  # AutoPublishAlias rollback applies. DependsOn the SAM-generated alias
+  # resource (SAM creates AWS::Lambda::Alias with logical ID
+  # <FunctionLogicalId>Aliaslive); !Sub doesn't infer the dependency.
+  BudgetShutdownSubscription:
+    Type: AWS::SNS::Subscription
+    DependsOn: BudgetShutdownFunctionAliaslive
+    Properties:
+      TopicArn: !Ref BudgetShutdownTriggerTopic
+      Protocol: lambda
+      Endpoint: !Sub '${BudgetShutdownFunction.Arn}:live'
+
+  # Permits SNS to invoke the Lambda alias.
+  BudgetShutdownInvokePermission:
+    Type: AWS::Lambda::Permission
+    DependsOn: BudgetShutdownFunctionAliaslive
+    Properties:
+      FunctionName: !Sub '${BudgetShutdownFunction.Arn}:live'
+      Action: lambda:InvokeFunction
+      Principal: sns.amazonaws.com
+      SourceArn: !Ref BudgetShutdownTriggerTopic
+
+  # CloudWatch Alarm — fires if the shutdown Lambda errors when invoked.
+  # FR-012: visibility on silent kill-switch failure.
+  BudgetShutdownErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: bluths-api-budget-shutdown-errors
+      AlarmDescription: Fires if the bluths-api-budget-shutdown Lambda errors when AWS Budgets invokes it.
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref BudgetShutdownFunction
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 5
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref BudgetAlertsTopic
+
+  # Read-only role for the month-rollover check Lambda (FR-014).
+  # No PATCH / Update / Delete — only GET and SNS publish.
+  MonthRolloverCheckRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: bluths-api-month-rollover-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ReadOnlyApiAndPublishSns
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: apigateway:GET
+                Resource: !Sub 'arn:aws:apigateway:${AWS::Region}::/apis/${BluthsHttpApi}/stages/prod'
+              - Effect: Allow
+                Action: sns:Publish
+                Resource: !Ref BudgetAlertsTopic
+
+  # Month-rollover check Lambda — read-only, monthly safety net (FR-013).
+  MonthRolloverCheckFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: bluths-api-month-rollover-check
+      Description: Reads prod stage throttle; emails Brian if API is still disabled at start of month.
+      CodeUri: .
+      Handler: app.month_rollover_check.handler
+      Runtime: python3.13
+      MemorySize: 128
+      Timeout: 30
+      Role: !GetAtt MonthRolloverCheckRole.Arn
+      AutoPublishAlias: live
+      Environment:
+        Variables:
+          API_GATEWAY_ID: !Ref BluthsHttpApi
+          SNS_TOPIC_ARN: !Ref BudgetAlertsTopic
+
+  # EventBridge schedule — fires the rollover check at 00:05 UTC on the 1st.
+  MonthRolloverSchedule:
+    Type: AWS::Events::Rule
+    DependsOn: MonthRolloverCheckFunctionAliaslive
+    Properties:
+      Name: bluths-api-month-rollover-schedule
+      Description: Triggers month-rollover check at 00:05 UTC on the 1st of each month.
+      ScheduleExpression: 'cron(5 0 1 * ? *)'
+      State: ENABLED
+      Targets:
+        - Id: MonthRolloverCheckLambda
+          Arn: !Sub '${MonthRolloverCheckFunction.Arn}:live'
+
+  MonthRolloverSchedulePermission:
+    Type: AWS::Lambda::Permission
+    DependsOn: MonthRolloverCheckFunctionAliaslive
+    Properties:
+      FunctionName: !Sub '${MonthRolloverCheckFunction.Arn}:live'
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt MonthRolloverSchedule.Arn
 
   # HTTP API (API Gateway v2)
   BluthsHttpApi:
@@ -274,6 +500,24 @@ Outputs:
     Value: !GetAtt BudgetShutdownFunction.Arn
     Export:
       Name: !Sub '${AWS::StackName}-budget-shutdown-arn'
+
+  BudgetAlertsTopicArn:
+    Description: "SNS topic that fans out budget + alarm notifications"
+    Value: !Ref BudgetAlertsTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-budget-alerts-topic-arn'
+
+  MonthlyBudgetName:
+    Description: "AWS Budget name for the monthly cost cap"
+    Value: !Ref MonthlyBudget
+    Export:
+      Name: !Sub '${AWS::StackName}-monthly-budget-name'
+
+  MonthRolloverCheckFunctionArn:
+    Description: "Month-rollover check Lambda ARN (for manual invocation testing)"
+    Value: !GetAtt MonthRolloverCheckFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-month-rollover-check-arn'
 
 # Metadata for SAM CLI / AWS Serverless Application Repository
 Metadata:

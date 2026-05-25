@@ -119,22 +119,12 @@ jobs:
       # STAGE 4: BUILD & PACKAGE
       # ============================================================
       - name: Build SAM application
-        working-directory: specs/005-aws-lambda-deployment/contracts
         run: |
-          # Copy SAM template to deploy directory
-          mkdir -p ../../../deploy/sam
-          cp sam-template.yaml ../../../deploy/sam/template.yaml
-
-          cd ../../../deploy/sam
-
-          # Fix CodeUri path for deployment directory (deploy/sam -> repo root)
-          sed -i 's|CodeUri: ../../../|CodeUri: ../../|g' template.yaml
-
-          # SAM build
+          # Build against the canonical root template.yaml (feature 010 retired
+          # the spec-bundled duplicate at specs/005-.../sam-template.yaml).
           sam build --use-container
 
       - name: Package SAM application
-        working-directory: deploy/sam
         run: |
           # Use pre-existing S3 bucket from GitHub secret (constitution: Least Privilege)
           ARTIFACT_BUCKET="${{ secrets.AWS_SAM_BUCKET }}"
@@ -166,7 +156,6 @@ jobs:
       # ============================================================
       - name: Deploy to AWS Lambda
         id: deploy
-        working-directory: deploy/sam
         run: |
           sam deploy \
             --template-file packaged.yaml \

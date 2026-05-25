@@ -150,6 +150,60 @@
 				"logs:ListLogDeliveries"
 			],
 			"Resource": "*"
+		},
+		{
+			"Sid": "BudgetsAccess",
+			"Effect": "Allow",
+			"Action": [
+				"budgets:*"
+			],
+			"Resource": [
+				"arn:aws:budgets::*:budget/bluths-api-*",
+				"arn:aws:budgets::*:budget/bluths-api-*/*"
+			]
+		},
+		{
+			"Sid": "SNSAccess",
+			"Effect": "Allow",
+			"Action": [
+				"sns:*"
+			],
+			"Resource": [
+				"arn:aws:sns:*:*:bluths-api-*"
+			]
+		},
+		{
+			"Sid": "CloudWatchAlarmsAccess",
+			"Effect": "Allow",
+			"Action": [
+				"cloudwatch:PutMetricAlarm",
+				"cloudwatch:DescribeAlarms",
+				"cloudwatch:DeleteAlarms",
+				"cloudwatch:TagResource",
+				"cloudwatch:UntagResource",
+				"cloudwatch:ListTagsForResource"
+			],
+			"Resource": [
+				"arn:aws:cloudwatch:*:*:alarm:bluths-api-*"
+			]
+		},
+		{
+			"Sid": "EventBridgeAccess",
+			"Effect": "Allow",
+			"Action": [
+				"events:PutRule",
+				"events:DeleteRule",
+				"events:DescribeRule",
+				"events:ListRules",
+				"events:PutTargets",
+				"events:RemoveTargets",
+				"events:TagResource",
+				"events:UntagResource",
+				"events:ListTagsForResource"
+			],
+			"Resource": [
+				"arn:aws:events:*:*:rule/bluths-api-*"
+			]
 		}
 	]
 }
