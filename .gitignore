@@ -46,3 +46,6 @@ logs/
 etc/staging/
 media/tweet_images/
 media/download_log.json
+
+# AWS SAM build artifacts
+.aws-sam/
