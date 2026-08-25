@@ -22,6 +22,7 @@ Allow: /openapi.json
 Allow: /llms.txt
 Allow: /prettyquote.html
 Allow: /styles.css
+Allow: /og-image.png
 Disallow: /api/
 Disallow: /health
 Crawl-delay: 1
