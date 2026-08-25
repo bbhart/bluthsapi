@@ -16,7 +16,6 @@ from app.services import (
     filter_by_speaker,
     filter_meme_quotes,
     build_quote_response,
-    build_error_response,
 )
 from app.config import settings
 

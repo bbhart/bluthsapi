@@ -28,6 +28,12 @@ class QuoteResponse(BaseModel):
 
 
 class ErrorResponse(BaseModel):
-    """Error response structure."""
+    """Error response structure.
 
-    error: str = Field(..., description="Human-readable error message")
+    The field is `detail` because that is what FastAPI's HTTPException emits.
+    This model exists only to document that shape in the OpenAPI spec; nothing
+    constructs it. Renaming the field would silently break every client that
+    reads the published spec.
+    """
+
+    detail: str = Field(..., description="Human-readable error message")

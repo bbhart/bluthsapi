@@ -83,4 +83,4 @@ Local development uses `uvicorn` directly (see README).
 
 ### Specs (`specs/`, `.specify/`)
 
-The project is developed with a spec-driven workflow ([spec-kit](https://github.com/github/spec-kit)); each numbered directory under `specs/` documents one feature's requirements, plan, and tasks. These are historical design records, not runtime code.
+The project is developed with a spec-driven workflow ([spec-kit](https://github.com/github/spec-kit)); each numbered directory under `specs/` documents one feature's requirements, plan, and tasks. These are historical design records, not runtime code, and they are not kept in sync with the implementation — read them for intent, and treat the code as the current contract wherever the two disagree.

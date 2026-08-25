@@ -5,7 +5,7 @@ import random
 from pathlib import Path
 from typing import Optional
 
-from app.models import Quote, QuoteResponse, ErrorResponse
+from app.models import Quote, QuoteResponse
 from app.config import settings
 
 
@@ -109,15 +109,3 @@ def build_quote_response(quote: Quote, s3_base_url: str) -> QuoteResponse:
     transformed_quote = Quote(**quote_data)
 
     return QuoteResponse(data=transformed_quote)
-
-
-def build_error_response(message: str) -> ErrorResponse:
-    """Create an error response.
-
-    Args:
-        message: Human-readable error message.
-
-    Returns:
-        ErrorResponse with the provided message.
-    """
-    return ErrorResponse(error=message)

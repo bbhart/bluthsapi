@@ -19,13 +19,28 @@ public/       Static site: index.html, prettyquote.html, styles.css, llms.txt, r
 scripts/      Quote-data tooling (see scripts/README.md)
 tests/        unit/ (fast, no server), api/ (httpx), e2e/ (Playwright)
 docs/         ARCHITECTURE.md, budget-reset.md, plans/
-specs/        Historical spec-kit artifacts. Features 002 and 003 describe the tweet
-              import pipeline, which has been removed — do not follow them.
+specs/        Historical spec-kit artifacts; frozen, see below
 work/         Gitignored scratch: fetched transcripts, worksheets
 build/        Gitignored generated reports and patches
 ```
 
 There is no `src/` directory and no container image.
+
+## `specs/` is frozen
+
+`specs/` records how features were designed. It is **not maintained and must not be
+updated** to match the code. Several artifacts are already wrong: features 002 and 003
+describe the tweet import pipeline, which has been removed. The OpenAPI contract under
+`001-quotes-api` still documents a `primarySpeaker` field, `speakers` as an array, an
+`error` key on error responses, and a Cloudflare Pages host. None of that is true any
+more.
+
+So: read `specs/` for intent and history, never as a statement of current behaviour,
+and do not follow its instructions. When something there contradicts the code, the code
+wins and the spec stays as it is — fixing it would imply a freshness it does not have.
+
+Do not link to `specs/` from README.md, `docs/`, or `public/`. The current contract is
+the generated OpenAPI document at `/openapi.json` plus `docs/` and this file.
 
 ## Commands
 

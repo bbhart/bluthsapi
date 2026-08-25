@@ -149,8 +149,11 @@ bluthsapi/
 │   ├── models.py            # Pydantic models
 │   ├── services.py          # Business logic
 │   ├── config.py            # Configuration
+│   ├── budget_shutdown.py   # Lambda: throttles the API when the budget trips
+│   ├── month_rollover_check.py  # Lambda: monthly reminder if still throttled
 │   └── data/
-│       └── quotes.json      # Quote data
+│       ├── quotes.json      # Quote data
+│       └── list-of-characters.txt  # Generated; canonical speaker names
 ├── public/
 │   ├── index.html           # Landing page / API documentation
 │   └── prettyquote.html     # Shareable quote-card page
@@ -159,9 +162,9 @@ bluthsapi/
 │   ├── e2e/                 # Playwright browser tests
 │   ├── pages/               # Page objects for e2e tests
 │   └── conftest.py          # pytest fixtures
-├── scripts/                 # Twitter-archive → quotes.json pipeline (see scripts/README.md)
+├── scripts/                 # Quote-data tooling: speakers, duplicates, ids (see scripts/README.md)
 ├── docs/                    # Architecture and operational docs
-├── specs/                   # Feature specs (spec-kit workflow)
+├── specs/                   # Historical spec-kit artifacts; not kept in sync
 ├── template.yaml            # AWS SAM / CloudFormation stack
 ├── samconfig.toml           # SAM deploy configuration
 ├── .github/workflows/       # CI: tests on PRs, deploy on push to main
@@ -170,6 +173,17 @@ bluthsapi/
 ├── .env.example             # Environment template
 └── README.md               # This file
 ```
+
+### A note on `specs/`
+
+`specs/` holds spec-kit artifacts from the features that built this project. They
+are kept as a record of what was decided and why, and they are **not maintained**
+— several describe fields, hosts, and pipelines that no longer exist. Read them as
+history, not as documentation.
+
+The current contract is whatever the code does. For the API surface that means the
+generated OpenAPI document at `/openapi.json`; for everything else, `docs/` and this
+file. Nothing outside `specs/` should link into it.
 
 ## Technology Stack
 
@@ -190,7 +204,10 @@ This project is configured for serverless deployment to AWS Lambda using AWS SAM
 
 - AWS CLI configured with credentials
 - AWS SAM CLI installed
-- Docker running (`sam build --use-container` builds inside SAM's image)
+- Docker running — only for `sam build --use-container`, which is the default in
+  `samconfig.toml` and what CI uses. That is SAM's own build image; there is no
+  Dockerfile in this repository. Plain `sam build` works without Docker if your
+  local Python matches the Lambda runtime.
 
 ### Deploy to AWS Lambda
 
@@ -214,7 +231,7 @@ The application includes automatic cost controls, fully managed by CloudFormatio
 - **CloudWatch Alarm**: If the shutdown Lambda errors, the alarm publishes to the same SNS topic so you're notified of silent failures.
 - **Month-rollover safety net**: On the 1st of each month, a read-only Lambda checks the API Gateway throttle; if still 0, emails a reminder pointing at the recovery doc.
 
-No manual setup script needed — everything is provisioned by `sam deploy`. See [`specs/010-budget-cloudformation/quickstart.md`](specs/010-budget-cloudformation/quickstart.md) for the deploy + verify runbook.
+No manual setup script needed — everything is provisioned by `sam deploy`. The stack is defined in [`template.yaml`](template.yaml).
 
 If the API is shut down due to budget limits, see [`docs/budget-reset.md`](docs/budget-reset.md) for recovery instructions.
 
@@ -229,23 +246,42 @@ you write one. Only `app/` and `public/` are needed at runtime.
 
 ### Success Response
 
+Every quote endpoint returns the same envelope. `context` and `imageUrl` are
+always present, and are `null` when the quote has neither:
+
 ```json
 {
   "data": {
-    "id": "quote-001",
-    "quote": "I've made a huge mistake.",
+    "id": "quote-3",
+    "quote": "It's, like, \"Hey, you want to go down to the whirlpool?\"",
     "speakers": "GOB",
-    "context": "Season 1, Episode 1 - Pilot",
-    "imageUrl": "https://bucket.s3.amazonaws.com/gob-mistake.jpg"
+    "context": null,
+    "imageUrl": "https://bqaasmedia.s3.us-east-1.amazonaws.com/F61ckVgWoAAyjra.jpg"
   }
 }
 ```
 
+`imageUrl` is stored in `quotes.json` as a bare S3 key and expanded to an
+absolute URL against `S3_BASE_URL` on the way out.
+
 ### Error Response
+
+Errors use FastAPI's standard shape — the message is under `detail`, not `error`:
 
 ```json
 {
-  "error": "No quotes found for character: Hermano"
+  "detail": "No quotes found for character: Hermano"
+}
+```
+
+### Health Response
+
+`GET /health` is outside the envelope:
+
+```json
+{
+  "status": "healthy",
+  "quotes_loaded": 600
 }
 ```
 
@@ -340,9 +376,9 @@ rights over that content.
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [uv Documentation](https://docs.astral.sh/uv/)
-- [API Specification](specs/001-quotes-api/contracts/openapi.yaml)
-- [Implementation Plan](specs/001-quotes-api/plan.md)
-- [Quickstart Guide](specs/001-quotes-api/quickstart.md)
+- [API Specification](https://api.lucille2.com/openapi.json) — generated from the code; also at `/openapi.json` on any running instance
+- [Architecture](docs/ARCHITECTURE.md)
+- [Budget reset runbook](docs/budget-reset.md)
 
 ## Support
 
