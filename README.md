@@ -373,6 +373,11 @@ Edit `app/data/quotes.json`:
 
 MIT License - See LICENSE file for details
 
+The MIT license covers the code in this repository only. Arrested Development
+quotes and imagery are the property of their respective rights-holders (20th
+Television / Netflix); this is a non-commercial fan project and claims no
+rights over that content.
+
 ## Resources
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
