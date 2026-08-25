@@ -72,6 +72,38 @@ inherited instead. Anything the merge cannot reconcile — a duplicate naming a
 different speaker, or a second image that would be discarded — is listed under
 CONFLICTS at the top of the report rather than silently resolved.
 
+## speakers_worksheet.py
+
+Exports the quotes that still have no speaker into a flat text file you can
+fill in by hand, then merges it back. Filling in speakers is a reading job, so
+it should not mean editing JSON.
+
+**Usage:**
+```bash
+python3 scripts/speakers_worksheet.py export      # writes work/unattributed.txt
+# ... edit the file in any editor ...
+python3 scripts/speakers_worksheet.py apply --dry-run
+python3 scripts/speakers_worksheet.py apply
+```
+
+One block per quote, with a line to type on:
+
+```
+--- quote-31
+I think I might have someone who's going to "circumvrent" the law.
+speakers:
+```
+
+Several speakers are comma separated in the order they speak
+(`speakers: Lucille,Michael`). Blank blocks are ignored, so the worksheet can
+be filled in over several sittings and applied as often as you like. `DELETE`
+on the speakers line drops that quote instead.
+
+Names are matched case-insensitively against the alias table, so `gob` becomes
+`GOB`. A name that resolves to nothing stops the whole merge and writes
+nothing, rather than skipping that row and leaving the worksheet and the data
+quietly disagreeing.
+
 ## Utility Modules
 
 ### speaker_names.py
