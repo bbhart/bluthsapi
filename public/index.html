@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arrested Development Quotes API</title>
+    <meta name="description" content="A free, no-signup API serving quotes from Arrested Development. Random quotes, quotes by character, and quotes with images.">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PEMHDLKW9H"></script>
@@ -14,135 +15,288 @@
       gtag('config', 'G-PEMHDLKW9H');
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Courier+Prime:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Arrested Development Quotes API</h1>
-        <p class="subtitle">Get random quotes from your favorite characters</p>
+<div class="page">
 
-        <h2>What is this?</h2>
-        <p>
-            This is a simple API that gives you memorable quotes from the TV show "Arrested Development".
-            You can get random quotes, search for quotes by character, or get quotes with fun images attached.
+    <header class="masthead">
+        <p class="masthead__eyebrow">The Bluth Company &middot; Records Division</p>
+        <h1 class="masthead__title">Arrested Development<br><em>Quotes API</em></h1>
+        <p class="masthead__lede">
+            Every quote is a line and whoever said it. Ask for one at random, ask for a
+            particular character, or ask for one with a picture attached. No key, no
+            sign-up, no account.
         </p>
-        <p>
-            No sign-up needed! Just use the web addresses below to get quotes instantly.
+        <p class="ledger">
+            <span><span class="ledger__value">600</span> quotes on file</span>
+            <span><span class="ledger__value">46</span> characters</span>
+            <span><span class="ledger__value">3</span> endpoints</span>
         </p>
-        <p>
-            Please don't abuse it and stuff.
-        </p>
+    </header>
 
-        <h2>How to Use</h2>
-        <p>
-            Simply visit one of the web addresses below in your browser, or use them in your app to get quotes in a computer-friendly format.
-        </p>
+    <!-- Signature: a real record, pulled live from the API this page documents. -->
+    <section class="slip" id="slip" aria-labelledby="slip-stamp">
+        <p class="slip__stamp" id="slip-stamp">Exhibit A &mdash; pulled live</p>
+        <div class="slip__line">
+            <p class="slip__speaker" id="slip-speaker">Tobias</p>
+            <blockquote class="slip__quote" id="slip-quote">There are dozens of us! DOZENS!!!</blockquote>
+        </div>
+        <div class="slip__foot">
+            <p class="slip__source" id="slip-source">GET /api/quotes/random</p>
+            <button class="pull" id="slip-pull" type="button">Pull another</button>
+        </div>
+        <p class="visually-hidden" role="status" aria-live="polite" id="slip-status"></p>
+    </section>
 
-        <h2>Available Endpoints</h2>
+    <section class="section">
+        <h2 class="section__title">Endpoints</h2>
 
-        <div class="endpoint">
-            <h3><span class="method">GET</span> Random Quote</h3>
-            <div class="endpoint-url">/api/quotes/random</div>
-            <p>
-                Get a random quote from any character in the show. Each time you visit, you'll get a different quote!
-            </p>
-            <div class="example">
-                <strong>Example response:</strong>
-                <pre>{
-  "data": {
-    "id": "quote-001",
-    "quote": "There are dozens of us! DOZENS!!!",
-    "speakers": "Tobias"
+        <article class="endpoint">
+            <div class="endpoint__head">
+                <span class="method">GET</span>
+                <span class="endpoint__path">/api/quotes/random</span>
+            </div>
+            <h3 class="endpoint__name">Random quote</h3>
+            <div class="endpoint__body">
+                <p class="prose">One quote from anyone in the show. A different one each time.</p>
+                <div class="specimen">
+                    <span class="specimen__label">200 OK</span>
+<pre>{
+  <span class="k">"data"</span>: {
+    <span class="k">"id"</span>: <span class="s">"quote-001"</span>,
+    <span class="k">"quote"</span>: <span class="s">"There are dozens of us! DOZENS!!!"</span>,
+    <span class="k">"speakers"</span>: <span class="s">"Tobias"</span>
   }
 }</pre>
+                </div>
             </div>
-        </div>
+        </article>
 
-        <div class="endpoint">
-            <h3><span class="method">GET</span> Quote by Character</h3>
-            <div class="endpoint-url">/api/quotes/{character-name}</div>
-            <p>
-                Get a random quote from a specific character. Replace <code>{character-name}</code> with the character's name.
-                Character names are not case-sensitive (e.g., "gob", "Gob", and "GOB" all work). Quotes that are
-                exchanges match on any of their speakers, so <code>/api/quotes/michael</code> can return a quote
-                whose speakers are <code>"Lucille,Michael"</code>.
-            </p>
-            <div class="example">
-                <strong>Example:</strong> /api/quotes/Tobias
-                <pre>{
-  "data": {
-    "id": "quote-001",
-    "quote": "There are dozens of us! DOZENS!!!",
-    "speakers": "Tobias"
+        <article class="endpoint">
+            <div class="endpoint__head">
+                <span class="method">GET</span>
+                <span class="endpoint__path">/api/quotes/{character}</span>
+            </div>
+            <h3 class="endpoint__name">Quote by character</h3>
+            <div class="endpoint__body">
+                <p class="prose">
+                    One quote from the character you name. Case does not matter, so
+                    <code>gob</code>, <code>Gob</code> and <code>GOB</code> all work.
+                </p>
+                <p class="prose">
+                    Quotes that are exchanges match on any of their speakers, so
+                    <code>/api/quotes/michael</code> can return a quote whose speakers are
+                    <code>"Lucille,Michael"</code>.
+                </p>
+                <div class="specimen">
+                    <span class="specimen__label">200 OK &middot; /api/quotes/michael</span>
+<pre>{
+  <span class="k">"data"</span>: {
+    <span class="k">"id"</span>: <span class="s">"quote-288"</span>,
+    <span class="k">"quote"</span>: <span class="s">"Lucille: You tricked me. Michael: I deceived you, Mom."</span>,
+    <span class="k">"speakers"</span>: <span class="s">"Lucille,Michael"</span>
   }
 }</pre>
+                </div>
+                <p class="aside">
+                    <span class="aside__label">If not found</span>
+                    A character with no quotes on file returns <code>404</code> and an
+                    <code>error</code> message naming the character you asked for.
+                </p>
             </div>
-            <div class="note">
-                <strong>Note:</strong> If no quotes exist for that character, you'll get a message saying no quotes were found.
-            </div>
-        </div>
+        </article>
 
-        <div class="endpoint">
-            <h3><span class="method">GET</span> Meme Quote</h3>
-            <div class="endpoint-url">/api/quotes/meme</div>
-            <p>
-                Get a random quote that includes a fun image. Perfect for sharing on social media!
-            </p>
-            <div class="example">
-                <strong>Example response:</strong>
-                <pre>{
-  "data": {
-    "id": "quote-042",
-    "quote": "There's always money in the banana stand.",
-    "speakers": "George Sr.",
-    "imageUrl": "https://bucket.s3.amazonaws.com/banana-stand.jpg"
+        <article class="endpoint">
+            <div class="endpoint__head">
+                <span class="method">GET</span>
+                <span class="endpoint__path">/api/quotes/meme</span>
+            </div>
+            <h3 class="endpoint__name">Quote with an image</h3>
+            <div class="endpoint__body">
+                <p class="prose">
+                    One quote that has a picture attached, as <code>imageUrl</code>. Good for
+                    posting.
+                </p>
+                <div class="specimen">
+                    <span class="specimen__label">200 OK</span>
+<pre>{
+  <span class="k">"data"</span>: {
+    <span class="k">"id"</span>: <span class="s">"quote-042"</span>,
+    <span class="k">"quote"</span>: <span class="s">"There's always money in the banana stand."</span>,
+    <span class="k">"speakers"</span>: <span class="s">"George Sr."</span>,
+    <span class="k">"imageUrl"</span>: <span class="s">"https://bucket.s3.amazonaws.com/banana-stand.jpg"</span>
   }
 }</pre>
+                </div>
             </div>
-            <div class="note">
-                <strong>Note:</strong> If no quotes with images are available, you'll get a message saying no meme quotes are available.
-            </div>
-        </div>
+        </article>
+    </section>
 
-        <h2>Response Format</h2>
-        <p>
-            All successful responses wrap the quote in a "data" field. Each quote includes:
+    <section class="section">
+        <h2 class="section__title">Try a character</h2>
+        <p class="prose">Each name below is a live request. 46 characters have quotes on file.</p>
+        <nav class="cast" aria-label="Example character requests">
+            <a class="cast__name" href="/api/quotes/michael">Michael</a>
+            <a class="cast__name" href="/api/quotes/gob">GOB</a>
+            <a class="cast__name" href="/api/quotes/lucille">Lucille</a>
+            <a class="cast__name" href="/api/quotes/tobias">Tobias</a>
+            <a class="cast__name" href="/api/quotes/buster">Buster</a>
+            <a class="cast__name" href="/api/quotes/lindsay">Lindsay</a>
+            <a class="cast__name" href="/api/quotes/george%20michael">George Michael</a>
+            <a class="cast__name" href="/api/quotes/george%20sr.">George Sr.</a>
+            <a class="cast__name" href="/api/quotes/maeby">Maeby</a>
+            <a class="cast__name" href="/api/quotes/annyong">Annyong</a>
+            <a class="cast__name" href="/api/quotes/narrator">Narrator</a>
+            <a class="cast__name" href="/api/quotes/carl%20weathers">Carl Weathers</a>
+        </nav>
+    </section>
+
+    <section class="section">
+        <h2 class="section__title">The record</h2>
+        <p class="prose">Every response wraps one quote in <code>data</code>.</p>
+        <table class="fields">
+            <thead>
+                <tr><th scope="col">Field</th><th scope="col">What it holds</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>Identifier for the quote, such as <code>quote-288</code>.</td>
+                </tr>
+                <tr>
+                    <td>quote</td>
+                    <td>The line itself. Exchanges keep their speaker prefixes.</td>
+                </tr>
+                <tr>
+                    <td>speakers</td>
+                    <td>
+                        Everyone who speaks, comma separated, in the order they speak
+                        &mdash; <code>"Lucille,Michael"</code>. Empty when nobody has
+                        identified the speaker yet.
+                    </td>
+                </tr>
+                <tr>
+                    <td>context</td>
+                    <td>Episode or situation, when it is known.</td>
+                </tr>
+                <tr>
+                    <td>imageUrl</td>
+                    <td>Full address of the picture. Only on quotes that have one.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section">
+        <h2 class="section__title">When something goes wrong</h2>
+        <p class="prose">
+            Errors come back in the same shape every time: one <code>error</code> field
+            saying what happened.
         </p>
-        <ul style="margin-left: 30px; margin-bottom: 20px;">
-            <li><strong>id</strong>: A unique identifier for the quote</li>
-            <li><strong>quote</strong>: The actual quote text</li>
-            <li><strong>speakers</strong>: Everyone who speaks in the quote, comma-separated in the order they speak (e.g. <code>"Lucille,Michael"</code>). Empty when we don't know who said it.</li>
-            <li><strong>context</strong>: Episode or situation reference (if available)</li>
-            <li><strong>imageUrl</strong>: Full web address to an image (only for meme quotes)</li>
+        <div class="specimen">
+            <span class="specimen__label">404 Not Found</span>
+<pre>{
+  <span class="k">"error"</span>: <span class="s">"No quotes found for character: Hermano"</span>
+}</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section__title">Also here</h2>
+        <ul class="tools">
+            <li>
+                <a class="link" href="/docs">Swagger UI</a>
+                <span class="tools__path">/docs</span>
+                &mdash; try the endpoints in the browser
+            </li>
+            <li>
+                <a class="link" href="/redoc">ReDoc</a>
+                <span class="tools__path">/redoc</span>
+                &mdash; the same reference, laid out to read
+            </li>
+            <li>
+                <a class="link" href="/prettyquote.html">Pretty quote</a>
+                <span class="tools__path">/prettyquote.html</span>
+                &mdash; a quote card built to share
+            </li>
         </ul>
-
-        <h2>Error Messages</h2>
-        <p>
-            If something goes wrong (like searching for a character with no quotes), you'll get a helpful error message:
+        <p class="prose" style="margin-top:1.1rem">
+            It is free and there is no key. Please do not hammer it.
         </p>
-        <div class="example">
-            <pre>{
-  "error": "No quotes found for character: Hermano"
-}</pre>
-        </div>
+    </section>
 
-        <h2>Technical Details</h2>
-        <p>
-            For developers: This API also provides auto-generated documentation in standard formats:
+    <footer class="colophon">
+        <p class="colophon__speaker">GOB</p>
+        <blockquote class="colophon__quote">I've made a huge mistake.</blockquote>
+        <p class="colophon__credit">
+            A <a class="link" href="https://bsky.app/profile/bluthquotes.lucille2.com">Bluthquotes</a> service
         </p>
-        <ul style="margin-left: 30px; margin-bottom: 20px;">
-            <li><a href="/docs" target="_blank"><strong>Swagger UI</strong></a> - Interactive API documentation at /docs</li>
-            <li><a href="/redoc" target="_blank"><strong>ReDoc</strong></a> - Alternative documentation view at /redoc</li>
-        </ul>
+    </footer>
 
-        <div class="footer">
-            <p>
-                A <a href="https://bsky.app/profile/bluthquotes.lucille2.com">Bluthquotes</a> service 
-            </p>
-            <p style="margin-top: 10px; font-size: 0.85em;">
-                "I've made a huge mistake." - Gob Bluth
-            </p>
-        </div>
-    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var slip = document.getElementById('slip');
+    var speakerEl = document.getElementById('slip-speaker');
+    var quoteEl = document.getElementById('slip-quote');
+    var sourceEl = document.getElementById('slip-source');
+    var statusEl = document.getElementById('slip-status');
+    var button = document.getElementById('slip-pull');
+
+    if (!slip || !button || !window.fetch) {
+        // Leave the quote that shipped in the HTML. Nothing to do.
+        return;
+    }
+
+    var busy = false;
+
+    function render(quote) {
+        quoteEl.textContent = quote.quote;
+        // Stored as "Lucille,Michael"; spaced out here purely for reading.
+        // The specimens below show the field's real format.
+        speakerEl.textContent = quote.speakers
+            ? quote.speakers.split(',').join(', ')
+            : 'Unattributed';
+        sourceEl.textContent = 'GET /api/quotes/random · ' + quote.id;
+        statusEl.textContent = 'Showing ' + quote.id + '.';
+    }
+
+    function pull() {
+        if (busy) { return; }
+        busy = true;
+        slip.setAttribute('data-loading', 'true');
+
+        fetch('/api/quotes/random', { headers: { Accept: 'application/json' } })
+            .then(function (response) {
+                if (!response.ok) { throw new Error('HTTP ' + response.status); }
+                return response.json();
+            })
+            .then(function (payload) {
+                if (payload && payload.data && payload.data.quote) {
+                    render(payload.data);
+                }
+            })
+            .catch(function () {
+                // The printed quote stays on the page; say so rather than blanking it.
+                sourceEl.textContent = 'Could not reach the API just now.';
+                statusEl.textContent = 'Could not reach the API just now.';
+            })
+            .then(function () {
+                busy = false;
+                slip.removeAttribute('data-loading');
+            });
+    }
+
+    button.addEventListener('click', pull);
+    pull();
+})();
+</script>
 </body>
 </html>
