@@ -1,13 +1,13 @@
 [
   {
     "id": "quote-001",
-    "quote": "Tobias: There are dozens of us! DOZENS!!!",
+    "quote": "There are dozens of us! DOZENS!!!",
     "speakers": "Tobias"
   },
   {
     "id": "quote-2",
     "quote": "IT'S A WONDERFUL RESTAURANT!!",
-    "speakers": "",
+    "speakers": "Tobias",
     "imageUrl": "GFd0PIwakAAv6S-.jpg"
   },
   {
@@ -33,8 +33,8 @@
   },
   {
     "id": "quote-8",
-    "quote": "Say what you want about America - thirteen bucks can still get you a hell of a lot of mice!",
-    "speakers": ""
+    "quote": "Say what you want about America, thirteen bucks can still get you a hell of a lot of mice!",
+    "speakers": "George Michael"
   },
   {
     "id": "quote-9",
@@ -107,12 +107,12 @@
   {
     "id": "quote-26",
     "quote": "What? No. No. No. No no no.",
-    "speakers": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-27",
     "quote": "There's a new daddy in town. A discipline daddy.",
-    "speakers": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-28",
@@ -132,7 +132,7 @@
   {
     "id": "quote-31",
     "quote": "I think I might have someone who's going to \"circumvrent\" the law.",
-    "speakers": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-32",
@@ -232,7 +232,7 @@
   {
     "id": "quote-57",
     "quote": "\"I think the only time you cooked for us was the morning Rosa's mom died.\" \"You gave us cereal in an ashtray.\"",
-    "speakers": ""
+    "speakers": "Lindsay,Buster"
   },
   {
     "id": "quote-58",
@@ -263,7 +263,7 @@
   {
     "id": "quote-65",
     "quote": "Michael, you have a chance to save this family. Please, do the right thing here - string this blind girl along so that Dad doesn't have to pay his debt to society.",
-    "speakers": "Lucille"
+    "speakers": "GOB"
   },
   {
     "id": "quote-66",
@@ -284,7 +284,7 @@
   {
     "id": "quote-70",
     "quote": "Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?",
-    "speakers": "George Michael"
+    "speakers": "GOB"
   },
   {
     "id": "quote-71",
@@ -402,7 +402,7 @@
   {
     "id": "quote-117",
     "quote": "I could use a leather jacket for when I'm on my hog and have to go into a controlled slide.",
-    "speakers": "",
+    "speakers": "George Michael",
     "imageUrl": "FcypWvMXoAEZQ6I.jpg"
   },
   {
@@ -456,12 +456,12 @@
   {
     "id": "quote-133",
     "quote": "What is she doing at a beauty pageant? Is she running the lights or something?",
-    "speakers": "Lucille"
+    "speakers": "Michael"
   },
   {
     "id": "quote-134",
     "quote": "\"Uncle Gob... was Aunt Lindsay ever pregnant?\" \"Yeah, sure, dozens of times.\"",
-    "speakers": "Maeby,GOB"
+    "speakers": "George Michael,GOB"
   },
   {
     "id": "quote-135",
@@ -477,7 +477,7 @@
   {
     "id": "quote-137",
     "quote": "If you didn't have adult onset diabetes, I wouldn't mind giving you a little sugar.",
-    "speakers": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-140",
@@ -536,7 +536,7 @@
   {
     "id": "quote-155",
     "quote": "Did you enjoy your lunch, mom? You drank it fast enough.",
-    "speakers": "Michael"
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-158",
@@ -644,7 +644,7 @@
   {
     "id": "quote-188",
     "quote": "Michael, look, this has got to stop. I mean, flattered? Yes. Interested? Not tonight.",
-    "speakers": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-190",
@@ -671,7 +671,7 @@
   {
     "id": "quote-195",
     "quote": "I'm not going to turn this mock trial into some kind of a --",
-    "speakers": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-198",
@@ -742,7 +742,7 @@
   {
     "id": "quote-217",
     "quote": "I buy all my cars at police auctions.",
-    "speakers": "Barry Zuckerkorn"
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-218",
@@ -816,7 +816,7 @@
   {
     "id": "quote-241",
     "quote": "I always pictured him in a lighthouse",
-    "speakers": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-242",
@@ -866,7 +866,7 @@
   {
     "id": "quote-255",
     "quote": "Is there a little girl here all by herself? Daddy needs to get his rocks off.",
-    "speakers": "",
+    "speakers": "Tobias",
     "imageUrl": "Dr1KVUoVsAAdUWG.jpg"
   },
   {
@@ -1081,7 +1081,7 @@
   {
     "id": "quote-361",
     "quote": "She tried pesto for the first time. Can you believe that? 89 years old and she never tried pesto.",
-    "speakers": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-362",
@@ -1224,7 +1224,7 @@
   {
     "id": "quote-409",
     "quote": "It was for me. I was going to smoke the marijuana like a cigarette.",
-    "speakers": "Michael"
+    "speakers": "George Michael"
   },
   {
     "id": "quote-413",
@@ -1266,7 +1266,7 @@
   {
     "id": "quote-430",
     "quote": "That's what you do when life hands you a chance to be with someone special. You just grab that brownish area by its points and you don't let go no matter what your mom says.",
-    "speakers": "Tobias"
+    "speakers": "Buster"
   },
   {
     "id": "quote-432",
@@ -1432,7 +1432,7 @@
   {
     "id": "quote-480",
     "quote": "I was once voted the worst audience participant Cirque Du Soleil ever had.",
-    "speakers": ""
+    "speakers": "Wayne Jarvis"
   },
   {
     "id": "quote-487",
@@ -1542,7 +1542,7 @@
   {
     "id": "quote-525",
     "quote": "It looks like you've been looking for dragons... in the future.",
-    "speakers": "",
+    "speakers": "Michael",
     "imageUrl": "C1TkGQnUoAAQEfm.jpg"
   },
   {
@@ -1589,7 +1589,7 @@
   {
     "id": "quote-556",
     "quote": "Oh Reggie, fighting for your country... you're such a p*ssy.",
-    "speakers": "Lucille",
+    "speakers": "Adelaide",
     "imageUrl": "CuS00anVMAAyWMu.jpg"
   },
   {
@@ -1740,7 +1740,7 @@
   {
     "id": "quote-615",
     "quote": "\"Can't a guy call his mother pretty without it seeming strange?\" \"Amen. And how about that little piece of tail on her? Cute!\"",
-    "speakers": ""
+    "speakers": "Michael,Buster"
   },
   {
     "id": "quote-616",
@@ -1837,7 +1837,7 @@
   {
     "id": "quote-679",
     "quote": "I was mistakenly voted out of a 4 person housing situation in a pack first, no talking after scenario.",
-    "speakers": "Tobias"
+    "speakers": "Michael"
   },
   {
     "id": "quote-680",
@@ -2020,7 +2020,7 @@
   {
     "id": "quote-770",
     "quote": "Her lawyers are claiming the seal is worth $250,000. And that's not even including Buster's Swatch.",
-    "speakers": "Michael"
+    "speakers": "GOB"
   },
   {
     "id": "quote-771",
@@ -2115,7 +2115,7 @@
   {
     "id": "quote-808",
     "quote": "I'm looking for something to give my dingle less tingle. Me quick want slow! Wait, that's Indian...",
-    "speakers": "Tobias"
+    "speakers": "GOB"
   },
   {
     "id": "quote-813",
@@ -2208,7 +2208,7 @@
   {
     "id": "quote-865",
     "quote": "Yeah, just a Sea Breeze, please. Make it a strong one. Put some stank on it.",
-    "speakers": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-868",
@@ -2255,7 +2255,7 @@
   {
     "id": "quote-882",
     "quote": "\"Hello, anustart.\" And she didn't even see the license plates.",
-    "speakers": ""
+    "speakers": "Lucille,Narrator"
   },
   {
     "id": "quote-883",
@@ -2285,7 +2285,7 @@
   {
     "id": "quote-888",
     "quote": "This heat just makes me want guac.",
-    "speakers": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-889",
@@ -2310,7 +2310,7 @@
   {
     "id": "quote-902",
     "quote": "See, light drizzle will annoy you, but thunder will eff you up!",
-    "speakers": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-903",
@@ -2413,7 +2413,7 @@
   {
     "id": "quote-967",
     "quote": "You know the feeling that you're feeling is what many of us call a feeling.",
-    "speakers": "Tobias"
+    "speakers": "Michael"
   },
   {
     "id": "quote-968",
@@ -2433,7 +2433,7 @@
   {
     "id": "quote-976",
     "quote": "How about a turtle? I've always loved those leathery little snappy faces.",
-    "speakers": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-981",
@@ -2529,7 +2529,7 @@
   {
     "id": "quote-1027",
     "quote": "Ohhh little guy. The tears aren't coming. The tears just aren't coming.",
-    "speakers": "Lucille"
+    "speakers": "GOB"
   },
   {
     "id": "quote-1028",
@@ -2654,7 +2654,7 @@
   {
     "id": "quote-1070",
     "quote": " Whenever I get a wee bit scared I hum a little tune, humdidididi...doo. ",
-    "speakers": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1074",
@@ -2664,7 +2664,7 @@
   {
     "id": "quote-1075",
     "quote": "YES. ANNYONG. YOUR NAME IS ANNYONG! WE ALL KNOW YOU'RE ANNYONG!",
-    "speakers": "Michael"
+    "speakers": "Buster"
   },
   {
     "id": "quote-1080",
@@ -2689,7 +2689,7 @@
   {
     "id": "quote-1089",
     "quote": " And the thought of rubbin' you is getting so exciting. Sky rockets in flight. Afternoon delight. ",
-    "speakers": "",
+    "speakers": "Maeby",
     "imageUrl": "CxADc4cVIAA8e-y.jpg"
   },
   {
@@ -2841,7 +2841,7 @@
   {
     "id": "quote-1155",
     "quote": "\"No, no, it's pronounced a-nal-ra-pist.\" \"It wasn't really the pronunciation that bothered me.\"",
-    "speakers": "Tobias,Michael"
+    "speakers": "Tobias,Buster"
   },
   {
     "id": "quote-1156",
@@ -2871,12 +2871,12 @@
   {
     "id": "quote-1163",
     "quote": "Look at us, crying like a couple of girls on the last day of camp.",
-    "speakers": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1168",
     "quote": "\"Taste the happy, Michael. Taste it.\" \"It tastes kind of like sad.\"",
-    "speakers": "Lucille,Michael"
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-1171",
@@ -2926,7 +2926,7 @@
   {
     "id": "quote-1185",
     "quote": "I don't want no part of yo tight-ass country club, ya freak bitch!",
-    "speakers": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1186",

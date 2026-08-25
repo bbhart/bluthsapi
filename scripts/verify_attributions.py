@@ -39,6 +39,7 @@ matched, so each change can be checked against the source.
 """
 
 import argparse
+import difflib
 import json
 import re
 import sys
@@ -50,6 +51,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from speaker_names import (  # noqa: E402
     _ALIAS_PATTERN,
     format_speakers,
+    parse_speakers,
     resolve,
     split_speakers,
 )
@@ -65,6 +67,10 @@ SPEAKER_LINE = re.compile(r"^([A-Z][A-Za-z .'\-]{1,30}):\s+(\S.*)$")
 
 # Stage directions: "(beat)", "[laughs]". Never spoken, so never matched on.
 STAGE_DIRECTION = re.compile(r"\([^()]*\)|\[[^\[\]]*\]")
+
+# A quoted run of dialogue, as used in quotes.json to write an exchange
+# without speaker labels: "line one." "line two."
+QUOTED_SEGMENT = re.compile(r"[\"“”]([^\"“”]{10,})[\"“”]")
 
 
 def normalize(text: str) -> str:
@@ -178,6 +184,143 @@ def find_matches(quote_text: str, episodes: list[Episode],
     return matches, None
 
 
+# Words too common to help narrow a search.
+STOPWORDS = frozenset("""
+a an and are as at be been but by do does did for from get got had has have he
+her him his i if in is it its just like me my no not of on or our out she so
+that the their them then there they this to too up us was we were what when
+who will with would you your im dont thats youre ive
+""".split())
+
+
+class FuzzyIndex:
+    """Inverted index over transcript lines, for candidate retrieval.
+
+    Scoring every quote against every line is far too slow, so candidates are
+    drawn from lines sharing an uncommon word with the quote and only those are
+    scored properly.
+    """
+
+    def __init__(self, episodes: list[Episode], max_postings: int = 400):
+        self.episodes = episodes
+        index: dict[str, list[tuple[int, int]]] = defaultdict(list)
+        for ep_i, episode in enumerate(episodes):
+            for line_i, (start, end, _) in enumerate(episode.spans):
+                for token in set(episode.text[start:end].split()):
+                    if token not in STOPWORDS and len(token) > 2:
+                        index[token].append((ep_i, line_i))
+        # Words appearing almost everywhere cannot discriminate.
+        self.index = {t: p for t, p in index.items() if len(p) <= max_postings}
+
+    def candidates(self, needle: str, limit: int = 60) -> list[tuple[int, int]]:
+        tokens = {t for t in needle.split() if t not in STOPWORDS and len(t) > 2}
+        hits: dict[tuple[int, int], int] = defaultdict(int)
+        for token in tokens:
+            for posting in self.index.get(token, ()):
+                hits[posting] += 1
+        if not hits:
+            return []
+        ranked = sorted(hits.items(), key=lambda kv: -kv[1])
+        return [posting for posting, _ in ranked[:limit]]
+
+
+class FuzzyMatch:
+    def __init__(self, episode: Episode, indexes: list[int], score: float):
+        self.episode = episode
+        self.indexes = indexes
+        self.score = score
+        self.labels: list[str] = []
+        for i in indexes:
+            label = episode.labels[i]
+            if label not in self.labels:
+                self.labels.append(label)
+
+    @property
+    def canonical(self) -> list[str] | None:
+        names: list[str] = []
+        for label in self.labels:
+            name = resolve(label)
+            if name is None:
+                return None
+            if name not in names:
+                names.append(name)
+        return names
+
+    @property
+    def excerpt(self) -> str:
+        first = self.episode.raw_lines[self.indexes[0]]
+        return first[:110] + ("..." if len(first) > 110 else "")
+
+
+def best_fuzzy(quote_text: str, index: FuzzyIndex,
+               min_words: int) -> list[FuzzyMatch]:
+    """Score a quote against plausible windows of consecutive dialogue lines.
+
+    Returns the scored windows, best first. The caller decides what score is
+    good enough.
+    """
+    needle = normalize(quote_text)
+    if len(needle.split()) < min_words:
+        return []
+
+    scored: list[FuzzyMatch] = []
+    seen: set[tuple[int, int, int]] = set()
+    for ep_i, line_i in index.candidates(needle):
+        episode = index.episodes[ep_i]
+        # Windows starting at, or just before, the candidate line -- a quote
+        # often begins mid-exchange.
+        for offset in (0, -1):
+            start_line = line_i + offset
+            if start_line < 0:
+                continue
+            span_start = episode.spans[start_line][0]
+            end_line = start_line
+            while end_line < len(episode.spans) - 1:
+                span_end = episode.spans[end_line][1]
+                if span_end - span_start >= len(needle) * 1.25:
+                    break
+                end_line += 1
+            for last in range(start_line, end_line + 1):
+                key = (ep_i, start_line, last)
+                if key in seen:
+                    continue
+                seen.add(key)
+                window_end = episode.spans[last][1]
+                window = episode.text[span_start:window_end]
+                if not window:
+                    continue
+                matcher = difflib.SequenceMatcher(None, needle, window)
+                ratio = matcher.ratio()
+
+                # A window that scores well can still stretch past the quote,
+                # picking up the next character's reply, or stop short of a
+                # speaker the quote does include. Keep only the lines the quote
+                # actually aligns with.
+                aligned = [False] * len(window)
+                for _, j, size in matcher.get_matching_blocks():
+                    for k in range(j, min(j + size, len(window))):
+                        aligned[k] = True
+
+                kept: list[int] = []
+                for line_no in range(start_line, last + 1):
+                    l_start, l_end, _ = episode.spans[line_no]
+                    rel_start = l_start - span_start
+                    rel_end = min(l_end - span_start, len(window))
+                    if rel_end <= rel_start:
+                        continue
+                    hits = sum(aligned[rel_start:rel_end])
+                    length = rel_end - rel_start
+                    if hits >= max(12, 0.35 * length):
+                        kept.append(line_no)
+
+                if not kept:
+                    continue
+                scored.append(FuzzyMatch(episode, kept, ratio))
+
+    scored.sort(key=lambda m: -m.score)
+    return scored[:12]
+
+
 def render_quote(quote: dict) -> dict:
     ordered = {k: quote[k] for k in KEY_ORDER if k in quote}
     ordered.update({k: v for k, v in quote.items() if k not in ordered})
@@ -198,6 +341,16 @@ def main() -> int:
                         help="minimum words a quote needs to be matchable (default: 6)")
     parser.add_argument("--min-chars", type=int, default=30,
                         help="minimum characters, after normalizing (default: 30)")
+    parser.add_argument("--fuzzy", action="store_true",
+                        help="also match paraphrased quotes that are not verbatim")
+    parser.add_argument("--fuzzy-threshold", type=float, default=0.82, metavar="R",
+                        help="similarity needed to accept a fuzzy match (default: 0.82)")
+    parser.add_argument("--fuzzy-margin", type=float, default=0.04, metavar="R",
+                        help="a fuzzy winner must beat any rival naming different "
+                             "speakers by this much (default: 0.04)")
+    parser.add_argument("--fuzzy-review-floor", type=float, default=0.70, metavar="R",
+                        help="report, but do not apply, matches scoring at least "
+                             "this (default: 0.70)")
     args = parser.parse_args()
 
     if not args.transcripts.is_dir():
@@ -254,6 +407,65 @@ def main() -> int:
             fixed.append((quote, group[0], current, found))
             quote["speakers"] = format_speakers(found)
 
+    # ---- fuzzy second pass --------------------------------------------
+    fuzzy_added, fuzzy_fixed, fuzzy_confirmed, fuzzy_review = [], [], [], []
+    still_unmatched = []
+
+    if args.fuzzy:
+        index = FuzzyIndex(episodes)
+        for quote, reason in unmatched:
+            if reason.startswith("too short"):
+                still_unmatched.append((quote, reason))
+                continue
+
+            # A quote carrying its own "Name:" prefixes already states who
+            # speaks. That is better evidence than an approximate window, so
+            # fuzzy matching is not allowed to overrule it.
+            if parse_speakers(quote["quote"]):
+                still_unmatched.append((quote, "speakers named in the quote text"))
+                continue
+
+            scored = best_fuzzy(quote["quote"], index, args.min_words)
+            scored = [m for m in scored if m.canonical is not None]
+            if not scored:
+                still_unmatched.append((quote, reason))
+                continue
+
+            best = scored[0]
+            names = best.canonical
+
+            # A rival naming different speakers must be clearly worse, or we
+            # cannot tell which of them the quote came from.
+            rival = next(
+                (m for m in scored[1:] if m.canonical != names), None
+            )
+            contested = rival is not None and (best.score - rival.score) < args.fuzzy_margin
+
+            # An exchange written as several quoted segments needs at least
+            # that many speakers. Fewer means the window trimmed a reply away,
+            # and applying it would silently drop a speaker.
+            segments = len(QUOTED_SEGMENT.findall(quote["quote"]))
+            short_handed = segments >= 2 and len(names) < segments
+
+            if best.score < args.fuzzy_threshold or contested or short_handed:
+                if best.score >= args.fuzzy_review_floor:
+                    fuzzy_review.append((quote, best, rival, contested))
+                else:
+                    still_unmatched.append((quote, reason))
+                continue
+
+            current = split_speakers(quote.get("speakers", ""))
+            if names == current:
+                fuzzy_confirmed.append((quote, best))
+            elif not current:
+                fuzzy_added.append((quote, best, names))
+                quote["speakers"] = format_speakers(names)
+            else:
+                fuzzy_fixed.append((quote, best, current, names))
+                quote["speakers"] = format_speakers(names)
+    else:
+        still_unmatched = unmatched
+
     # ---- report -------------------------------------------------------
     total = len(quotes)
     lines = [
@@ -267,7 +479,20 @@ def main() -> int:
         f"FIXED (disagreed with source): {len(fixed)}",
         f"ambiguous, left alone:         {len(ambiguous)}",
         f"unrecognized speaker label:    {len(unknown_label)}",
-        f"not matched:                   {len(unmatched)}",
+        "",
+    ]
+    if args.fuzzy:
+        lines += [
+            "fuzzy pass (paraphrased quotes):",
+            f"  confirmed:                   {len(fuzzy_confirmed)}",
+            f"  ADDED:                       {len(fuzzy_added)}",
+            f"  FIXED:                       {len(fuzzy_fixed)}",
+            f"  needs review, left alone:    {len(fuzzy_review)}",
+        ]
+    else:
+        lines.append("fuzzy pass:                    not run (--fuzzy)")
+    lines += [
+        f"not matched:                   {len(still_unmatched)}",
         "",
         "Only quotes located verbatim in a transcript were touched. Everything",
         "else was left exactly as it was.",
@@ -289,6 +514,48 @@ def main() -> int:
             lines.append(f"  {quote['id']}: -> {','.join(after)}")
             lines.append(f"      quote:  {quote['quote'][:100]}")
             lines.append(f"      source: {match.episode.slug} | {match.excerpt}")
+            lines.append("")
+
+    if fuzzy_fixed:
+        lines += ["", "FUZZY FIXED -- paraphrase located; stored value disagreed",
+                  "-" * 72, ""]
+        for quote, match, before, after in fuzzy_fixed:
+            lines.append(f"  {quote['id']}: {','.join(before)} -> {','.join(after)}"
+                         f"   [score {match.score:.3f}]")
+            lines.append(f"      quote:  {quote['quote'][:100]}")
+            lines.append(f"      source: {match.episode.slug} | {match.excerpt}")
+            lines.append("")
+
+    if fuzzy_added:
+        lines += ["", "FUZZY ADDED -- paraphrase located; was unattributed",
+                  "-" * 72, ""]
+        for quote, match, after in fuzzy_added:
+            lines.append(f"  {quote['id']}: -> {','.join(after)}"
+                         f"   [score {match.score:.3f}]")
+            lines.append(f"      quote:  {quote['quote'][:100]}")
+            lines.append(f"      source: {match.episode.slug} | {match.excerpt}")
+            lines.append("")
+
+    if fuzzy_review:
+        lines += ["", "FUZZY NEEDS REVIEW -- plausible but not applied", "-" * 72,
+                  "", "Below the accept threshold, or a rival match named someone",
+                  "else. Decide these by hand.", ""]
+        for quote, best, rival, contested in fuzzy_review:
+            segments = len(QUOTED_SEGMENT.findall(quote["quote"]))
+            if contested:
+                why = "contested"
+            elif segments >= 2 and len(best.canonical) < segments:
+                why = f"{segments} quoted segments but only {len(best.canonical)} speaker(s)"
+            else:
+                why = "below threshold"
+            lines.append(f"  {quote['id']}: suggests {','.join(best.canonical)}"
+                         f"   [score {best.score:.3f}, {why}]")
+            lines.append(f"      current: {quote['speakers'] or '(none)'}")
+            lines.append(f"      quote:   {quote['quote'][:100]}")
+            lines.append(f"      source:  {best.episode.slug} | {best.excerpt}")
+            if rival is not None:
+                lines.append(f"      rival:   {','.join(rival.canonical)} "
+                             f"[score {rival.score:.3f}] {rival.episode.slug}")
             lines.append("")
 
     if ambiguous:
@@ -318,7 +585,7 @@ def main() -> int:
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(report, encoding="utf-8")
 
-    if not args.dry_run and (added or fixed):
+    if not args.dry_run and (added or fixed or fuzzy_added or fuzzy_fixed):
         args.quotes.write_text(
             json.dumps([render_quote(q) for q in quotes], indent=2,
                        ensure_ascii=False) + "\n",
@@ -329,12 +596,17 @@ def main() -> int:
     print(f"  confirmed: {len(confirmed)}")
     print(f"  added:     {len(added)}")
     print(f"  fixed:     {len(fixed)}")
+    if args.fuzzy:
+        print(f"  fuzzy confirmed: {len(fuzzy_confirmed)}")
+        print(f"  fuzzy added:     {len(fuzzy_added)}")
+        print(f"  fuzzy fixed:     {len(fuzzy_fixed)}")
+        print(f"  fuzzy review:    {len(fuzzy_review)}")
     print(f"  ambiguous: {len(ambiguous)}   unknown label: {len(unknown_label)}"
-          f"   unmatched: {len(unmatched)}")
+          f"   unmatched: {len(still_unmatched)}")
     print(f"\nReport: {args.report}")
     if args.dry_run:
         print("Dry run - quotes.json was not modified.")
-    elif added or fixed:
+    elif added or fixed or fuzzy_added or fuzzy_fixed:
         print(f"Updated {args.quotes}. Now run:")
         print("  python3 scripts/normalize_speakers.py --check")
     return 0

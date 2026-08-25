@@ -6,6 +6,7 @@
 #
 # `Lucille` is Lucille Bluth. Lucille Austero is always written out.
 
+Adelaide
 Ann
 Annyong
 Barry Zuckerkorn
