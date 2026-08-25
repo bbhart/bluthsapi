@@ -46,7 +46,7 @@ Pure HTML/CSS/JS, no build step. `index.html` is the landing page; `prettyquote.
 
 ### Data pipeline (`scripts/`)
 
-One-time/occasional tooling that turns a Twitter archive export (`etc/tweets.js`) into `app/data/quotes.json`:
+One-time/occasional tooling that turns a Twitter archive export (`etc/tweets.js` — not committed; supply your own archive locally) into `app/data/quotes.json`:
 
 1. `extract_tweets.py` / `tweet_parser.py` — parse the archive into staging JSON (`etc/staging/`)
 2. `etc/scripts/filter_tweets.py`, `staging_validator.py`, `validate_staging.py` — filter near-duplicates and junk
