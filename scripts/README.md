@@ -1,151 +1,107 @@
-# Tweet to Quote Conversion Scripts
+# Quote Data Scripts
 
-Utility scripts for converting Twitter archive data to application-ready quotes.
+Utilities for maintaining `app/data/quotes.json` and the canonical character list.
 
 ## Overview
 
-This directory contains Python scripts that process tweet data through a three-stage pipeline:
+`quotes.json` was originally seeded from an export of the @bluthquotes Twitter
+archive. That import was a one-time event and its tooling (tweet extraction,
+staging, filtering, media download) has been removed. The quote database is now
+maintained by hand and by pull request — see
+[CONTRIBUTING.md](../CONTRIBUTING.md#contributing-quotes).
 
-1. **Extract** - Parse tweets.js and create human-reviewable staging file
-2. **Review** - Manual curation of staging file (add/remove/edit entries)
-3. **Convert** - Transform reviewed staging into quotes.json format
-4. **Download** (Optional) - Download tweet media files for S3 upload
+These scripts use the standard library only.
 
-## Quick Start
+## normalize_speakers.py
 
-For detailed setup and usage instructions, see the [complete quickstart guide](../specs/002-tweet-to-quote-conversion/quickstart.md).
-
-### Basic Workflow
-
-```bash
-# 1. Extract tweets to staging file
-python3 scripts/extract_tweets.py --verbose
-
-# 2. Review and edit staging file (manual step)
-# Edit etc/staging/tweets_staging.json in your text editor
-# - Remove unwanted entries
-# - Edit text content
-# - Add "exclude": true to skip entries
-
-# 3. Validate staging file (optional but recommended)
-python3 scripts/validate_staging.py
-
-# 4. Convert staging to quotes.json
-python3 scripts/convert_to_quotes.py --verbose
-
-# 5. Download media files (optional)
-python3 scripts/download_media.py --verbose --skip-existing
-```
-
-## Scripts
-
-### extract_tweets.py
-
-Extracts tweets from Twitter archive to staging file.
+Normalizes the `speakers` field in `app/data/quotes.json` and regenerates
+`app/data/list-of-characters.txt`. Idempotent — safe to re-run.
 
 **Usage:**
 ```bash
-python3 scripts/extract_tweets.py [options]
+# Rewrite quotes.json and regenerate the character list
+python3 scripts/normalize_speakers.py
+
+# Verify only; exits non-zero if a name is not canonical or the list is stale
+python3 scripts/normalize_speakers.py --check
+```
+
+It parses speakers out of the quote text, folds every name to its canonical form
+via the alias table in `speaker_names.py`, and rewrites the character list from
+the names actually in use. `--check` is what CI runs on pull requests. See
+[CONTRIBUTING.md](../CONTRIBUTING.md#character-names).
+
+A name that doesn't resolve to a canonical character stops the run in **both**
+modes: nothing is written and the exit code is 1 until the quote is fixed or the
+character is added to `CHARACTERS`. The script never normalizes around an unknown
+name — that would silently delete data.
+
+An unrecognized `Name:` prefix *inside the quote text* is only a warning. The
+quote text is never modified, so nothing is lost; it just means a speaker went
+unrecorded, and that detection is a heuristic that can misfire on ordinary
+punctuation.
+
+## find_duplicate_quotes.py
+
+Finds near-duplicate quotes and writes a report plus a patch. It never modifies
+`quotes.json` — you review, then apply.
+
+**Usage:**
+```bash
+python3 scripts/find_duplicate_quotes.py
+less build/duplicates-report.txt          # read this first
+git apply build/duplicates.patch
+python3 scripts/normalize_speakers.py --check
 ```
 
 **Options:**
-- `--source PATH` - Path to tweets.js (default: etc/tweets.js)
-- `--output PATH` - Path for staging output (default: etc/staging/tweets_staging.json)
-- `-v, --verbose` - Enable verbose progress output
+- `--threshold FLOAT` - similarity ratio to call a pair duplicate (default: 0.85)
+- `--containment-min-tokens N` - a contained quote needs at least N words (default: 6)
+- `--quotes PATH` / `--patch PATH` / `--report PATH` - override paths
+- `--stdout` - print the report instead of writing files
 
-**Example:**
-```bash
-python3 scripts/extract_tweets.py --verbose
-```
+Matching runs on a normalized form of the text: lowercased, speaker prefixes
+removed, censorship markers (`[bleep]`, `__`, `****`) collapsed, punctuation
+flattened. A pair matches on similarity ratio, or on containment — one quote
+wholly inside another, which is the common case here, since the same line was
+tweeted both truncated and in full. Groups are transitive.
 
-### validate_staging.py
-
-Validates staging file JSON syntax and schema.
-
-**Usage:**
-```bash
-python3 scripts/validate_staging.py [file]
-```
-
-**Example:**
-```bash
-python3 scripts/validate_staging.py etc/staging/tweets_staging.json
-```
-
-### convert_to_quotes.py
-
-Converts reviewed staging file to quotes.json format.
-
-**Usage:**
-```bash
-python3 scripts/convert_to_quotes.py [options]
-```
-
-**Options:**
-- `--staging PATH` - Path to staging file (default: etc/staging/tweets_staging.json)
-- `--quotes PATH` - Path to quotes output (default: app/data/quotes.json)
-- `--dry-run` - Preview conversion without writing
-- `-v, --verbose` - Enable verbose progress output
-
-**Example:**
-```bash
-# Preview conversion
-python3 scripts/convert_to_quotes.py --dry-run --verbose
-
-# Perform conversion
-python3 scripts/convert_to_quotes.py --verbose
-```
-
-### download_media.py
-
-Downloads tweet media files to local folder.
-
-**Usage:**
-```bash
-python3 scripts/download_media.py [options]
-```
-
-**Options:**
-- `--staging PATH` - Path to staging file (default: etc/staging/tweets_staging.json)
-- `--output-dir PATH` - Directory for downloads (default: media/tweet_images)
-- `--skip-existing` - Skip files that already exist
-- `--timeout SECONDS` - HTTP timeout (default: 30)
-- `-v, --verbose` - Enable verbose progress output
-
-**Example:**
-```bash
-python3 scripts/download_media.py --verbose --skip-existing
-```
+The surviving record is the one with the longest text, so a punchline is never
+traded away for a shorter variant that happened to carry an image; the image is
+inherited instead. Anything the merge cannot reconcile — a duplicate naming a
+different speaker, or a second image that would be discarded — is listed under
+CONFLICTS at the top of the report rather than silently resolved.
 
 ## Utility Modules
 
-### tweet_parser.py
+### speaker_names.py
 
-Parses tweets.js JavaScript wrapper and extracts JSON data.
+The canonical character registry, alias resolution, and multi-speaker text
+parsing. Names like `GOB` / `Gob` / `G.O.B.` all fold to one canonical `GOB`.
 
-**Key Function:**
+**Key Functions:**
 ```python
-parse_tweets_file(file_path: str | Path) -> list[dict]
+resolve(name: str) -> str | None
+# "G.O.B." -> "GOB";  "George Sr" -> "George Sr.";  "Nobody" -> None
+
+parse_speakers(text: str) -> list[str]
+# "Lucille: You tricked me. Michael: I deceived you." -> ["Lucille", "Michael"]
+
+unknown_prefixes(text: str) -> list[str]
+# "Name:" prefixes that no alias resolves, so they can be reported not dropped
 ```
 
-### speaker_detector.py
+Unlike a bare `^\w+:` regex, `parse_speakers` only accepts a prefix that resolves
+to a known character, so `"Next stop: LAX"` yields no speaker. Parsing never
+modifies the quote text — a `"Lucille:"` prefix stays in the quote body, because
+that is how the exchange reads.
 
-Detects speaker names from "Name:" prefix pattern in text.
-
-**Key Function:**
-```python
-detect_speaker(text: str) -> tuple[str | None, str]
-# Returns (speaker_name, remaining_text) or (None, original_text)
-```
-
-**Examples:**
-- `"Michael: I've made a huge mistake"` → `("Michael", "I've made a huge mistake")`
-- `"George Michael: Her?"` → `("George Michael", "Her?")`
-- `"No speaker here"` → `(None, "No speaker here")`
+To add a character, add an entry to the `CHARACTERS` dict here and re-run
+`normalize_speakers.py`.
 
 ### quote_id_generator.py
 
-Generates unique quote IDs with collision detection.
+Generates the next sequential quote ID.
 
 **Key Function:**
 ```python
@@ -153,96 +109,8 @@ get_next_quote_id(existing_quotes: list[dict]) -> str
 # Returns formatted ID like "quote-1", "quote-42"
 ```
 
-### staging_validator.py
+## Tests
 
-Validates staging file structure and schema.
-
-**Key Function:**
-```python
-validate_staging_file(file_path: str | Path) -> tuple[bool, list[str]]
-# Returns (is_valid, error_messages)
+```bash
+pytest tests/unit
 ```
-
-## Data Flow
-
-```
-etc/tweets.js (Twitter archive)
-    ↓ extract_tweets.py
-etc/staging/tweets_staging.json
-    ↓ (manual review & editing)
-etc/staging/tweets_staging.json (reviewed)
-    ↓ convert_to_quotes.py
-app/data/quotes.json
-```
-
-Media download runs independently:
-```
-etc/staging/tweets_staging.json
-    ↓ download_media.py
-media/tweet_images/*.jpg
-media/download_log.json
-```
-
-## Requirements
-
-- Python 3.11+
-- No external dependencies (uses standard library only)
-
-## File Locations
-
-- **Source**: `etc/tweets.js` - Twitter archive export
-- **Staging**: `etc/staging/tweets_staging.json` - Intermediate format (gitignored)
-- **Quotes**: `app/data/quotes.json` - Application data
-- **Media**: `media/tweet_images/` - Downloaded images (gitignored)
-- **Logs**: `media/download_log.json` - Download status (gitignored)
-
-## Error Handling
-
-All scripts use standard exit codes:
-- `0` - Success
-- `1` - General error (file not found, permission error)
-- `2` - Invalid data (corrupted JSON, invalid format)
-
-Errors are printed to stderr with descriptive messages.
-
-## Speaker Extraction
-
-The conversion script automatically detects speaker names from tweet text:
-
-- Pattern: `Name: text content`
-- Matches: Alphabetical characters and spaces only
-- Preserves exact capitalization
-- Strips speaker prefix from quote text
-
-**Examples:**
-- `"Lucille: I don't understand the question"` → Speaker: "Lucille", Quote: "I don't understand the question"
-- `"GOB: I've made a huge tiny mistake"` → Speaker: "GOB", Quote: "I've made a huge tiny mistake"
-- `"R2D2: Beep"` → No match (contains numbers)
-
-## Common Issues
-
-### Extraction fails with "Invalid tweets.js format"
-
-The tweets.js file must have this structure:
-```javascript
-window.YTD.tweets.part0 = [...json array...];
-```
-
-### Validation fails with JSON syntax errors
-
-Edit the staging file carefully. Common issues:
-- Missing commas between entries
-- Trailing commas in arrays/objects
-- Unclosed quotes or brackets
-
-Use `python3 -m json.tool < file.json` to check JSON syntax.
-
-### Download fails with 403/404 errors
-
-Some media URLs may no longer be available. The script logs errors but continues downloading remaining files. Check `media/download_log.json` for details.
-
-## See Also
-
-- [Full Quickstart Guide](../specs/002-tweet-to-quote-conversion/quickstart.md)
-- [Data Model Documentation](../specs/002-tweet-to-quote-conversion/data-model.md)
-- [JSON Schemas](../specs/002-tweet-to-quote-conversion/contracts/schemas.md)

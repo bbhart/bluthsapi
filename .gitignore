@@ -42,15 +42,13 @@ Thumbs.db
 *.log
 logs/
 
-# Tweet conversion staging and media (002-tweet-to-quote-conversion)
-# The raw Twitter archive is local pipeline input only — never commit it.
-etc/tweets.js
-etc/staging/
-media/tweet_images/
-media/download_log.json
-
 # AWS SAM build artifacts
 .aws-sam/
 
 # Private review notes (not for publication)
 REMEDIATION.md
+
+# Local reference material fetched by scripts/fetch_transcripts.py.
+# Full episode transcripts of copyrighted television -- keep them local,
+# do not commit or redistribute.
+work/
