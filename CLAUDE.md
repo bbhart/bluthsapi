@@ -95,9 +95,6 @@ and anything they cannot resolve confidently is listed for a human instead of gu
 
 ## Things that must not be committed
 
-- `work/transcripts/` holds full transcripts of copyrighted episodes, fetched as local
-  reference. Keep them local. `work/` is gitignored and has its own `.gitignore` as a
-  second line of defence.
 - This repository is public. No AWS account ids, ARNs, or personal email addresses.
   `CertificateArn` and `AlertEmail` are template parameters fed from CI secrets
   (`ACM_CERTIFICATE_ARN`, `ALERT_EMAIL`); `samconfig.toml` deliberately carries neither.
