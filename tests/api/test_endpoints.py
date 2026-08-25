@@ -65,20 +65,18 @@ class TestRandomQuoteEndpoint:
 
         The response may include:
         - id: unique identifier
-        - primarySpeaker: main character
-        - speakers: list of characters
+        - speakers: comma-separated character names, "" when unknown
         - context: episode reference
         - imageUrl: image URL (for meme quotes)
         """
         response = api_client.get("/api/quotes/random")
         data = response.json()["data"]
 
-        # These fields are optional but if present should be correct type
-        if "primarySpeaker" in data:
-            assert isinstance(data["primarySpeaker"], str)
-
-        if "speakers" in data and data["speakers"] is not None:
-            assert isinstance(data["speakers"], list)
+        # speakers is always present, possibly empty
+        assert "speakers" in data
+        assert isinstance(data["speakers"], str)
+        assert not data["speakers"].startswith(",")
+        assert not data["speakers"].endswith(",")
 
         if "context" in data and data["context"] is not None:
             assert isinstance(data["context"], str)
@@ -131,9 +129,9 @@ class TestSpeakerEndpoint:
         random_response = api_client.get("/api/quotes/random")
         random_data = random_response.json()["data"]
 
-        # Use primarySpeaker if available
-        if "primarySpeaker" in random_data and random_data["primarySpeaker"]:
-            speaker = random_data["primarySpeaker"]
+        # Use the first speaker if the quote names one
+        if random_data.get("speakers"):
+            speaker = random_data["speakers"].split(",")[0]
 
             response = api_client.get(f"/api/quotes/{speaker}")
             assert response.status_code == 200
@@ -165,8 +163,8 @@ class TestSpeakerEndpoint:
         random_response = api_client.get("/api/quotes/random")
         random_data = random_response.json()["data"]
 
-        if "primarySpeaker" in random_data and random_data["primarySpeaker"]:
-            speaker = random_data["primarySpeaker"]
+        if random_data.get("speakers"):
+            speaker = random_data["speakers"].split(",")[0]
 
             # Try different cases
             lower_response = api_client.get(f"/api/quotes/{speaker.lower()}")

@@ -300,8 +300,7 @@ See [quickstart.md](specs/001-quotes-api/quickstart.md) for detailed deployment 
   "data": {
     "id": "quote-001",
     "quote": "I've made a huge mistake.",
-    "primarySpeaker": "Gob",
-    "speakers": ["Gob"],
+    "speakers": "GOB",
     "context": "Season 1, Episode 1 - Pilot",
     "imageUrl": "https://bucket.s3.amazonaws.com/gob-mistake.jpg"
   }
@@ -355,24 +354,31 @@ The API handles the following error scenarios gracefully:
 Edit `app/data/quotes.json`:
 
 ```json
-{
-  "quotes": [
-    {
-      "id": "quote-001",
-      "quote": "There are dozens of us! DOZENS!!!",
-      "primarySpeaker": "Tobias"
-    },
-    {
-      "id": "quote-002",
-      "quote": "I've made a huge mistake.",
-      "primarySpeaker": "Gob",
-      "speakers": ["Gob"],
-      "context": "Season 1, Episode 1 - Pilot",
-      "imageUrl": "gob-mistake.jpg"
-    }
-  ]
-}
+[
+  {
+    "id": "quote-001",
+    "quote": "There are dozens of us! DOZENS!!!",
+    "speakers": "Tobias"
+  },
+  {
+    "id": "quote-002",
+    "quote": "I've made a huge mistake.",
+    "speakers": "GOB",
+    "context": "Season 1, Episode 1 - Pilot",
+    "imageUrl": "gob-mistake.jpg"
+  },
+  {
+    "id": "quote-288",
+    "quote": "Lucille: You tricked me. Michael: I deceived you, Mom.",
+    "speakers": "Lucille,Michael"
+  }
+]
 ```
+
+`speakers` is a comma-separated list of everyone who speaks in the quote, in the
+order they speak, and `""` when unknown. Every name must appear in
+`app/data/list-of-characters.txt` — run `python scripts/normalize_speakers.py --check`
+to verify. See [CONTRIBUTING.md](CONTRIBUTING.md#character-names) for why.
 
 ## Contributing
 

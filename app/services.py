@@ -49,19 +49,30 @@ def get_random_quote(quotes: list[Quote]) -> Optional[Quote]:
 
 
 def filter_by_speaker(quotes: list[Quote], speaker: str) -> list[Quote]:
-    """Filter quotes by primary speaker (case-insensitive).
+    """Filter quotes by speaker (case-insensitive).
+
+    The `speakers` field is a comma-separated list, so a quote matches when the
+    requested name is any one of its speakers. Asking for "Michael" returns a
+    quote whose speakers are "Lucille,Michael".
 
     Args:
         quotes: List of Quote objects to filter.
         speaker: Speaker name to filter by (case-insensitive).
 
     Returns:
-        List of quotes where primarySpeaker matches (case-insensitive).
+        List of quotes naming that speaker.
     """
-    speaker_lower = speaker.lower()
+    speaker_lower = speaker.strip().lower()
+    if not speaker_lower:
+        return []
+
     return [
         q for q in quotes
-        if q.primarySpeaker and q.primarySpeaker.lower() == speaker_lower
+        if speaker_lower in {
+            name.strip().lower()
+            for name in q.speakers.split(",")
+            if name.strip()
+        }
     ]
 
 

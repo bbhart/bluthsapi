@@ -9,6 +9,7 @@ Thank you for your interest in contributing to the Arrested Development Quotes A
 - [Getting Started](#getting-started)
 - [Development Workflow](#development-workflow)
 - [Contributing Quotes](#contributing-quotes)
+- [Character Names](#character-names)
 - [Coding Standards](#coding-standards)
 - [Testing Guidelines](#testing-guidelines)
 - [Submitting Changes](#submitting-changes)
@@ -154,7 +155,9 @@ docker run -p 8000:8000 bluthsapi:test
 The quotes database lives in `app/data/quotes.json`. It was populated haphazardly by scraping my old @bluthquotes tweets and 
 trying to prune things down. 
 
-I can definitely use help with filling out the `primarySpeaker` and `speakers` fields. 
+I can definitely use help with filling out the `speakers` field. Roughly a third of
+the quotes still have it empty, and some of the ones that are filled in are guesses
+that may well be wrong. Corrections are as welcome as additions.
 
 Additions and corrections via PR are most welcome!
 
@@ -166,8 +169,7 @@ Each quote in the `quotes.json` file is an object in a flat array. The structure
 {
   "id": "quote-XXX",
   "quote": "The actual quote text here.",
-  "primarySpeaker": "Character Name",
-  "speakers": ["Character Name", "Other Character"],
+  "speakers": "Character Name,Other Character",
   "context": "Season X, Episode Y - Episode Title",
   "imageUrl": "filename.jpg"
 }
@@ -178,14 +180,27 @@ Each quote in the `quotes.json` file is an object in a flat array. The structure
 **Required fields:**
 - `id`: Unique identifier (see [ID Format Guidelines](#id-format-guidelines) below)
 - `quote`: The actual quote text
-- `primarySpeaker`: The main character speaking (use consistent character names - see note below)
+- `speakers`: Everyone who speaks in the quote, comma-separated, in the order they
+  speak. Use `""` if you don't know. Names must be spelled exactly as they appear in
+  [Character Names](#character-names).
 
 **Optional fields:**
-- `speakers`: Array of all characters involved (if multiple)
 - `context`: Episode information for reference
 - `imageUrl`: Filename of associated image (if available on S3)
 
-**Character Name Consistency:** Many quotes currently have empty `primarySpeaker` fields. When adding quotes or filling in missing data, use consistent character names matching existing entries (e.g., "Lucille" not "Lucille Bluth", "Tobias" not "Tobias Fünke"). Helping fill in these missing fields is a valuable contribution!
+Plenty of quotes are exchanges rather than one-liners, which is why `speakers` is a
+list rather than a single name:
+
+```json
+{
+  "id": "quote-288",
+  "quote": "Lucille: You tricked me. Michael: I deceived you, Mom. Trick makes it sound like we have a playful relationship. Lucille: Touche.",
+  "speakers": "Lucille,Michael"
+}
+```
+
+Note the format: comma-separated, **no space after the comma**, no duplicates even
+when a character speaks twice.
 
 ### ID Format Guidelines
 
@@ -211,8 +226,7 @@ Example: If the last quote ID is `quote-500`, your new quote should be `quote-50
 {
   "id": "quote-042",
   "quote": "I don't understand the question, and I won't respond to it.",
-  "primarySpeaker": "Lucille",
-  "speakers": ["Lucille"],
+  "speakers": "Lucille",
   "context": "Season 1, Episode 5 - Charity Drive"
 }
 ```
@@ -228,11 +242,70 @@ uvicorn app.main:app --reload
 # Test that quotes load correctly (note: may not show your new quote due to randomness)
 curl http://localhost:8000/api/quotes/random
 
-# Test character-specific quotes (if your quote has a primarySpeaker)
+# Test character-specific quotes (if your quote names a speaker)
 curl http://localhost:8000/api/quotes/lucille
+
+# Check that every name you used is canonical
+python scripts/normalize_speakers.py --check
 ```
 
-**Note:** The `/random` endpoint returns a randomly selected quote, so you may need to call it multiple times to see your newly added quote. Character-specific endpoints only show quotes with matching `primarySpeaker` values.
+**Note:** The `/random` endpoint returns a randomly selected quote, so you may need to call it multiple times to see your newly added quote. The character endpoint matches a quote if the requested name is *any* of its `speakers`, so `/api/quotes/michael` will return a quote whose speakers are `"Lucille,Michael"`.
+
+## Character Names
+
+`app/data/list-of-characters.txt` is the canonical list of character names. **Every
+name in a `speakers` field must appear in that file, spelled exactly as it appears
+there.**
+
+This exists because the data used to drift. The same character showed up as `GOB`,
+`Gob`, and `G.O.B.`; George Sr. showed up as `George`, `George Sr` and `George Sr.`.
+The API filters quotes by exact name, so each spelling variant was effectively a
+separate character, and `/api/quotes/gob` only ever returned a fraction of GOB's
+quotes. One spelling per character fixes that.
+
+Two conventions worth knowing:
+
+- **Short names win when they're unambiguous.** It's `Michael`, `Tobias`, `Buster`,
+  `Lindsay`, `Maeby`, `George Michael`, `Oscar` — not `Michael Bluth` or
+  `Tobias Fünke`. Full names are only used where the short form collides with
+  another character or isn't how the character is known: `Barry Zuckerkorn`,
+  `Wayne Jarvis`, `Larry Middleman`.
+- **`Lucille` is Lucille Bluth.** She's *the* Lucille. Lucille Austero is always
+  written out as `Lucille Austero`.
+
+### Checking your names
+
+```bash
+python scripts/normalize_speakers.py --check
+```
+
+This fails if a quote names a character that isn't on the list, or if the list has
+drifted out of sync with the data. It's what CI runs on your PR, so run it before
+you push.
+
+An unrecognized name is a **hard stop in both modes** — `normalize_speakers.py`
+writes nothing and exits non-zero until you either correct the quote or add the
+character. It will not normalize around a name it doesn't know, because that
+would delete a name you deliberately wrote and leave a record that looks fine
+afterwards.
+
+### Adding a character who isn't on the list yet
+
+The list is **generated** — don't edit `list-of-characters.txt` by hand, your change
+will be overwritten. Instead:
+
+1. Add the character to the `CHARACTERS` dictionary in
+   [`scripts/speaker_names.py`](scripts/speaker_names.py). The key is the canonical
+   name; the value is a list of aliases that should resolve to it (nicknames, full
+   names, spellings you've seen in the wild — the alias list is also what lets the
+   parser recognize a `Name:` prefix in quote text).
+2. Use the canonical name in your quote's `speakers` field.
+3. Run `python scripts/normalize_speakers.py` to regenerate the list.
+4. Commit both `quotes.json` and `list-of-characters.txt`.
+
+If the character is a variant of someone already on the list, add an alias rather
+than a new canonical name. `G.O.B.` belongs in GOB's alias list, not on the list as
+its own entry.
 
 ## Coding Standards
 
@@ -284,7 +357,7 @@ def test_random_quote_returns_valid_format(client):
     data = response.json()
     assert "data" in data
     assert "quote" in data["data"]
-    assert "primarySpeaker" in data["data"]
+    assert "speakers" in data["data"]
 ```
 
 ## Submitting Changes
