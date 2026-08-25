@@ -40,7 +40,7 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/bluthsapi.git
+git clone https://github.com/bbhart/bluthsapi.git
 cd bluthsapi
 ```
 
@@ -156,8 +156,8 @@ pytest
 # Run with coverage
 pytest --cov=app --cov-report=html
 
-# Run specific test file
-pytest tests/test_api.py -v
+# Run the API tests only (e2e tests require Playwright: `playwright install chromium`)
+pytest tests/api -v
 ```
 
 ### Manual Testing
@@ -188,8 +188,9 @@ bluthsapi/
 ├── public/
 │   └── index.html           # Static documentation
 ├── tests/
-│   ├── test_api.py          # API endpoint tests
-│   ├── test_services.py     # Service logic tests
+│   ├── api/                 # API endpoint tests
+│   ├── e2e/                 # Playwright browser tests
+│   ├── pages/               # Page objects for e2e tests
 │   └── conftest.py          # pytest fixtures
 ├── Dockerfile               # Docker build configuration
 ├── docker-compose.yml       # Docker Compose setup
@@ -255,7 +256,7 @@ If the API is shut down due to budget limits, see [`docs/budget-reset.md`](docs/
 ssh user@your-server.com
 
 # Clone repository
-git clone https://github.com/yourusername/bluthsapi.git
+git clone https://github.com/bbhart/bluthsapi.git
 cd bluthsapi
 
 # Build and run with Docker
@@ -387,4 +388,3 @@ For issues, questions, or contributions, please open an issue on GitHub.
 
 ---
 
-**Note**: This project includes a placeholder quote dataset with a single Tobias quote. A full quotes dataset will be added in a future feature update.

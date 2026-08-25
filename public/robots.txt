@@ -7,4 +7,3 @@ User-agent: *
 Crawl-delay: 1
 
 # Sitemap (if added in the future)
-# Sitemap: https://yourdomain.com/sitemap.xml

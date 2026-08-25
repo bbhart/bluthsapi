@@ -135,7 +135,7 @@ pytest
 pytest --cov=app --cov-report=html
 
 # Run specific test file
-pytest tests/test_api.py -v
+pytest tests/api/test_endpoints.py -v
 ```
 
 ### Testing Locally
