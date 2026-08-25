@@ -56,7 +56,7 @@ If your usage justifies higher costs, update the budget:
 aws budgets update-budget \
   --account-id $(aws sts get-caller-identity --query Account --output text) \
   --budget '{
-    "BudgetName": "bluths-api-monthly-budget",
+    "BudgetName": "bluths-api-cost-budget",
     "BudgetLimit": {
       "Amount": "50",
       "Unit": "USD"
@@ -92,7 +92,7 @@ SNS_TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'bluths-
 # Add alert at 25% ($5)
 aws budgets create-notification \
   --account-id "$ACCOUNT_ID" \
-  --budget-name "bluths-api-monthly-budget" \
+  --budget-name "bluths-api-cost-budget" \
   --notification NotificationType=ACTUAL,ComparisonOperator=GREATER_THAN,Threshold=25,ThresholdType=PERCENTAGE \
   --subscribers SubscriptionType=SNS,Address="$SNS_TOPIC_ARN"
 ```
@@ -131,7 +131,7 @@ ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 
 aws budgets describe-budget \
   --account-id "$ACCOUNT_ID" \
-  --budget-name "bluths-api-monthly-budget" \
+  --budget-name "bluths-api-cost-budget" \
   --query 'Budget.CalculatedSpend.ActualSpend' \
   --output table
 ```
@@ -141,7 +141,7 @@ View budget history:
 ```bash
 aws budgets describe-budget-performance-history \
   --account-id "$ACCOUNT_ID" \
-  --budget-name "bluths-api-monthly-budget" \
+  --budget-name "bluths-api-cost-budget" \
   --time-period Start=2025-01-01,End=2025-12-31
 ```
 

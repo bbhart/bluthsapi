@@ -214,7 +214,7 @@ Resources:
     Type: AWS::Budgets::Budget
     Properties:
       Budget:
-        BudgetName: bluths-api-monthly-budget
+        BudgetName: bluths-api-cost-budget
         BudgetType: COST
         TimeUnit: MONTHLY
         BudgetLimit:
