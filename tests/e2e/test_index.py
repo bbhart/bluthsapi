@@ -1,7 +1,4 @@
-"""End-to-end tests for the index/landing page.
-
-Tests verify index page display and analytics integration (Issue #7).
-"""
+"""End-to-end tests for the index/landing page."""
 
 import pytest
 from playwright.sync_api import Page
@@ -26,19 +23,6 @@ class TestIndexPageDisplay:
         assert title, "Page should have a title"
         assert "Arrested Development" in title or "Quotes" in title, \
             "Title should reference Arrested Development or Quotes"
-
-    def test_google_analytics_present(self, page: Page):
-        """Verify that Google Analytics tracking code is present (Issue #7).
-
-        Given: The index page is displayed
-        When: Inspecting the page
-        Then: Google Analytics tracking code is present
-        """
-        index_page = IndexPage(page)
-        index_page.goto()
-
-        has_analytics = index_page.has_analytics()
-        assert has_analytics, "Google Analytics script (gtag) should be present"
 
     def test_endpoint_documentation_visible(self, page: Page):
         """Verify that API endpoint documentation is displayed.

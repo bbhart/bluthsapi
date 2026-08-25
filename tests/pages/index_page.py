@@ -8,14 +8,12 @@ from tests.pages.base_page import BasePage
 class IndexPage(BasePage):
     """Page object for interacting with the index/landing page.
 
-    Provides selectors and methods for testing the landing page
-    display and analytics integration.
+    Provides selectors and methods for testing the landing page display.
     """
 
     # Selectors
     PAGE_TITLE = "h1"
     ENDPOINT_BLOCKS = ".endpoint"
-    ANALYTICS_SCRIPT = 'script[src*="gtag"]'
 
     def __init__(self, page: Page):
         """Initialize the IndexPage.
@@ -37,16 +35,6 @@ class IndexPage(BasePage):
             The text content of the h1 element.
         """
         return self.page.locator(self.PAGE_TITLE).text_content() or ""
-
-    def has_analytics(self) -> bool:
-        """Check if Google Analytics script is present.
-
-        Returns:
-            True if the gtag script is found in the page, False otherwise.
-        """
-        # Check for the Google Analytics script tag
-        analytics_script = self.page.locator(self.ANALYTICS_SCRIPT)
-        return analytics_script.count() > 0
 
     def get_endpoint_count(self) -> int:
         """Get the number of endpoint documentation blocks.
