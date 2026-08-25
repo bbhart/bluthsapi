@@ -45,10 +45,43 @@ async def lifespan(app: FastAPI):
 
 
 # Create FastAPI app
+# The OpenAPI document is the most useful thing here for anything reading the
+# site programmatically, so it is worth filling in properly. Deliberately no
+# `servers` entry: FastAPI defaults to a relative server, which keeps "Try it
+# out" in /docs pointed at whatever host you are actually on. Naming the
+# production host here would make local requests fire at production instead.
 app = FastAPI(
     title="Arrested Development Quotes API",
-    description="A read-only REST API serving memorable quotes from the TV show Arrested Development",
+    description=(
+        "A free, read-only REST API serving quotes from the television series "
+        "*Arrested Development*.\n\n"
+        "Each quote carries the line itself and `speakers`, a comma-separated "
+        "list of everyone who speaks in it, in the order they speak "
+        "(`\"Lucille,Michael\"`). Speaker names come from a fixed list of "
+        "characters, matched case-insensitively.\n\n"
+        "No API key, no sign-up, no rate limit beyond ordinary courtesy. "
+        "Responses are cacheable for an hour."
+    ),
     version="1.0.0",
+    contact={
+        "name": "Bluthquotes",
+        "url": "https://github.com/bbhart/bluthsapi",
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://github.com/bbhart/bluthsapi/blob/main/LICENSE",
+    },
+    openapi_tags=[
+        {
+            "name": "Quotes",
+            "description": "Retrieve a single quote: at random, by character, "
+                           "or one that has an image attached.",
+        },
+        {
+            "name": "Health",
+            "description": "Service health and the number of quotes loaded.",
+        },
+    ],
     lifespan=lifespan
 )
 

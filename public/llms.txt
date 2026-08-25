@@ -1,0 +1,77 @@
+# Arrested Development Quotes API
+
+> A free, read-only REST API serving quotes from the television series *Arrested
+> Development*. No API key, no sign-up, no account. Three endpoints, all GET,
+> all returning JSON.
+
+Base URL: `https://api.lucille2.com`
+
+The complete specification is at
+[/openapi.json](https://api.lucille2.com/openapi.json) (OpenAPI 3.1). Prefer it
+over this file for anything beyond a quick orientation.
+
+## The data
+
+Every response wraps exactly one quote in a `data` object:
+
+```json
+{
+  "data": {
+    "id": "quote-288",
+    "quote": "Lucille: You tricked me. Michael: I deceived you, Mom.",
+    "speakers": "Lucille,Michael",
+    "context": null,
+    "imageUrl": null
+  }
+}
+```
+
+- `id` — identifier for the quote, such as `quote-288`.
+- `quote` — the line. Quotes that are exchanges keep their speaker prefixes in
+  the text.
+- `speakers` — everyone who speaks, comma separated with no space, in the order
+  they speak. An empty string means nobody has identified the speaker yet, which
+  is true of a small number of quotes.
+- `context` — episode or situation, usually `null`.
+- `imageUrl` — full URL of an attached image, or `null`.
+
+Speaker names come from a fixed list of 46 characters and are matched
+case-insensitively. There is one canonical spelling per character: `GOB`, never
+`Gob` or `G.O.B.`. `Lucille` means Lucille Bluth; Lucille Austero is written out
+in full.
+
+600 quotes are on file.
+
+## Endpoints
+
+- [GET /api/quotes/random](https://api.lucille2.com/api/quotes/random): One
+  quote from anyone in the show, chosen at random.
+- [GET /api/quotes/{character}](https://api.lucille2.com/api/quotes/michael):
+  One random quote naming that character. Matches if the requested name is any
+  of a quote's speakers, so `michael` can return a quote whose speakers are
+  `"Lucille,Michael"`. Returns 404 when the character has no quotes on file.
+- [GET /api/quotes/meme](https://api.lucille2.com/api/quotes/meme): One random
+  quote that has `imageUrl` set.
+
+Errors return a single `error` field describing what happened, for example
+`{"error": "No quotes found for character: Hermano"}`.
+
+## Notes for automated clients
+
+Responses carry `Cache-Control: public, max-age=3600`. CORS is open for GET.
+
+There is no pagination and no endpoint that returns the full collection; each
+call returns one quote. Repeatedly polling the random endpoint is not a way to
+enumerate the data. If you want the whole set, take
+[quotes.json](https://github.com/bbhart/bluthsapi/blob/main/app/data/quotes.json)
+from the repository instead — it is the same file the API serves from, and
+fetching it once is cheaper for everyone.
+
+`robots.txt` disallows crawling `/api/`. That is aimed at bulk spidering, not at
+an agent fetching a quote because someone asked for one.
+
+## More
+
+- [Documentation](https://api.lucille2.com/docs): Swagger UI.
+- [Reference](https://api.lucille2.com/redoc): ReDoc.
+- [Source](https://github.com/bbhart/bluthsapi): MIT licensed.

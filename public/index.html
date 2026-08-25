@@ -19,6 +19,73 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Courier+Prime:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="canonical" href="https://api.lucille2.com/">
+
+    <!-- The machine-readable version of this page. Anything reading the site
+         programmatically should start here rather than parsing the HTML. -->
+    <link rel="alternate" type="application/json" href="/openapi.json" title="OpenAPI specification">
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for language models">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Arrested Development Quotes API">
+    <meta property="og:title" content="Arrested Development Quotes API">
+    <meta property="og:description" content="A free, no-signup API serving quotes from Arrested Development. Random quotes, quotes by character, and quotes with images.">
+    <meta property="og:url" content="https://api.lucille2.com/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Arrested Development Quotes API">
+    <meta name="twitter:description" content="A free, no-signup API serving quotes from Arrested Development.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebAPI",
+      "name": "Arrested Development Quotes API",
+      "description": "A free, read-only REST API serving quotes from the television series Arrested Development. Each quote carries the line and a comma-separated list of everyone who speaks in it.",
+      "url": "https://api.lucille2.com/",
+      "documentation": "https://api.lucille2.com/docs",
+      "termsOfService": "https://github.com/bbhart/bluthsapi/blob/main/LICENSE",
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true,
+      "provider": {
+        "@type": "Organization",
+        "name": "Bluthquotes",
+        "url": "https://bsky.app/profile/bluthquotes.lucille2.com"
+      },
+      "potentialAction": [
+        {
+          "@type": "ConsumeAction",
+          "name": "Get a random quote",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://api.lucille2.com/api/quotes/random",
+            "httpMethod": "GET",
+            "contentType": "application/json"
+          }
+        },
+        {
+          "@type": "ConsumeAction",
+          "name": "Get a quote by character",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://api.lucille2.com/api/quotes/{character}",
+            "httpMethod": "GET",
+            "contentType": "application/json"
+          }
+        },
+        {
+          "@type": "ConsumeAction",
+          "name": "Get a quote that has an image",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://api.lucille2.com/api/quotes/meme",
+            "httpMethod": "GET",
+            "contentType": "application/json"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 <div class="page">
@@ -222,6 +289,11 @@
                 <a class="link" href="/prettyquote.html">Pretty quote</a>
                 <span class="tools__path">/prettyquote.html</span>
                 &mdash; a quote card built to share
+            </li>
+            <li>
+                <a class="link" href="/openapi.json">OpenAPI specification</a>
+                <span class="tools__path">/openapi.json</span>
+                &mdash; the whole API in one machine-readable file
             </li>
         </ul>
         <p class="prose" style="margin-top:1.1rem">

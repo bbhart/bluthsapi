@@ -1,9 +1,27 @@
-# robots.txt for Arrested Development Quotes API
+# robots.txt for the Arrested Development Quotes API
+#
+# The documentation is open to everything. The API endpoints are not, because
+# spidering them is pointless and costly: every path returns a different random
+# quote, so a crawler can follow them forever without ever reaching the end,
+# and each request is a billed function invocation against a fixed monthly
+# budget. Everything a crawler could want to know about the endpoints is in the
+# OpenAPI document, which is allowed.
+#
+# This applies to bulk crawlers. An agent fetching a quote because a person
+# asked it to is ordinary API use and is welcome.
+#
+# Machine-readable descriptions of this service:
+#   https://api.lucille2.com/openapi.json   full API specification (OpenAPI 3.1)
+#   https://api.lucille2.com/llms.txt       short summary in Markdown
 
-# Allow all crawlers to access documentation
 User-agent: *
-
-# Crawl-delay to be respectful to the API
+Allow: /$
+Allow: /docs
+Allow: /redoc
+Allow: /openapi.json
+Allow: /llms.txt
+Allow: /prettyquote.html
+Allow: /styles.css
+Disallow: /api/
+Disallow: /health
 Crawl-delay: 1
-
-# Sitemap (if added in the future)
