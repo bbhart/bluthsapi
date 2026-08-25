@@ -6,7 +6,7 @@ This document explains how to recover from an automatic API shutdown triggered b
 
 The budget protection is a two-tier system:
 
-- **At $20 actual monthly spend** — AWS Budgets sends a **warning email** to `<operator-email>` directly (no automated action). The API stays online.
+- **At $20 actual monthly spend** — AWS Budgets sends a **warning email** to the `AlertEmail` address directly (no automated action). The API stays online.
 - **At $30 actual monthly spend** — AWS Budgets publishes the threshold breach to the `bluths-api-budget-shutdown-trigger` SNS topic. That topic has the `bluths-api-budget-shutdown` Lambda subscribed (targeting the `:live` alias). The Lambda sets the API Gateway `prod` stage throttle to 0, so every subsequent request returns `429 Too Many Requests`. the operator also receives a direct email at $30 from AWS Budgets.
 
 The Lambda code and data remain intact — only the API Gateway throttle is changed.

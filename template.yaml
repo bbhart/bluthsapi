@@ -51,6 +51,15 @@ Parameters:
     Description: ACM Certificate ARN for the custom domain (must be in us-east-1)
     Default: ""
 
+  AlertEmail:
+    Type: String
+    Description: >-
+      Address that receives budget warnings and the shutdown notice. Required:
+      it is deliberately not defaulted so that a deployment never sends this
+      stack's cost alerts to somebody else's inbox.
+    AllowedPattern: ".+@.+\\..+"
+    ConstraintDescription: Must be a valid email address.
+
 Resources:
   # Lambda function for the FastAPI application
   BluthsApiFunction:
@@ -206,7 +215,7 @@ Resources:
     Properties:
       TopicArn: !Ref BudgetAlertsTopic
       Protocol: email
-      Endpoint: <operator-email>
+      Endpoint: !Ref AlertEmail
 
   # Monthly cost budget — limit $30. Notifications at $20 (warning) and
   # $30 (paired with the Lambda budget action below).
@@ -232,7 +241,7 @@ Resources:
             ThresholdType: ABSOLUTE_VALUE
           Subscribers:
             - SubscriptionType: EMAIL
-              Address: <operator-email>
+              Address: !Ref AlertEmail
         - Notification:
             NotificationType: ACTUAL
             ComparisonOperator: GREATER_THAN
@@ -240,7 +249,7 @@ Resources:
             ThresholdType: ABSOLUTE_VALUE
           Subscribers:
             - SubscriptionType: EMAIL
-              Address: <operator-email>
+              Address: !Ref AlertEmail
             - SubscriptionType: SNS
               Address: !Ref BudgetShutdownTriggerTopic
 

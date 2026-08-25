@@ -423,6 +423,9 @@ If you have questions about contributing:
 - Review existing [issues](https://github.com/bbhart/bluthsapi/issues)
 - Open a new issue with your question
 
+For anything you would rather not put in a public issue, DM
+[@bluthquotes.lucille2.com](https://bsky.app/profile/bluthquotes.lucille2.com) on Bluesky.
+
 ## License
 
 By contributing to this project, you agree that your contributions will be licensed under the project's MIT License.

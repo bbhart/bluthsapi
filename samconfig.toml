@@ -9,7 +9,16 @@ resolve_s3 = true
 s3_prefix = "bluths-api"
 confirm_changeset = true
 capabilities = "CAPABILITY_NAMED_IAM"
-parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\" PerIPRateLimit=\"3\" GlobalRateLimit=\"50\" CustomDomainName=\"api.lucille2.com\" CertificateArn=\"${ACM_CERTIFICATE_ARN}\""
+# CertificateArn and AlertEmail are deliberately absent: one embeds the AWS
+# account id, the other a personal address, and this file is public. Supply
+# them on the command line when deploying by hand:
+#
+#   sam deploy --parameter-overrides \
+#     CertificateArn="$ACM_CERTIFICATE_ARN" AlertEmail="$ALERT_EMAIL"
+#
+# Note the CLI flag REPLACES this list rather than merging with it, so
+# repeat the values below alongside them. CI passes all of them explicitly.
+parameter_overrides = "S3BaseUrl=\"https://bqaasmedia.s3.us-east-1.amazonaws.com\" PerIPRateLimit=\"3\" GlobalRateLimit=\"50\" CustomDomainName=\"api.lucille2.com\""
 image_repositories = []
 
 [default.global.parameters]

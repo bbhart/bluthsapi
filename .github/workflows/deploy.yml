@@ -177,7 +177,8 @@ jobs:
               PerIPRateLimit=3 \
               GlobalRateLimit=50 \
               CustomDomainName=api.lucille2.com \
-              CertificateArn="${ACM_CERTIFICATE_ARN}" \
+              CertificateArn="${{ secrets.ACM_CERTIFICATE_ARN }}" \
+            AlertEmail="${{ secrets.ALERT_EMAIL }}" \
             --tags \
               Environment=production \
               Project=bluths-api \

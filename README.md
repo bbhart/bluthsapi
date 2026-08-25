@@ -251,7 +251,7 @@ sam deploy
 The application includes automatic cost controls, fully managed by CloudFormation in `template.yaml`:
 
 - **Monthly budget**: $30/month hard cap
-- **Alert at $20** (actual spend): Email notification to `<operator-email>`
+- **Alert at $20** (actual spend): Email notification to the address in the `AlertEmail` stack parameter
 - **Alert at $30** (actual spend): Email + automatic API shutdown (sets API Gateway throttle to 0; requests return 429)
 - **CloudWatch Alarm**: If the shutdown Lambda errors, the alarm publishes to the same SNS topic so you're notified of silent failures.
 - **Month-rollover safety net**: On the 1st of each month, a read-only Lambda checks the API Gateway throttle; if still 0, emails a reminder pointing at the recovery doc.
@@ -387,6 +387,12 @@ to verify. See [CONTRIBUTING.md](CONTRIBUTING.md#character-names) for why.
 3. Commit your changes: `git commit -m "Add amazing feature"`
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
+
+## Contact
+
+Questions, corrections and bug reports are best filed as
+[issues](https://github.com/bbhart/bluthsapi/issues). For anything else, DM
+[@bluthquotes.lucille2.com](https://bsky.app/profile/bluthquotes.lucille2.com) on Bluesky.
 
 ## License
 
