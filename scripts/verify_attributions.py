@@ -409,6 +409,7 @@ def main() -> int:
 
     # ---- fuzzy second pass --------------------------------------------
     fuzzy_added, fuzzy_fixed, fuzzy_confirmed, fuzzy_review = [], [], [], []
+    fuzzy_weak_agree = []
     still_unmatched = []
 
     if args.fuzzy:
@@ -447,6 +448,19 @@ def main() -> int:
             segments = len(QUOTED_SEGMENT.findall(quote["quote"]))
             short_handed = segments >= 2 and len(names) < segments
 
+            current = split_speakers(quote.get("speakers", ""))
+
+            # Compare against what is stored before applying the confidence
+            # gate. A weak match that agrees with the stored value asks nothing
+            # of anyone, and putting it in a review queue only wastes the
+            # reviewer's time.
+            if names == current:
+                if best.score >= args.fuzzy_threshold and not contested:
+                    fuzzy_confirmed.append((quote, best))
+                else:
+                    fuzzy_weak_agree.append((quote, best, short_handed))
+                continue
+
             if best.score < args.fuzzy_threshold or contested or short_handed:
                 if best.score >= args.fuzzy_review_floor:
                     fuzzy_review.append((quote, best, rival, contested))
@@ -454,10 +468,7 @@ def main() -> int:
                     still_unmatched.append((quote, reason))
                 continue
 
-            current = split_speakers(quote.get("speakers", ""))
-            if names == current:
-                fuzzy_confirmed.append((quote, best))
-            elif not current:
+            if not current:
                 fuzzy_added.append((quote, best, names))
                 quote["speakers"] = format_speakers(names)
             else:
@@ -487,6 +498,7 @@ def main() -> int:
             f"  confirmed:                   {len(fuzzy_confirmed)}",
             f"  ADDED:                       {len(fuzzy_added)}",
             f"  FIXED:                       {len(fuzzy_fixed)}",
+            f"  agreed, low confidence:      {len(fuzzy_weak_agree)}",
             f"  needs review, left alone:    {len(fuzzy_review)}",
         ]
     else:
@@ -536,10 +548,25 @@ def main() -> int:
             lines.append(f"      source: {match.episode.slug} | {match.excerpt}")
             lines.append("")
 
+    if fuzzy_weak_agree:
+        lines += ["", "FUZZY AGREED, LOW CONFIDENCE -- no action needed", "-" * 72,
+                  "",
+                  "The match scored too low to apply, but it agrees with what is",
+                  "already stored, so there is nothing to decide. Listed only as",
+                  "weak corroboration.", ""]
+        for quote, best, short_handed in fuzzy_weak_agree:
+            note = "  (may be missing a speaker)" if short_handed else ""
+            lines.append(f"  {quote['id']}: {quote['speakers']} "
+                         f"[score {best.score:.3f}]{note}")
+        lines.append("")
+
     if fuzzy_review:
-        lines += ["", "FUZZY NEEDS REVIEW -- plausible but not applied", "-" * 72,
-                  "", "Below the accept threshold, or a rival match named someone",
-                  "else. Decide these by hand.", ""]
+        lines += ["", "FUZZY NEEDS REVIEW -- a real decision, not yet applied",
+                  "-" * 72, "",
+                  "Each of these would CHANGE the stored value, and was not",
+                  "confident enough to apply. Entries where the suggestion equals",
+                  "the stored value are not listed here -- see the section above.",
+                  ""]
         for quote, best, rival, contested in fuzzy_review:
             segments = len(QUOTED_SEGMENT.findall(quote["quote"]))
             if contested:
@@ -598,6 +625,7 @@ def main() -> int:
     print(f"  fixed:     {len(fixed)}")
     if args.fuzzy:
         print(f"  fuzzy confirmed: {len(fuzzy_confirmed)}")
+        print(f"  fuzzy agreed (low confidence): {len(fuzzy_weak_agree)}")
         print(f"  fuzzy added:     {len(fuzzy_added)}")
         print(f"  fuzzy fixed:     {len(fuzzy_fixed)}")
         print(f"  fuzzy review:    {len(fuzzy_review)}")
