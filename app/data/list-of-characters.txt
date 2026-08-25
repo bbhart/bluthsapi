@@ -15,15 +15,19 @@ Buster
 Carl Weathers
 Detective Munch
 Dr. Farmer
+Franklin Bluth
 George Michael
 George Sr.
 GOB
 Ice
 Jessie
+Jim Cramer
 John Beard
 Judge Lionel Ping
+Kitty
 Larry Middleman
 Lindsay
+Literal Doctor
 Loretta
 Lucille
 Lucille Austero
@@ -41,6 +45,8 @@ Stan Sitwell
 Steve Holt
 T-Bone
 Tobias
+Tom Jane
+Tony Wonder
 Uncle Jack
 Waitress
 Warden Gentiles

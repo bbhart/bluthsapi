@@ -121,11 +121,17 @@ class TestFilterBySpeaker:
         assert filter_by_speaker(sample, "Nobody") == []
 
 
+NO_SUCH_NAME = "Zzzz Notarealcharacter"
+
+
 class TestUnknownNamesAreNeverDropped:
     """An unresolvable name must stop the run, not get normalized away.
 
     Silently dropping it would delete a curator's work and leave a record that
     looks correct, so the failure has to be loud and the data left alone.
+
+    NO_SUCH_NAME must stay something that will never become a real character.
+    These tests originally used "Franklin", which later turned out to be one.
     """
 
     @pytest.fixture
@@ -151,24 +157,24 @@ class TestUnknownNamesAreNeverDropped:
 
     def test_unknown_name_exits_non_zero(self, normalizer):
         code, _, _ = normalizer(
-            [{"id": "quote-1", "quote": "Hello", "speakers": "Franklin"}]
+            [{"id": "quote-1", "quote": "Hello", "speakers": NO_SUCH_NAME}]
         )
         assert code == 1
 
     def test_unknown_name_leaves_the_file_untouched(self, normalizer):
-        records = [{"id": "quote-1", "quote": "Hello", "speakers": "Franklin"}]
+        records = [{"id": "quote-1", "quote": "Hello", "speakers": NO_SUCH_NAME}]
         code, quotes_path, chars_path = normalizer(records)
 
         assert code == 1
         written = json.loads(quotes_path.read_text(encoding="utf-8"))
-        assert written[0]["speakers"] == "Franklin", "the name must survive"
+        assert written[0]["speakers"] == NO_SUCH_NAME, "the name must survive"
         assert not chars_path.exists(), "no character list on a failed run"
 
     def test_one_bad_name_blocks_the_whole_file(self, normalizer):
         """A good record must not be rewritten while a bad one is unresolved."""
         records = [
             {"id": "quote-1", "quote": "Hello", "speakers": "gob"},
-            {"id": "quote-2", "quote": "Hello", "speakers": "Franklin"},
+            {"id": "quote-2", "quote": "Hello", "speakers": NO_SUCH_NAME},
         ]
         code, quotes_path, _ = normalizer(records)
 
@@ -178,7 +184,7 @@ class TestUnknownNamesAreNeverDropped:
 
     def test_check_mode_also_fails(self, normalizer):
         code, _, _ = normalizer(
-            [{"id": "quote-1", "quote": "Hello", "speakers": "Franklin"}],
+            [{"id": "quote-1", "quote": "Hello", "speakers": NO_SUCH_NAME}],
             argv=("normalize_speakers.py", "--check"),
         )
         assert code == 1
