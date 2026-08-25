@@ -52,7 +52,7 @@
   "data": {
     "id": "quote-001",
     "quote": "There are dozens of us! DOZENS!!!",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias"
   }
 }</pre>
             </div>
@@ -63,7 +63,9 @@
             <div class="endpoint-url">/api/quotes/{character-name}</div>
             <p>
                 Get a random quote from a specific character. Replace <code>{character-name}</code> with the character's name.
-                Character names are not case-sensitive (e.g., "gob", "Gob", and "GOB" all work).
+                Character names are not case-sensitive (e.g., "gob", "Gob", and "GOB" all work). Quotes that are
+                exchanges match on any of their speakers, so <code>/api/quotes/michael</code> can return a quote
+                whose speakers are <code>"Lucille,Michael"</code>.
             </p>
             <div class="example">
                 <strong>Example:</strong> /api/quotes/Tobias
@@ -71,7 +73,7 @@
   "data": {
     "id": "quote-001",
     "quote": "There are dozens of us! DOZENS!!!",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias"
   }
 }</pre>
             </div>
@@ -92,7 +94,7 @@
   "data": {
     "id": "quote-042",
     "quote": "There's always money in the banana stand.",
-    "primarySpeaker": "George Sr.",
+    "speakers": "George Sr.",
     "imageUrl": "https://bucket.s3.amazonaws.com/banana-stand.jpg"
   }
 }</pre>
@@ -109,8 +111,7 @@
         <ul style="margin-left: 30px; margin-bottom: 20px;">
             <li><strong>id</strong>: A unique identifier for the quote</li>
             <li><strong>quote</strong>: The actual quote text</li>
-            <li><strong>primarySpeaker</strong>: The main character who said the quote (if available)</li>
-            <li><strong>speakers</strong>: All characters involved (if available)</li>
+            <li><strong>speakers</strong>: Everyone who speaks in the quote, comma-separated in the order they speak (e.g. <code>"Lucille,Michael"</code>). Empty when we don't know who said it.</li>
             <li><strong>context</strong>: Episode or situation reference (if available)</li>
             <li><strong>imageUrl</strong>: Full web address to an image (only for meme quotes)</li>
         </ul>

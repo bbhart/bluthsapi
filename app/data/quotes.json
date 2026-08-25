@@ -1,3462 +1,3096 @@
 [
   {
     "id": "quote-001",
-    "quote": "Tobias: There are dozens of us! DOZENS!!!",
-    "primarySpeaker": "Tobias"
+    "quote": "There are dozens of us! DOZENS!!!",
+    "speakers": "Tobias"
   },
   {
     "id": "quote-2",
     "quote": "IT'S A WONDERFUL RESTAURANT!!",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "GFd0PIwakAAv6S-.jpg"
   },
   {
     "id": "quote-3",
     "quote": "It's, like, \"Hey, you want to go down to the whirlpool?\" \"Yeah, I don't have a husband.\" I call it Swing City.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "F61ckVgWoAAyjra.jpg"
   },
   {
     "id": "quote-4",
     "quote": "Annyong",
-    "primarySpeaker": ""
+    "speakers": "Annyong"
   },
   {
     "id": "quote-5",
     "quote": "If I may take off my acting pants for a moment and pull my analrapist stocking over my head, George Michael has been acting strange lately. I think he may have developed what we in the soft sciences refer to obsessive-compulsive disorder, or the O.C. Disorder.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-6",
     "quote": "Steve Holt is a bastard. He doesn't even know who his real father is. What else don't we know about Steve Holt? George Michael Bluth is a cool guy. His dad is a powerful executive working for this man. The girls like him just fine. Young and old, it doesn't matter, in the dark.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-7",
-    "quote": "I don't know who that is and I don't care to find out",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-8",
-    "quote": "Say what you want about America - thirteen bucks can still get you a hell of a lot of mice!",
-    "primarySpeaker": ""
+    "quote": "Say what you will about America, thirteen bucks can still get you a hell of a lot of mice!",
+    "speakers": "George Michael"
   },
   {
     "id": "quote-9",
     "quote": "Lucille: I'll be in the hospital bar. Michael: Uh, you know there isn't a hospital bar, Mother. Lucille: Well, this is why people hate hospitals.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-10",
     "quote": "If I make this comeback, I'll buy you a hundred George Michaels that you can teach to drive!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-12",
     "quote": "Even it means me taking a chubby, I will suck it up.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-14",
-    "quote": "I'm a scholar. I enjoy scholarly pursuits.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-15",
     "quote": "These are my awards, Mother. From Army. The seal is for marksmanship, and the gorilla is for sand racing. Now if you'll excuse me, they're putting me in something called Hero Squad.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "EZH3HqWVAAAea6P.png"
   },
   {
     "id": "quote-16",
     "quote": "I spent so much time making sweet love on my wife that it's hard to hear anything over the clatter of her breasts...",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-17",
     "quote": "Oh, this shall keep me safe from the hot Mexican sun.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "EY-gE_oUMAE-Rha.jpg"
   },
   {
     "id": "quote-18",
     "quote": "Yeah, like I'm going to take a whiz through this $5,000 suit. COME ON.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-19",
     "quote": "Hey, maybe you could pop a tent outside with your cousin Maeby... it'd be a good chance to rub off on her.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-20",
     "quote": "Oh, it's so cute. She sometimes takes a little pack of mayonnaise, and she'll squirt it in her mouth all over, and then she'll take an egg and kind of... Mmmm! She calls it a \"mayonegg.\" Are you okay?",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-21",
     "quote": "I prematurely shot my wad on what was supposed to be a dry run, so now I'm afraid I have something of a mess on my hands.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-23",
     "quote": "I'm out of here. Seriously.",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "EXci2Y3UYAAK47d.jpg"
   },
   {
     "id": "quote-24",
     "quote": "Tobias: So what are your plans for this evening? Bob Loblaw: I thought that maybe I would stay in and work on my law blog. Tobias: Ah, yes. The \"Bob Loblaw Law Blog\". You, sir, are a mouthful.",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias,Bob Loblaw"
   },
   {
     "id": "quote-25",
     "quote": "Please refrain from discussing or engaging in any sort of interoffice [bleep]ing or [bleep]ing or finger [bleep] or [bleep]sting or [bleep]ing or even [bleep]. Even though so many people in this office are begging for it.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-26",
     "quote": "What? No. No. No. No no no.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-27",
     "quote": "There's a new daddy in town. A discipline daddy.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-28",
     "quote": "I'd rather be dead in California than alive in Arizona.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-29",
     "quote": "\"Oh, hi, Mom. I have the afternoon free.\" \"Really? Did 'nothing' cancel?\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Lucille"
   },
   {
     "id": "quote-30",
     "quote": "He may be suffering from what we in the soft-sciences call Obsessive Compulsive Disorder or the The OC Disorder.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-31",
     "quote": "I think I might have someone who's going to \"circumvrent\" the law.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-32",
     "quote": "Lucille: What are you doing home? Buster: Army had half a day.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Buster"
   },
   {
     "id": "quote-33",
     "quote": "Oh please. They didn't sneak into this country to be your friends.",
-    "primarySpeaker": "",
+    "speakers": "Lucille",
     "imageUrl": "EWGV4gAUwAEpFa4.jpg"
   },
   {
     "id": "quote-34",
     "quote": "Lucille: Well, apparently, mood-altering medication leads to street drugs. That's what this very handsome, young doctor said on The Today Show. Michael: That was Tom Cruise, the actor. Lucille: They said he was some kind of scientist...",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-35",
     "quote": "Wow. We're just blowing through nap time, aren't we...",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-36",
-    "quote": "Daddy needs to get his rocks off.",
-    "primarySpeaker": "",
-    "imageUrl": "EVxYc9vVAAAsU_7.jpg"
+    "speakers": "Buster"
   },
   {
     "id": "quote-37",
     "quote": "It's as Ann as the nose on Plain's face.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-38",
     "quote": "I'm sure that Egg is a very nice person. I just don't want you spending all your money getting her all glittered up for Easter.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-39",
     "quote": "I'd have to get up pretty early to get drunk by 1 o'clock.",
-    "primarySpeaker": "",
+    "speakers": "Lucille",
     "imageUrl": "EVLh81LUYAEDv5V.png"
   },
   {
     "id": "quote-40",
     "quote": "And although the intervention didn't work, it turned into one of the Bluth family's better parties.",
-    "primarySpeaker": "",
+    "speakers": "Narrator",
     "imageUrl": "EU2Y3zeU8AIorep.jpg"
-  },
-  {
-    "id": "quote-43",
-    "quote": "Chicken fingers... with spicy club sauce.",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-44",
     "quote": "They cannot arrest a husband and wife for the same crime.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-45",
     "quote": "I'll see you when you realize what that bucket's for.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-46",
     "quote": "\"What do you think about Sudden Valley?\" \"It sounds like a salad dressing, but for some reason I don't want to eat it.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,George Michael"
   },
   {
     "id": "quote-47",
     "quote": "You gotta lock that down",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "EULKq8tUwAAOy1R.jpg"
   },
   {
     "id": "quote-50",
     "quote": "Oh, that is just great. Now I'm expected to climb back on top of Kitty and do my thing again. I mean, this family runs into problems and it's \"Oh, let's have Gob [bleep] our way out of it.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-51",
     "quote": "No, I was ashamed to be SEEN with you. I like being WITH you.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-52",
     "quote": "When a man loves a woman, and he actually wants to make love... to her, something very, very special happens, and... with deep, deep concentration and-and great focus, he's often able to achieve an erec...",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-53",
     "quote": "Michael: Where's Tobias? Lindsay: He's out on the balcony having margaritas with Carl Weathers.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lindsay"
   },
   {
     "id": "quote-54",
     "quote": "Don't Buy",
-    "primarySpeaker": "",
+    "speakers": "Jim Cramer",
     "imageUrl": "ERjJDjjUYAEutgQ.jpg"
   },
   {
     "id": "quote-55",
     "quote": "I mean, it's one banana, Michael. What could it cost, ten dollars?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-56",
-    "quote": "You burn down the storage unit?",
-    "primarySpeaker": "",
-    "imageUrl": "EQSUt-4U8AAH3-n.jpg"
+    "speakers": "Lucille"
   },
   {
     "id": "quote-57",
     "quote": "\"I think the only time you cooked for us was the morning Rosa's mom died.\" \"You gave us cereal in an ashtray.\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Buster"
   },
   {
     "id": "quote-58",
     "quote": "Who's got a stew goin'?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-59",
-    "quote": "\"Sweet old thing.\" \"Only two of those words describe Mom, so I know you're lying to me.\"",
-    "primarySpeaker": ""
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-60",
     "quote": "I'm Mr Manager",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-62",
     "quote": "You must teach me the ways of the secular flesh.",
-    "primarySpeaker": ""
+    "speakers": "Ann"
   },
   {
     "id": "quote-63",
     "quote": "These are my awards. From Army.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "EO08AYNUYAAMXsZ.jpg"
   },
   {
     "id": "quote-64",
     "quote": "He's very good",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-65",
     "quote": "Michael, you have a chance to save this family. Please, do the right thing here - string this blind girl along so that Dad doesn't have to pay his debt to society.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-66",
     "quote": "No! These are just strippers! Look how hot they are!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-67",
     "quote": "I'm tired of trying to find happiness through lies and self-medicating. If you need me, I'll be at the bar.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-68",
     "quote": "Excuse me, do these effectively hide my thunder?",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "EN4TOmOU4AEcRmr.jpg"
-  },
-  {
-    "id": "quote-69",
-    "quote": "Look what the homosexuals have done to me!",
-    "primarySpeaker": "",
-    "imageUrl": "FfJsqvNX0AYapBD.jpg"
   },
   {
     "id": "quote-70",
     "quote": "Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-71",
     "quote": "Yeah, I invited her. You said you wanted to spend time some with her. You said I was being an Ann hog.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-72",
     "quote": "Get rid of the Seaward.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-73",
     "quote": "You're a good guy mon frere. That means brother in French. I don't know how I know that. I took four years of Spanish.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-75",
     "quote": "Yes, hello, I'm looking for the magic",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "ENcjByCVUAEi35H.jpg"
   },
   {
     "id": "quote-76",
     "quote": "G.O.B.: Ah! Good to see you, old friend. What have you been up to? Tobias: Oh, uh, things are good, nothing much. I'm a registered sex offender, but things are good. G.O.B.: Yes, yes.",
-    "primarySpeaker": ""
+    "speakers": "GOB,Tobias"
   },
   {
     "id": "quote-80",
     "quote": "I don't criticize you! And if you're worried about criticism, sometimes a diet is the best defense.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-81",
     "quote": "\"Do you guys know where I could get one of those gold necklaces with the T on it?\" \"That's a cross.\" \"Across from where?\"",
-    "primarySpeaker": ""
+    "speakers": "Maeby,Michael"
   },
   {
     "id": "quote-82",
     "quote": "Enjoy the Hanukkah cookie, man",
-    "primarySpeaker": "",
+    "speakers": "Tony Wonder",
     "imageUrl": "EMiMFBSUUAE7Mnc.jpg"
   },
   {
     "id": "quote-86",
     "quote": "I don't feel so good",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "EMCWWlWU4AY1Hl1.jpg"
   },
   {
     "id": "quote-87",
     "quote": "You can always tell a Milford man",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-88",
     "quote": "Army had a half day",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-90",
     "quote": "Stop licking my hand, you horse's ass.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-92",
     "quote": "I just want my kids back",
-    "primarySpeaker": "",
+    "speakers": "Tom Jane",
     "imageUrl": "ELpN5bkUcAAdXyv.jpg"
   },
   {
     "id": "quote-93",
     "quote": "STEVE HOLT!",
-    "primarySpeaker": "",
+    "speakers": "Steve Holt",
     "imageUrl": "ELj2GvfVAAA9h5n.jpg"
   },
   {
     "id": "quote-99",
     "quote": "If you're saying I play favorites, you're wrong. I love all my children equally.",
-    "primarySpeaker": ""
+    "speakers": "Lucille",
+    "imageUrl": "DUUF-v_V4AENU2C.jpg"
   },
   {
     "id": "quote-101",
     "quote": "It's all regulation, Michael.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "EJMsEUSVUAEoMJT.jpg"
   },
   {
     "id": "quote-102",
     "quote": "We have unlimited juice? This party is going to be off the hook.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-109",
     "quote": "Luz, that coat cost more than your house! Oh, that's how we joke. She doesn't even have a house.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-111",
     "quote": "I'm not \"super prepared\"",
-    "primarySpeaker": "",
+    "speakers": "Barry Zuckerkorn",
     "imageUrl": "EHVpckHUUAAKqEP.jpg"
   },
   {
     "id": "quote-112",
     "quote": "WHERE THE FUCK ARE MY HARD BOILED EGGS?",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-113",
     "quote": "Would it kill her to let some vodka go bad?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-116",
-    "quote": "Michael: Are you serious? Wayne Jarvis: Almost always. I was once called the worst audience participant Cirque du Soleil ever had.",
-    "primarySpeaker": "Michael"
+    "speakers": "Maeby"
   },
   {
     "id": "quote-117",
     "quote": "I could use a leather jacket for when I'm on my hog and have to go into a controlled slide.",
-    "primarySpeaker": "",
+    "speakers": "George Michael",
     "imageUrl": "FcypWvMXoAEZQ6I.jpg"
   },
   {
     "id": "quote-118",
     "quote": "No, Pop-pop does not get a treat. I just bought you a f**king pizza.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-119",
     "quote": "She mistook the \"drowsy eye\" alcohol warning for a \"winking eye\" alcohol suggestion.",
-    "primarySpeaker": "",
+    "speakers": "Narrator",
     "imageUrl": "EGxevRlVUAI0gzr.jpg"
   },
   {
     "id": "quote-120",
     "quote": "\"I've always been deeply passionate about nature. Perhaps you remember Neuterfest?\" \"I'll never forget your wedding.\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Michael"
   },
   {
     "id": "quote-122",
     "quote": "Fried cheese... with club sauce. Popcorn shrimp... with club sauce. Chicken fingers... with spicy club sauce.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-124",
     "quote": "Chickens don't clap!",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "EGAbgg3UUAA-NKn.jpg"
   },
   {
     "id": "quote-127",
     "quote": "\"Taste my sad\"",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "EFr5o4wU0AARvTU.jpg"
   },
   {
     "id": "quote-128",
     "quote": "Michael: Tell me the truth, okay? 'Cause there's been a lot of lying in this family. Lucille: And a lot of love. Michael: More lies.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-129",
     "quote": "Why should you go to jail for a crime somebody else noticed?",
-    "primarySpeaker": ""
+    "speakers": "Bob Loblaw"
   },
   {
     "id": "quote-130",
     "quote": "I want to cry so bad, but I don't think I can spare the moisture.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-133",
     "quote": "What is she doing at a beauty pageant? Is she running the lights or something?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-134",
     "quote": "\"Uncle Gob... was Aunt Lindsay ever pregnant?\" \"Yeah, sure, dozens of times.\"",
-    "primarySpeaker": ""
+    "speakers": "George Michael,GOB"
   },
   {
     "id": "quote-135",
     "quote": "What's next, Michael? Are you going to make dancing illegal? Is this the tiny town from Footloose?",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-136",
     "quote": "Nothing wrong with that",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "EEsXWkQUEAUnWRO.jpg"
   },
   {
     "id": "quote-137",
     "quote": "If you didn't have adult onset diabetes, I wouldn't mind giving you a little sugar.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-140",
     "quote": "Sometimes life is about making difficult sandwiches.",
-    "primarySpeaker": ""
+    "speakers": "Michael,Tobias"
   },
   {
     "id": "quote-141",
     "quote": "Lindsay: Michael, I've got nothing. My husband dumped me and ran off to Vegas with Kitty, that bleached-blonde whore. Michael: He's definitely got a type.",
-    "primarySpeaker": "Lindsay"
+    "speakers": "Lindsay,Michael"
   },
   {
     "id": "quote-142",
     "quote": "GENE!!!",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-143",
     "quote": "Baby, you keep a stew goin'",
-    "primarySpeaker": "",
+    "speakers": "Carl Weathers",
     "imageUrl": "ECH5T07UwAAaKR3.jpg"
   },
   {
     "id": "quote-144",
     "quote": "Everything they do is so dramatic and flamboyant. It just makes me want to set myself on fire.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-145",
     "quote": "George Michael: I have Pop-Pop in the attic. Michael: What? The mere fact that you call making love \"pop pop\" tells me you're not ready.",
-    "primarySpeaker": "George Michael"
+    "speakers": "George Michael,Michael"
   },
   {
     "id": "quote-146",
     "quote": "You've ruined the act, GOB.",
-    "primarySpeaker": "",
+    "speakers": "Franklin Bluth",
     "imageUrl": "EBd3H6VVAAA7Jxg.jpg"
   },
   {
     "id": "quote-151",
     "quote": "Motherboy",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "EBAKIHYVUAAotzo.jpg"
   },
   {
     "id": "quote-152",
     "quote": "I don't care for GOB.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-154",
     "quote": "Take a look at banner",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "D_87WNcU0AA3cUc.jpg"
   },
   {
     "id": "quote-155",
     "quote": "Did you enjoy your lunch, mom? You drank it fast enough.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-158",
     "quote": "We have unlimited juice?",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-159",
     "quote": "There's still some meat on that bone",
-    "primarySpeaker": ""
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-160",
     "quote": "Come on, this is a Bluth family celebration. It's no place for children.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-161",
     "quote": "How am I supposed to find someone willing to go into that musty old claptrap?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-164",
     "quote": "You might wanna lean away from that fire since you're soaked in alcohol.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-166",
     "quote": "I made a huge tiny mistake.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-167",
     "quote": "She wanted to look 48. I nearly airbrushed her into oblivion. Ended up checking 'albino' in the form.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "Fb4yrjJXEAIcWU9.jpg"
   },
   {
     "id": "quote-168",
     "quote": "In layman's terms, it might be considered a very heavy nap.",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "Fb1r9LnWQAInPMR.jpg"
   },
   {
     "id": "quote-169",
     "quote": "Heart attack never stopped old Big Bear",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-170",
     "quote": "Please refrain from discussing or engaging in any sort of interoffice __ or __ or finger__ or __sting or __ or even __.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-171",
     "quote": "These are lawyers. That's Latin for liar.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-173",
     "quote": "They don't appreciate him. It's his glasses... they make him look like a lizard. Plus he's self-conscious.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-174",
     "quote": "I heard the jury's still out on science.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-175",
     "quote": "Maeby: I drugged him NOT to go all the way with him. George Michael: Well, I think even the anti-drug people are going to be okay with that.",
-    "primarySpeaker": "Maeby"
+    "speakers": "Maeby,George Michael"
   },
   {
     "id": "quote-177",
     "quote": "Taste the happy",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-178",
     "quote": "Always leave a note",
-    "primarySpeaker": "",
+    "speakers": "George Sr.",
     "imageUrl": "D6_NnilU8AIC2z0.jpg"
   },
   {
     "id": "quote-180",
     "quote": "Maybe it was the 11 months he spent in the womb. The doctor said there were claw marks on the walls of her uterus.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-181",
     "quote": "Lucille: Michael, what are you doing tomorrow? Michael: Having my day ruined with whatever you're about to ask me to do.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-185",
     "quote": "Fuck Mountain",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-186",
     "quote": "What have we always said is the most important thing?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-188",
     "quote": "Michael, look, this has got to stop. I mean, flattered? Yes. Interested? Not tonight.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-190",
     "quote": "Oh, I can taste those meaty, leading man parts in my mouth!",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "FbDZJ3FWAAAmhRX.jpg"
   },
   {
     "id": "quote-191",
     "quote": "'Ovarian cancer'. Gee, wonder who that was.",
-    "primarySpeaker": "",
+    "speakers": "George Sr.",
     "imageUrl": "Fa8P21JX0AAr1dx.jpg"
   },
   {
     "id": "quote-192",
     "quote": "What's gotten into you? Have you been eating cheese?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-193",
     "quote": "It could be your colon. I'd want to get in there and find some answers.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-195",
     "quote": "I'm not going to turn this mock trial into some kind of a --",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-198",
     "quote": "Wedding Ring... tone. Opposite of serious",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-199",
     "quote": "I know you're the big marriage expert - oh, I'm sorry, I forgot, your wife is dead!",
-    "primarySpeaker": ""
+    "speakers": "Tobias",
+    "imageUrl": "Cnm_HjjUMAAvogl.jpg"
   },
   {
     "id": "quote-200",
     "quote": "Yes, he's like the steel man from The Wizard From Oz.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-201",
     "quote": "You are a worse psychiatrist than you are a son-in-law and you will never get work as an actor because you have no talent.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-202",
     "quote": "BABYSIT ME!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-203",
     "quote": "How do we filter out the teases? We don't let them in.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-204",
     "quote": "I'm an ideas man, Michael. I think I proved that with 'Fuck Mountain'.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-205",
     "quote": "Michael: She's always got to wedge herself in the middle of us so that she can control everything. Buster: Yeah. Mom's awesome. Maybe we should call her.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Buster"
   },
   {
     "id": "quote-206",
     "quote": "I'm looking for something that says \"Dad likes leather!\"",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-207",
     "quote": "Probably out there without a flipper, swimming around in a circle, freaking out his whole family.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-209",
     "quote": "Birthday greetings. \"It seems like only yesterday you were bursting forth from your mother's fertile womb.\"",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-210",
     "quote": "\"I'm not gonna cry about my Pa. I'm gonna build an airport, put my name on it.\" Why, Michael? So you can fly away from your feelings?",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-215",
     "quote": "Do not order the Skip's Scramble.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-217",
     "quote": "I buy all my cars at police auctions.",
-    "primarySpeaker": ""
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-218",
     "quote": "I'm going to go get a drink refill. You know you can get unlimited refills on any drink you want... and it's free?",
-    "primarySpeaker": ""
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-219",
     "quote": "Whoa, whoa, whoa. There's still plenty of meat on that bone. Now you take this home, throw it in a pot, add some broth, a potato... baby, you've got a stew going.",
-    "primarySpeaker": "",
+    "speakers": "Carl Weathers",
     "imageUrl": "DzD0ddOUYAAMqDP.jpg"
   },
   {
     "id": "quote-220",
     "quote": "BEADS?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-224",
     "quote": "Way to plant!",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-225",
     "quote": "The speech was disturbing, food inedible and the gift bags pretty frightening. And when GOB realized he wouldn't get tipped the service got a little worse. Oh, and then that old racist woman choked on Buster's thumb. All in all, it was one of the Bluth's better dinner parties.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-226",
     "quote": "Soy loco por los Cornballs!",
-    "primarySpeaker": "",
+    "speakers": "George Sr.",
     "imageUrl": "DwmvDeAUYAAHW7s.jpg"
   },
   {
     "id": "quote-228",
     "quote": "It's up to me now. I'm Mr. Manager.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-231",
-    "quote": "There are very few intelligent, attractive and straight men in this town.",
-    "primarySpeaker": ""
+    "speakers": "George Michael",
+    "imageUrl": "FuRqy3YWYAAXkmn.jpg"
   },
   {
     "id": "quote-232",
     "quote": "Michael: Oh, yeah, that's my father. That's why we had the meeting here-- so that he couldn't interfere. Larry: Interfere? I ought to pull down your pants and spank your ass raw. Michael: I'm sorry. Have we met?",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Larry Middleman"
   },
   {
     "id": "quote-234",
     "quote": "TAKE TO THE SEA!",
-    "primarySpeaker": ""
+    "speakers": "Barry Zuckerkorn"
   },
   {
     "id": "quote-235",
     "quote": "I don't have a son... but if I ever do, I'm either going to take him to the cabin in the woods, or I'm going to promise to take him and then not take him. But the one thing that I will never do is not tell him that I'm taking him to a cabin in the woods, and then not take him!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-237",
     "quote": "SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH SPEECH",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-239",
     "quote": "I have pop pop in the attic",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-240",
     "quote": " Hello darkness my old friend ",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "DuL_UPxVYAAXflC.jpg"
   },
   {
     "id": "quote-241",
     "quote": "I always pictured him in a lighthouse",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-242",
     "quote": "Michael: Well, it's not like you made a commitment to her or anything. Buster: No, not a commitment... but I did refer to it as \"our nausea\"... but that was when we were going at it pretty hot and heavy. Michael: Well, now it's my nausea.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Buster"
   },
   {
     "id": "quote-243",
     "quote": "Michael: You taught me a lesson about not teaching lessons? George Sr.: That was my last lesson.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Sr."
   },
   {
     "id": "quote-244",
     "quote": "Michael: I need the guy with the fake arm, J. Walter Weatherman. George: Oh, he's dead. You killed him when you left the door open with the air conditioning on.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Sr."
   },
   {
     "id": "quote-246",
     "quote": "Michael: What is she doing in the beauty pageant? She running the lights or something? George Michael: She's in it. She's a contestant. It's sort of like an inner beauty pageant. Michael: Ah! There it is.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Michael"
   },
   {
     "id": "quote-248",
     "quote": "I mean, there is so much in life that I have not experienced. And now that I'm away from Mom, I feel like this is my chance to live. I want to dance. I want to make love to a woman. I want to get a checking account. I want to know what it feels like to get my face socked in.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-249",
     "quote": "The guy runs a prison, he can have any piece of ass he wants.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-250",
     "quote": "How could I say no to the woman who gave me chlamydia?",
-    "primarySpeaker": ""
+    "speakers": "Warden Gentiles"
   },
   {
     "id": "quote-252",
     "quote": "Oscar: Well, sure, the question is: Which way do I try to get it in her? Michael: I don't need any details. Oscar: Maybe I'll put it in her brownie. Michael: Hey!",
-    "primarySpeaker": "Oscar"
-  },
-  {
-    "id": "quote-253",
-    "quote": "Never once touched my per diem. I'd go to Craft Service, get some raw veggies, bacon, Cup-A-Soup... baby, I got a stew goin'.",
-    "primarySpeaker": ""
+    "speakers": "Oscar,Michael"
   },
   {
     "id": "quote-254",
     "quote": "Lucille: Modest and generous? Then why is he always waving giant $10 million checks over his head every time some...? Michael: Go ahead, Mom, finish the thought. Every time some children's hospital needs funding?",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-255",
     "quote": "Is there a little girl here all by herself? Daddy needs to get his rocks off.",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "Dr1KVUoVsAAdUWG.jpg"
   },
   {
     "id": "quote-258",
     "quote": "Well, yeah you've gotta lock that down.",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "DrH680MU8AEdO06.jpg"
   },
   {
     "id": "quote-259",
     "quote": "Michael: Where's the storage unit? Lucille: I don't remember. Michael: Try. Lucille: Something-dale. I don't know -- Brookfeather, Raintree. It's hot. It was very hot there. I've never been ... get a warrant.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-265",
     "quote": "Lucille (to Michael): \"If alcohol's the reason I'm here, I got news for you, bub. It's the only reason you're here too.\"",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-266",
     "quote": "Lucille: \"You might want to let that fire go out before you stick your face in it.\" Lindsay: \"That's funny, because I was going to say you might want to lean away from that fire since you're soaked in alcohol.\"",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Lindsay"
   },
   {
     "id": "quote-267",
     "quote": "Lindsay: Did you enjoy your meal, Mom? You drank it fast enough. Lucille: Not as much as you enjoyed yours. You want your belt to buckle, not your chair.",
-    "primarySpeaker": "Lindsay"
+    "speakers": "Lindsay,Lucille"
   },
   {
     "id": "quote-268",
     "quote": "That chubby little wrist of yours is testing the tensile strength of this bracelet as it is.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-270",
     "quote": "Do you know the Muffin Man? There's a reward in it if you do.",
-    "primarySpeaker": "",
+    "speakers": "John Beard",
     "imageUrl": "DqYo6iiXcAAxkYZ.jpg"
   },
   {
     "id": "quote-271",
     "quote": "Barry: Are all the guys in here... you know? George Sr: No not all of them. Barry: Yeah. It's never the ones you hope.",
-    "primarySpeaker": "Barry"
+    "speakers": "Barry Zuckerkorn,George Sr."
   },
   {
     "id": "quote-273",
     "quote": "The worst that could happen is that I could spill coffee all over this $3,000 suit. Come on.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-274",
     "quote": "GIVE MY SON THE JUICE",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-278",
     "quote": "Have you seen the new Poof?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-280",
-    "quote": "We don't allow you to have bees in here",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-282",
     "quote": "We forget but we never forgive.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-283",
-    "quote": "Balls",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-284",
     "quote": "Someone order 140 pounds of upper body strength?",
-    "primarySpeaker": ""
+    "speakers": "Uncle Jack"
   },
   {
     "id": "quote-286",
     "quote": "It's tired in here",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "FY2STp4X0AIov9s.jpg"
   },
   {
     "id": "quote-287",
     "quote": "I think that's one of Mom's little fibs, you know, like \"I'll sacrifice anything for my children.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-288",
     "quote": "Lucille: You tricked me. Michael: I deceived you, Mom. Trick makes it sound like we have a playful relationship. Lucille: Touche.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-289",
     "quote": "Would you like some FOAM in your coffee? It's called a cup-o-keno, and wait til you see what it costs!",
-    "primarySpeaker": "",
+    "speakers": "John Beard",
     "imageUrl": "FYrDyLoWAAEG7lv.jpg"
   },
   {
     "id": "quote-290",
     "quote": "Lucille: I don't have the milk of mother's kindness in me anymore. Michael: Yeah. That udder's been dry for a while though, hasn't it?",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-291",
     "quote": "Why would anybody take a limo? What is this, like $12? Why would anybody pay more than $12 to go to the airport? Next stop: LAX. Oh, come on. We're stopping again? How many more stops are we going to make? Honestly, I haven't even seen this part of Los Angeles. Is that snow?",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "DlvLeRSU0AAMxzW.jpg"
   },
   {
     "id": "quote-292",
     "quote": "How do you know Steve Holt? Are you in AA?",
-    "primarySpeaker": ""
+    "speakers": "Maeby"
   },
   {
     "id": "quote-293",
     "quote": "Has anyone in this family ever even seen a chicken? ",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-298",
     "quote": "You were just a turd out there, you know? You couldn't kick, and you couldn't run, you know? You were just a turd.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-299",
-    "quote": "It was her idea. She wanted to get a drink. I know it's crazy. I mean, I'm married. And the carbs!",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-301",
     "quote": "I just don't want you getting her all glittered up for Easter",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-302",
-    "quote": "Her",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-303",
     "quote": "\"I've got a nice hard cot with his name on it.\" \"You'd do that to your own brother?\" \"I said cot.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-304",
     "quote": "You boys know how to shovel coal?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-305",
     "quote": "So did you see the new Poof?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-306",
     "quote": "A sea of waiters and no one will take a drink order.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-309",
     "quote": "GOB: Let me ask you something. Is this a business decision, or is it personal? 'Cause if it's business I'll go away happily. But if it's personal, I'll go away... but I won't be happy. Michael: It's personal.",
-    "primarySpeaker": "GOB"
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-310",
     "quote": "If I look like a man who made love to his wife last night -- it's because I almost did.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-311",
     "quote": "Don't worry, these young beauties have been nowhere near the bananas.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "DhSvIU4UYAA-5Ac.jpg"
   },
   {
     "id": "quote-324",
     "quote": "You're making me dizzy",
-    "primarySpeaker": "",
+    "speakers": "Lucille Austero",
     "imageUrl": "Dfrw7J6UYAAtsV_.jpg"
-  },
-  {
-    "id": "quote-325",
-    "quote": "It's okay, she's alive. And soft. Soft and alive.",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-327",
     "quote": "Hey, George Michael, you want to put your head down there by his drainage shunt.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "FX-6RuCXkAI77nl.jpg"
   },
   {
     "id": "quote-328",
     "quote": "You know, Mom, I'm crazy about this aspirin. Can't believe we give it to children.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-329",
     "quote": "No one's called him Baby Buster since high school.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-331",
     "quote": "Well I hope you also carry a spare bowl of candy beans!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-336",
     "quote": "I hear I'm not the only one whose son has a nasty left hook.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-337",
-    "quote": "It's more of an inner beauty pageant.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-343",
     "quote": "Take it back! If I wanted something your thumb touched, I'd eat the inside of your ear.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-346",
-    "quote": "I'm a registered sex offender, but things are good.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-351",
     "quote": "You're blowing my mind, Frank.",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "DdRYEAgVwAAt_bj.jpg"
   },
   {
     "id": "quote-356",
     "quote": "I've got this Christian girlfriend now and she's trying to get me to be a better man and reconnect with my son and I'm trying to get her to renounce God and f^ck me and I just want to prove to her that I'm worth it.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-358",
     "quote": "My system's not used to curly fries",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-361",
     "quote": "She tried pesto for the first time. Can you believe that? 89 years old and she never tried pesto.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-362",
     "quote": "Do you want FOAM in your coffee?",
-    "primarySpeaker": "",
+    "speakers": "John Beard",
     "imageUrl": "Fvjh0ZLXsAEV4_Y.jpg"
-  },
-  {
-    "id": "quote-364",
-    "quote": "I didn't take \"wasn't optimistic it could be done\" for an answer.",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-366",
     "quote": "He said some wonderful things.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-367",
     "quote": "I will pack your sweet pink mouth with so much ice cream you'll be the envy of every Jerry and Jane on the block!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-368",
     "quote": "Okay okay so sh-should should should sh-should sh-sh should should shoulda shoulda sh-sh sshhould should sh-sh-sh should should should should shoulda shoulda should should sh-shoulda sh-sh-should shoulda should sh-should should sh-sh-sh-should should should",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-371",
     "quote": "It's a jetpack... what could go wrong?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-372",
     "quote": "Michael: You want to deal with what I deal with? A sister who takes your money and throws it away. A mother who you can't trust. A company whose founder may be on trial for treason. Is that what you want? Gob: What kind of vacation time does it offer?",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-373",
     "quote": "I understand more than you'll never know.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-374",
     "quote": "I don't know what I expected.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-375",
     "quote": "It's a bird! It walked on my pillow!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-376",
     "quote": "They do allow some nervous crying, but you can tell they don't like it.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-377",
     "quote": "But where did the lighter fluid come from?",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "DYI0J3KV4AE119k.jpg"
   },
   {
     "id": "quote-380",
     "quote": "If mother sees this, she will blow a cow.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-384",
     "quote": "Great, now I'm gonna smell to high heaven like a tuna melt!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-386",
     "quote": "The soup of the day is Bread",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-387",
     "quote": "Look, I guess we should decide on who's going to speak for the family. I would, but I have Laker tickets.",
-    "primarySpeaker": "",
+    "speakers": "Barry Zuckerkorn",
     "imageUrl": "DWWc4ejVAAAaG9S.jpg"
   },
   {
     "id": "quote-388",
     "quote": "YOU'VE GOT THE WRONG TWIN.",
-    "primarySpeaker": ""
+    "speakers": "Oscar"
   },
   {
     "id": "quote-390",
     "quote": "GOB: Spring break. It's my favorite holiday. Nothing gets me more excited. Michael: I can see that. You might want to button that shirt up. GOB: No, I'm good.",
-    "primarySpeaker": "GOB"
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-391",
     "quote": "My Army training tells me that this is going to be a hot mission.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-392",
-    "quote": "Maybe I'll put it in her brownie.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-393",
     "quote": "Oh, she thinks I'm too critical. That's another fault of hers.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-394",
     "quote": "Gob: Hey, can you do me a favor? A young neighborhood tough by the name of Steve Holt will be dropping by, and... Michael: Your son? Gob: According to him. Michael: And a DNA test. Gob: I heard the jury's still out on science.",
-    "primarySpeaker": "Gob"
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-395",
     "quote": "They're pills that create a sort of temporary forgettingness. So if somebody finds out how you do a trick, you just give 'em one of these, and they forget the whole thing. It's a mainstay of the magician's toolkit, like how clowns always have a rag soaked in ether.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-396",
-    "quote": "I love all my children equally.",
-    "primarySpeaker": "",
-    "imageUrl": "DUUF-v_V4AENU2C.jpg"
+    "speakers": "GOB"
   },
   {
     "id": "quote-398",
     "quote": "Aren't you the sweetest thing, spending some time with what's left of your uncle.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-400",
     "quote": "Watch out for hop ons.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-401",
     "quote": "Yes, that's one of the things that attracted me to you--your sense of right and wrong. I also like your hair and your face and your breasts.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-402",
     "quote": "Lucille 2: You're embarrassed to be with me! GOB: No, I'm embarrassed to be SEEN with you.",
-    "primarySpeaker": ""
+    "speakers": "Lucille Austero,GOB"
   },
   {
     "id": "quote-406",
     "quote": "Michael: Look, I don't want your forgiveness, Dad. I want the guy with the one arm and the fake blood. J. Walter Weatherman. How do I get a hold of him? George, Sr.: Well, he's, uh, dead. You killed him when you left the door open with the air conditioner on.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Sr."
   },
   {
     "id": "quote-408",
     "quote": "Narrator: He was far from the best.",
-    "primarySpeaker": "Narrator"
+    "speakers": "Narrator"
   },
   {
     "id": "quote-409",
     "quote": "It was for me. I was going to smoke the marijuana like a cigarette.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-413",
     "quote": "Tobias: I'm afraid I prematurely shot my wad on what was supposed to be a dry run if you will, so I'm afraid I have something of a mess on my hands. Michael: There's so many poorly chosen words in that sentence.",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias,Michael"
   },
   {
     "id": "quote-416",
     "quote": "Lucille: Oh, please. I've been drinking since before you were born. So if alcohol's the reason I'm here, I got news for you, bub, it's the only reason you're here, too. Michael: Hey, you're mean sober, too.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-417",
     "quote": "Look at banner, Michael!",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "DQfkflcUQAEnbVO.jpg"
   },
   {
     "id": "quote-418",
     "quote": "If I still had money, I'd buy a Klimpy's just to burn it to the ground.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-419",
     "quote": "A 'relative' masterpiece...",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "DP2Ab7zUIAAnx97.jpg"
   },
   {
     "id": "quote-421",
     "quote": "Hey, check out who's on that Hog in the rear-view mirror.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-422",
     "quote": "Oh, by the way, Doctor said no kissing her on the face for one week. I was like, \"Make it two weeks! See if I care!\"",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-430",
     "quote": "That's what you do when life hands you a chance to be with someone special. You just grab that brownish area by its points and you don't let go no matter what your mom says.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-432",
     "quote": "Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-433",
     "quote": "Michael: GOB, you've found a woman who believes in you. You should make a commitment to her because life is short. Listen to me. I would give anything to be able to have that again, you know? A family. Nothing else matters. Lucille: Michael? Michael: It's Mom. Hide.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-434",
     "quote": "Tobias: Look, this has got to stop. I mean, flattered? Yes. Interested? Not tonight. Michael: I think I see what's happening. You're meeting girl Michael at the bar? Tobias: It was her idea. She wanted to get a drink. I know it's crazy. I mean, I'm married. And the carbs!",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias,Michael"
   },
   {
     "id": "quote-436",
     "quote": "I can picture the look on Lindsay's face right now. \"Where's Tobias?\". Oh, he's just on a weekend getaway with Michael Bluth and they're dipping each other in... hey, you didn't get any body chocolate.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-437",
     "quote": "Michael: We have a private eye, huh? Lucille: Oh, I hired him a hundred years ago to find out if your father was cheating on me. He never did find anything. Michael: Well, he can't be very good then.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-438",
     "quote": "I may have committed some light treason.",
-    "primarySpeaker": "",
+    "speakers": "George Sr.",
     "imageUrl": "FUC8hE2XoAErMwg.jpg"
   },
   {
     "id": "quote-439",
     "quote": "I don't see you crying, robot.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "FTzoU4LWYAAgb1X.jpg"
   },
   {
     "id": "quote-440",
     "quote": "I need a fake passport, preferably to France... I like the way they think.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-442",
     "quote": "Annyong: Ok. Mother want someone to go to my soccer game with. She don't want other soccer moms think that she is single mother. She old school. Michael: I liked it better when he just said \"Annyong\".",
-    "primarySpeaker": "Annyong"
+    "speakers": "Annyong,Michael"
   },
   {
     "id": "quote-443",
     "quote": "The speech was disturbing, the food was inedible, and the gift bags pretty frightening. And when GOB found out that he wasnt going to get any tips, the service got worse. Oh and that old racist woman choked on Buster's thumb. All in all it was one of the Bluth's better parties.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-444",
     "quote": "Let me tell you a little story about acting. I was doing this Showtime movie, Hot Ice with Anne Archer, never once touched my per diem. I'd go to Craft Service, get some raw veggies, bacon, Cup-A-Soup... baby, I got a stew going.",
-    "primarySpeaker": ""
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-447",
     "quote": "Barry: So, basically, you're about 2,000 shares short of being the majority stockholders. Now, unfortunately, it's a private stock, so you cannot just buy up the shares unless someone is willing to sell. Michael: Are you sure? Barry: That's what they said on \"Ask Jeeves.\"",
-    "primarySpeaker": "Barry",
+    "speakers": "Barry Zuckerkorn,Michael",
     "imageUrl": "DOImV1rVQAAyLA2.jpg"
   },
   {
     "id": "quote-448",
     "quote": "Plate or platter?",
-    "primarySpeaker": ""
+    "speakers": "Waitress"
   },
   {
     "id": "quote-450",
     "quote": "Wow, this is the best free scrapbooking class I've ever taken!",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "DNbmMp0VoAAn2lN.jpg"
   },
   {
     "id": "quote-452",
     "quote": "This is why people hate hospitals.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-455",
     "quote": "Of course, the \"Bob Loblaw Law Blog.\" Wow. You, sir, are a mouthful!",
-    "primarySpeaker": ""
+    "speakers": "Tobias",
+    "imageUrl": "BjoAnQJCEAAzrZ5.jpg"
   },
   {
     "id": "quote-459",
     "quote": "Better than part I have now - guy who orders strike on Pearl Harbor.",
-    "primarySpeaker": ""
+    "speakers": "Annyong"
   },
   {
     "id": "quote-460",
     "quote": "Please tell your friends about this show.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-462",
     "quote": "So Ann, the question is, do you want a man or a boy? I know how I'd answer.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-463",
     "quote": "\"I'm not afraid of sex.\" \"Well, OK, have sex with this girl. Right now. Get in there, have some sex with her.\"",
-    "primarySpeaker": ""
+    "speakers": "George Michael,Tobias"
   },
   {
     "id": "quote-464",
     "quote": "Guy's a pro.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-465",
     "quote": "Ah, there's the woman I'm sexually attracted to!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-466",
     "quote": "You're gonna get some hop-ons.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-468",
     "quote": "The seal is for marksmanship and the gorilla is for sand racing.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-469",
-    "quote": "No borders, no limits... go ahead, look at the eclipse... you know best?",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-470",
     "quote": "\"Do you have any idea how often you say the word afraid?\" \"Well, I know I used it in the Jacuzzi.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,Tobias"
   },
   {
     "id": "quote-471",
     "quote": "You don't want a hungry dove down your pants.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-473",
     "quote": "We lost him",
-    "primarySpeaker": "",
+    "speakers": "Literal Doctor",
     "imageUrl": "DGErwSeVoAQnRSD.jpg"
   },
   {
     "id": "quote-474",
     "quote": "I'm foolish and I'm funny and I'm needy. Am I needy? Are you sure I'm not needy? 'Cause I feel needy sometimes.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-478",
     "quote": "Who'd like a banger in the mouth?",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-479",
     "quote": "I've been in the film business for a while, but I just can't seem to get one in the can.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-480",
     "quote": "I was once voted the worst audience participant Cirque Du Soleil ever had.",
-    "primarySpeaker": ""
+    "speakers": "Wayne Jarvis"
   },
   {
     "id": "quote-487",
     "quote": "You get yourself a tape recorder...",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-490",
-    "quote": "I thought you were going to say sandwiches.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-491",
     "quote": "Now... who wants to take their top off?",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-492",
     "quote": "Can you believe that the only reason the club is going under is because it's in a terrifying neighborhood?",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-493",
     "quote": "Make love in your own hand, MOTHER",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-495",
     "quote": "Nellie has blown them all away.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-496",
     "quote": "It just seems like there's still light coming in from under the door.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-497",
     "quote": "I think George Michael is hiding Ann in the attic.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-500",
     "quote": "Everyone's laughing, and riding, and cornholing except Buster.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-501",
     "quote": "It's one banana, Michael...",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-502",
     "quote": "Oh, yeah, the $4,000 suit is holding the elevator for a guy who doesn't make that in 3 months. Come on!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-503",
     "quote": "What about the teases? We. Don't. Let. Them. In.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "C8qQo8JVYAkKXcT.jpg"
   },
   {
     "id": "quote-504",
     "quote": "A frozen banana that WON'T make you sick and kill you.",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "C8gd9GMUMAAq_pv.jpg"
   },
   {
     "id": "quote-507",
     "quote": "GOB: Heart attack never stopped old Big Bear. Buster: I didn't even know we were calling him Big Bear. GOB: We never had a chance to.",
-    "primarySpeaker": "GOB"
-  },
-  {
-    "id": "quote-515",
-    "quote": "It's cold out here",
-    "primarySpeaker": "",
-    "imageUrl": "C5zqW8MWYAAXj8l.jpg"
+    "speakers": "GOB,Buster"
   },
   {
     "id": "quote-516",
     "quote": "\"Look what the homosexuals have done to me!\" \"You can't just comb that out and reset it?\"",
-    "primarySpeaker": ""
+    "speakers": "Lucille,Michael",
+    "imageUrl": "FfJsqvNX0AYapBD.jpg"
   },
   {
     "id": "quote-517",
     "quote": "\"And you guys weren't even speaking towards the end.\" \"A lot of that was the coma.\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Michael"
   },
   {
     "id": "quote-518",
     "quote": "You buy yourself a tape recorder, you just record a whole day. I think you're going to be surprised at some of your phrasing.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-523",
     "quote": "You just made a fool out of yourself in front of T-Bone.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-524",
     "quote": "\"I run a pretty tight ship around here.\" \"With a pool table...\"",
-    "primarySpeaker": "",
+    "speakers": "GOB,Michael",
     "imageUrl": "C1hLc-5UAAA-TKr.jpg"
   },
   {
     "id": "quote-525",
     "quote": "It looks like you've been looking for dragons... in the future.",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "C1TkGQnUoAAQEfm.jpg"
   },
   {
     "id": "quote-526",
     "quote": "GOB: Hey, Dad. Look at you. You're a year older...and a year closer to death. Buster: Oh yeah, I guess that's kind of funny.",
-    "primarySpeaker": "GOB"
+    "speakers": "GOB,Buster"
   },
   {
     "id": "quote-527",
     "quote": "She keeps saying that God is going to show me a sign. The... something of my ways. Wisdom?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-531",
     "quote": "It was the first taste of alcohol Buster had since he was nursing.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-538",
     "quote": "We're going to be here every day. I don't care if it takes from now till the end of Shrimpfest.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-540",
     "quote": "Don't call it that.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-541",
     "quote": "It walked on my pillow!",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-546",
-    "quote": " And the thought of rubbin' you is getting so exciting ",
-    "primarySpeaker": "",
-    "imageUrl": "CxADc4cVIAA8e-y.jpg"
+    "speakers": "Buster"
   },
   {
     "id": "quote-547",
     "quote": "Pop Pop gets a treat?",
-    "primarySpeaker": "",
+    "speakers": "George Michael",
     "imageUrl": "Cwyoyl6UcAIFvRB.jpg"
   },
   {
     "id": "quote-550",
     "quote": "Why would a banana grab another banana?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-553",
-    "quote": "Apparently, mood-altering medication leads to street drugs. That's what this very handsome, young doctor said on The Today Show.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-556",
     "quote": "Oh Reggie, fighting for your country... you're such a p*ssy.",
-    "primarySpeaker": "",
+    "speakers": "Adelaide",
     "imageUrl": "CuS00anVMAAyWMu.jpg"
   },
   {
     "id": "quote-559",
     "quote": "Stack the chafing dishes outside by the mailbox. I'm on the job.",
-    "primarySpeaker": "",
+    "speakers": "Ice",
     "imageUrl": "CtU47VoUsAAmemk.jpg"
   },
   {
     "id": "quote-560",
     "quote": "It's that Glisten.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-563",
     "quote": "Sometimes the guys are tapped out. But check your lease, man. You're living in **** City.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-565",
     "quote": "Still plenty of meat on that bone",
-    "primarySpeaker": "",
+    "speakers": "Carl Weathers",
     "imageUrl": "CrygtOoWIAEhOHR.jpg"
   },
   {
     "id": "quote-567",
     "quote": "Great. So now we don't have a car or a jet? Why don't we just take an ad out in I'm Poor Magazine?",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-568",
     "quote": "I thought the two of us could talk man-on-man.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-569",
     "quote": "There's always money in the banana stand",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-570",
     "quote": "I blue myself",
-    "primarySpeaker": "",
+    "speakers": "Tobias",
     "imageUrl": "FNmt-CKXIAsUeEj.jpg"
   },
   {
     "id": "quote-572",
     "quote": "No borders, no limits, \"Go ahead, touch the Cornballer, you know best.\" ",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-573",
-    "quote": "Sausage in the mouth",
-    "primarySpeaker": "",
-    "imageUrl": "Cq5m4zqVYAARTGY.jpg"
-  },
-  {
-    "id": "quote-575",
-    "quote": "I don't want to blame it all on 9/11, but it certainly didn't help.",
-    "primarySpeaker": "",
-    "imageUrl": "Cpx9_F4VYAAfx3p.jpg"
+    "speakers": "Michael"
   },
   {
     "id": "quote-576",
     "quote": "The only thing more terrifying than the escaped lunatic's hook was his twisted call...",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-577",
     "quote": "I know she's a brownish area! With points! And I love her!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-578",
     "quote": "Mom... after all these years, God's not going to take a call from you.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-579",
-    "quote": "MOTHER OF GOD",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-581",
     "quote": "She's not 'that Mexican', Mom. She's my Mexican. And she's Colombian or something.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-582",
     "quote": "\"Get rid of the Seaward.\" \"I'll leave when I'm good and ready.\"",
-    "primarySpeaker": "",
+    "speakers": "Michael,Lucille",
     "imageUrl": "CoPeFx5VUAAr8HY.jpg"
-  },
-  {
-    "id": "quote-584",
-    "quote": "I know you're the big marriage expert...",
-    "primarySpeaker": "",
-    "imageUrl": "Cnm_HjjUMAAvogl.jpg"
   },
   {
     "id": "quote-585",
     "quote": "\"No, she's in it. She's a contestant. It's sorta like an inner beauty pageant.\" \"Ah, there it is.\"",
-    "primarySpeaker": ""
+    "speakers": "George Michael,Michael"
   },
   {
     "id": "quote-589",
     "quote": "Oh, most definitely.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-590",
-    "quote": "You seem more villainous than usual, Mom. Are you sober?",
-    "primarySpeaker": ""
+    "speakers": "T-Bone"
   },
   {
     "id": "quote-592",
     "quote": "F A M I L Y L O V E M I C H A E L",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-593",
     "quote": "Anything for his father's approval.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-598",
     "quote": "\"Hey, it was one night of wild passion!\" \"And yet you didn't notice her body?\" \"I like to look in the mirror.\"",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-600",
-    "quote": "There's been a lot of lying in this family.",
-    "primarySpeaker": ""
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-602",
     "quote": "Whenever she'd change clothes, she'd make me wait on the balcony until zip-up, and yet anything goes at bath time.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-605",
     "quote": "White Power Bill: [Stabbing Gob] White power! Gob: I'm white!",
-    "primarySpeaker": "White Power Bill"
+    "speakers": "White Power Bill,GOB"
   },
   {
     "id": "quote-608",
     "quote": "I'm a complete failure. I can't even fake the death of a stripper.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-609",
     "quote": "Old bear loves the honey",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-610",
     "quote": "Michael: Are you serious? Wayne Jarvis: Almost always. I was once called the worst audience participant Cirque du Soleil ever had. Michael: This is a big accusation. Wayne: Well, Michael, I did not find their buffoonery amusing.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Wayne Jarvis"
   },
   {
     "id": "quote-612",
     "quote": "But I'm the oldest. The matriarch if you will.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-613",
     "quote": "No, no. No. It was her drink, and even if it wasn't...",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-614",
     "quote": "Well, no one's going to top that.",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "Ch-5N6zVEAEZ77s.jpg"
   },
   {
     "id": "quote-615",
     "quote": "\"Can't a guy call his mother pretty without it seeming strange?\" \"Amen. And how about that little piece of tail on her? Cute!\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,Buster"
   },
   {
     "id": "quote-616",
     "quote": "Oh, like when they say \"poofter\" to mean \"tourist\".",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-622",
     "quote": "I'm gonna go get sexy.",
-    "primarySpeaker": ""
+    "speakers": "Maeby"
   },
   {
     "id": "quote-626",
     "quote": " Big yellow joint, big yellow joint, I'll meet you down at the big yellow joint. ",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-627",
     "quote": "Michael: What'd he say? George Michael: Well, if I clean it up, it's not really a sentence.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Michael"
   },
   {
     "id": "quote-628",
     "quote": "GOB's not on board",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-629",
     "quote": "Michael: You seem more villainous than usual, Mom. Are you sober? Lucille: Michael, it's eight a.m. Michael: So, it's not that.",
-    "primarySpeaker": "Michael"
-  },
-  {
-    "id": "quote-630",
-    "quote": "There's a new daddy in town.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-631",
-    "quote": "George: \"He,\" \"she\"--what's the difference? Tobias: Oh, hear, hear. In the dark, it all looks the same.",
-    "primarySpeaker": "George"
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-636",
     "quote": "One of the guys told me to take my head out of my bottom and get back to work. My bottom!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-638",
     "quote": "My bees are dropping like flies and I need them to fly like bees.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-641",
-    "quote": "You ever even been on a plane you piece of sh!*?",
-    "primarySpeaker": ""
+    "quote": "You ever even been on a plane you piece of shit?",
+    "speakers": "Michael"
   },
   {
     "id": "quote-642",
     "quote": "So glad we pushed through that.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-643",
     "quote": "Talk you off what, Pop Pop?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-644",
-    "quote": "Friday juice box",
-    "primarySpeaker": "",
-    "imageUrl": "CboHd3dVAAA8-x5.jpg"
+    "speakers": "George Michael"
   },
   {
     "id": "quote-647",
     "quote": "She calls in a \"mayon-egg\"",
-    "primarySpeaker": "",
+    "speakers": "Lindsay",
     "imageUrl": "CbI3hUxUUAA_lPi.jpg"
-  },
-  {
-    "id": "quote-650",
-    "quote": "It's like we finish each other's --",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-658",
-    "quote": "Tell me the truth, okay? 'Cause there's been a lot of lying in this family.",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-660",
     "quote": "Michael, I'm your older brother. I'll never be proud of you.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-662",
-    "quote": "And with deep, deep concentration and, and great focus, he's often able to achieve an erec--",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-664",
     "quote": "Steve Holt: I've made a huge mistake. GOB: I know the feeling. I had you.",
-    "primarySpeaker": "Steve Holt"
+    "speakers": "Steve Holt,GOB"
   },
   {
     "id": "quote-669",
     "quote": "Got yourself a stew goin'.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-671",
-    "quote": "Happy Thanksgiving eve from the Funke family.",
-    "primarySpeaker": "",
-    "imageUrl": "CUs5plnUYAAkLzP.jpg"
+    "speakers": "Carl Weathers"
   },
   {
     "id": "quote-673",
     "quote": "Michael: \"We got a basket full of father-son fun here.\" George Michael: \"What's Kama Sutra oil?\"",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Michael"
   },
   {
     "id": "quote-675",
     "quote": "Sometimes love should be terrifying.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-679",
     "quote": "I was mistakenly voted out of a 4 person housing situation in a pack first, no talking after scenario.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-680",
     "quote": "GOB: It's okay, she's alive. And soft. Soft and alive. Lucille: All right, let's not add that to the charges.",
-    "primarySpeaker": "GOB"
+    "speakers": "GOB,Lucille"
   },
   {
     "id": "quote-681",
     "quote": "It's probably because a seal bit off his hand. The army has taken to giving medals for being food.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-682",
-    "quote": "We got a basket full of father-son fun here.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-683",
     "quote": "Huzzah!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-684",
     "quote": "\"Mr. Zuckerkorn, you've been warned about touching.\" \"You said spanking.\"",
-    "primarySpeaker": ""
+    "speakers": "Judge Lionel Ping,Barry Zuckerkorn"
   },
   {
     "id": "quote-686",
     "quote": "I need a tea to give my dingle less tingle.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-688",
     "quote": "Let me give that oatmeal some brown sugar.",
-    "primarySpeaker": "",
+    "speakers": "GOB",
     "imageUrl": "COkkpBcUwAEFgMT.jpg"
   },
   {
     "id": "quote-692",
     "quote": "I should be in this Poof.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-702",
     "quote": "My brother wasn't optimistic it could be done, but I didn't take \"wasn't optimistic it could be done\" for an answer.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-703",
     "quote": "Wine only turns into alcohol if you let it sit.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-706",
     "quote": "I guess she wanted me to have something new. Sweet old thing. Only two of those words describe Mom, so I know you're lying to me.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Michael"
   },
   {
     "id": "quote-708",
     "quote": "GOB [to Buster regarding hook]: We'll have to find something to do so that people can look at you without wanting to kill themselves.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-709",
     "quote": "George: You know what's risky? Lettin your son go on that church thing Michael: Her name's Ann, Dad, and he's not \"going\" on her, OK?",
-    "primarySpeaker": "George"
+    "speakers": "George Sr.,Michael"
   },
   {
     "id": "quote-710",
     "quote": "\"Could it be love?\" \"I know what an erection feels like, Michael. No, it's the opposite. It's...it's like my heart is getting hard.\"",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-714",
-    "quote": "\"Perhaps you remember Neuterfest?\" \"I'll never forget your wedding.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-715",
     "quote": "Yes, she happens to be more experienced than a normal girl, but sometimes love should be... terrifying.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-717",
     "quote": "A MILLION ****ING DIAMONDS",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-718",
     "quote": "Don't call my escorts whores.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-719",
     "quote": "He's going to be all right.",
-    "primarySpeaker": "",
+    "speakers": "Literal Doctor",
     "imageUrl": "CGyZMLTVIAAWvOi.jpg"
   },
   {
     "id": "quote-720",
     "quote": "What's Spanish for \"I know you speak English\"?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-723",
     "quote": "Watch out for live-ins. You're gonna get some live-ins.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-724",
-    "quote": "Why are you squeezing me with your body?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-725",
     "quote": "I'm going to see if I can get a Wrench to strip my nuts.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-730",
     "quote": "You can control your bladder when you're dead! \\o/!",
-    "primarySpeaker": ""
+    "speakers": "Steve Holt"
   },
   {
     "id": "quote-731",
     "quote": "Bob Loblaw Lobs Law Bomb",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-732",
     "quote": "\"That's a woman's wig.\" \"I was told it was a bob.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB,Tobias"
   },
   {
     "id": "quote-733",
     "quote": "Buster: Can I open a can of soup for you? George Michael: Can it open a can? Buster: Can what open a can? Oh, God. George Michael: Oh, God.",
-    "primarySpeaker": "Buster"
-  },
-  {
-    "id": "quote-734",
-    "quote": "It's one day of weed, Michael... what could it cost, $50?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-735",
-    "quote": "It's up to me now",
-    "primarySpeaker": "",
-    "imageUrl": "FuRqy3YWYAAXkmn.jpg"
-  },
-  {
-    "id": "quote-740",
-    "quote": "These might actually be $10 each since it's Las Vegas.",
-    "primarySpeaker": "",
-    "imageUrl": "B68mWsuCEAA-x7b.jpg"
+    "speakers": "Buster,George Michael"
   },
   {
     "id": "quote-742",
     "quote": "Hey, look at that. You're mean sober, too.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-749",
     "quote": "Buster: I'm a scholar. I enjoy scholarly pursuits. Lucille: Suddenly, playing with yourself is a scholarly pursuit.",
-    "primarySpeaker": "Buster"
-  },
-  {
-    "id": "quote-751",
-    "quote": "You just grab that brownish area by its points, and you don't let go no matter what your mom says.",
-    "primarySpeaker": ""
+    "speakers": "Buster,Lucille"
   },
   {
     "id": "quote-753",
     "quote": "You are playing adults with fully formed libidos, not two grown men playing grab-ass in the shower.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-754",
-    "quote": "We finish each other's sandwiches.",
-    "primarySpeaker": "",
-    "imageUrl": "B18rU7vCUAA7ORT.jpg"
+    "speakers": "Tobias"
   },
   {
     "id": "quote-755",
     "quote": "Why don't you marry an ice cream sandwich!",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-756",
     "quote": "Illusion, Michael. A trick is something a whore does for money.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-757",
     "quote": "There was some talk of ice cream, but not exactly on my terms.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-758",
     "quote": "Well, Buster's in what we call a light to no coma. In layman's term, it might be considered a very heavy nap.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-759",
-    "quote": "I figured out a way to make money while I'm working!",
-    "primarySpeaker": ""
+    "speakers": "Dr. Farmer"
   },
   {
     "id": "quote-762",
     "quote": "Excuse me. I was just looking for a marker. A *Magic* Marker.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-763",
     "quote": "Great news. I got my hands on some money. I can't say how or when... or where my wedding ring is...",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-770",
     "quote": "Her lawyers are claiming the seal is worth $250,000. And that's not even including Buster's Swatch.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-771",
     "quote": "Portugal? Well, gonna live it up in ol' South America, aren't we, Michael?",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-773",
     "quote": "A Colombian cartel that won't kidnap and kill you.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-779",
     "quote": "They're pills that create a sort of temporary forgettingness... like how clowns always have a rag soaked in ether.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-780",
     "quote": "Me quick want slow!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-781",
     "quote": "I'm sure, wherever your father is, she loves you very much.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-782",
-    "quote": "He's dead. You killed him when you left the door open with the air conditioning on.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-786",
     "quote": "There's the Jewish notion of heaven, and that it can be obtained here on earth, and there is your belief in the cleansing power of the pipe.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-787",
     "quote": "What a fun, sexy time for you.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-788",
     "quote": "Those are balls.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-790",
     "quote": "\"You've got three days.\" \"Hey, if I can't find a horny immigrant by then, I don't deserve to stay here.\"",
-    "primarySpeaker": ""
+    "speakers": "Lucille,GOB"
   },
   {
     "id": "quote-791",
     "quote": "My gut is telling me no. But my gut is also very hungry.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-792",
     "quote": "First I blow him, then I poke him.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-793",
     "quote": "It's sort of like going from prime rib to... I don't know... weird brother of prime rib.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-794",
     "quote": "I'm surrounded by squalor and death and I still can't be happy.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-796",
     "quote": "I just haven't had sex in a month. You know, you've been here two months. It's hard to gauge time.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-798",
-    "quote": "Steve Holt is a bastard. He doesn't even know who his real father is. What else don't we know about Steve Holt?",
-    "primarySpeaker": ""
+    "speakers": "George Sr.,Michael"
   },
   {
     "id": "quote-801",
     "quote": "We need a name. Maybe Operation Hot Mother. No, let's try to top that. They never did, and later, Operation Hot Mother was underway.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-802",
     "quote": "Either I zip down or he zips up and that is a mighty long zipper on Mother's Cher jumpsuit. You have to get on your knees to start it.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-803",
     "quote": "White Power Bill: White power! GOB: I'm ... white!",
-    "primarySpeaker": "White Power Bill"
+    "speakers": "White Power Bill,GOB"
   },
   {
     "id": "quote-804",
     "quote": "Buster: How about a turtle? I love those leathery little snappy faces. Michael: You certainly have a type.",
-    "primarySpeaker": "Buster"
+    "speakers": "Buster,Michael"
   },
   {
     "id": "quote-808",
     "quote": "I'm looking for something to give my dingle less tingle. Me quick want slow! Wait, that's Indian...",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-813",
     "quote": "Let's not spin in the comfy chair.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-815",
     "quote": "You want to have some guy reach around you in the middle of the night, start messing with your junk?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-818",
-    "quote": "\"I did refer to it as 'our nausea' but that was when we were going at it pretty hot and heavy.\" \"Well, now it's my nausea.\"",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-819",
     "quote": "When I miss your lips, I'll put a fig in my mouth and think of you.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "BlZs2z5CMAA_RwO.jpg"
   },
   {
     "id": "quote-820",
     "quote": "Somewhere, over the rainbow, there's another rainbow",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-821",
     "quote": "This has been pleasant and professional. Good luck to you in the coming business year.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-823",
-    "quote": "Of course. The Bob Loblaw Law Blog.",
-    "primarySpeaker": "",
-    "imageUrl": "BjoAnQJCEAAzrZ5.jpg"
+    "speakers": "Wayne Jarvis"
   },
   {
     "id": "quote-835",
     "quote": "I don't just lie there, if that's what you're thinking.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-837",
     "quote": "Michael: Do you know how they punish treason? George: First time. Michael: I've never heard of a second. George: Oh, I've got the worst [bleep]ing attorneys.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,George Sr."
   },
   {
     "id": "quote-838",
     "quote": "Would a coward have these?",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "FGMiLImXEAMryPI.jpg"
   },
   {
     "id": "quote-839",
     "quote": "A lady of the evening. Working girl. She turns illusions for money.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-843",
     "quote": "It's called taking advantage. It's what gets you ahead in life.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-848",
     "quote": "I know, I just call her Annabelle cause she's shaped like a... she's the belle of the ball!",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-850",
     "quote": "That coat costs more than your house!",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-852",
     "quote": "I'm calling it Tricks... let me finish... Around the Office. I figured out a way to make money while I'm working.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-854",
     "quote": "What's this, a stuffy office meeting? Well. Maybe it's time for a little... office magic?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-855",
-    "quote": "Things are good. Nothing much. I'm a registered sex offender, but things are good.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-861",
     "quote": "Say goodbye to THESE. ()(.)",
-    "primarySpeaker": ""
+    "speakers": "Kitty"
   },
   {
     "id": "quote-863",
     "quote": "Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech! Speech!",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-864",
     "quote": "You're George Michael! Who's cooler than you?",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "BHuoBW_CYAALaTv.jpg"
   },
   {
     "id": "quote-865",
     "quote": "Yeah, just a Sea Breeze, please. Make it a strong one. Put some stank on it.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-868",
     "quote": "\"Why should we believe in you?\" \"For the same reason you should believe a $100 bill is no more than a hundred pennies.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-872",
     "quote": "I'm out of this family. Seriously.",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "FFEbs6PXoAUbIbL.jpg"
   },
   {
     "id": "quote-873",
     "quote": "Michael: It's like we finish each other's... Lindsay: Sandwiches? Michael: Sentences. Why would I say... Lindsay: Sandwiches?",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Lindsay",
+    "imageUrl": "B18rU7vCUAA7ORT.jpg"
   },
   {
     "id": "quote-876",
     "quote": "And the new lovers discover each other. The beautiful female body, the horrible male.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-877",
     "quote": "Cousins can bunk together. That's why they call it \"bunking cousins.\"",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-878",
     "quote": "Let the great experiment begin!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-880",
     "quote": "Why would anybody take a limo? What is this, like $12? Why would anybody pay more than $12 to go to the airport? . . . Is that snow?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-881",
     "quote": "George Michael: My girlfriend Ann wants to have a Christian music bonfire here. Michael: That sounds like some mild fun.",
-    "primarySpeaker": "George Michael"
+    "speakers": "George Michael,Michael"
   },
   {
     "id": "quote-882",
     "quote": "\"Hello, anustart.\" And she didn't even see the license plates.",
-    "primarySpeaker": ""
+    "speakers": "Lucille,Narrator"
   },
   {
     "id": "quote-883",
     "quote": "You were looking pretty shredded up there on that cross.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-884",
     "quote": "Now... you've got some mice to scoop out of the sea.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-885",
     "quote": "It's so easy to forget... it's so easy to forget... Stupid, forgetful Michael.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-886",
     "quote": "Faith is a fact.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-887",
     "quote": "There's not a lot of logic to it. It's kind of like on a boat with women and children first. I mean, why should they...",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-888",
     "quote": "This heat just makes me want guac.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-889",
     "quote": "\"Ann just called. They had a pre-dawn Mass. Then they were going to Mass, so...\" \"Ann's got a great deal of Mass.\"",
-    "primarySpeaker": ""
+    "speakers": "George Michael,Michael"
   },
   {
     "id": "quote-890",
     "quote": "Lucille 2: Buster, do you remember when we were kissing last night? Buster: It was a wild, wild ride.",
-    "primarySpeaker": ""
+    "speakers": "Lucille Austero,Buster"
   },
   {
     "id": "quote-892",
     "quote": "If they don't get paid soon, they'll get really mad, and they're going to have a major Mongolian beef with us.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-895",
     "quote": "Rev. Veal: My wife and I were about the same age when we got engaged. Michael: Well, yeah, you've gotta lock that down.",
-    "primarySpeaker": ""
+    "speakers": "Reverend Veal,Michael"
   },
   {
     "id": "quote-902",
     "quote": "See, light drizzle will annoy you, but thunder will eff you up!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-903",
     "quote": "I aim to not please.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-904",
     "quote": "A man, a woman, a bedroom... let's solve for x.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-909",
     "quote": "So now you looooove the Ten Commandments.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-910",
     "quote": "OK ok ok so should should should should should should should she she she should should",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-919",
     "quote": "Marta: Te Quiero. Gob: English, please. Marta: I love you. Gob: Great, now I'm late.",
-    "primarySpeaker": "Marta"
+    "speakers": "Marta,GOB"
   },
   {
     "id": "quote-925",
     "quote": "If you were hot, mother, we would win.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "BJtg4_WCcAALa2l.jpg"
   },
   {
     "id": "quote-926",
     "quote": "GOB: Remember that seal of hers that I released into the ocean? Bit off Buster's hand? Michael: Vaguely.",
-    "primarySpeaker": "GOB"
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-927",
     "quote": "May the 4th be with you. Keep fighting little guy.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-930",
     "quote": "Lucille: Buster! Buster: It's a bird! Lucille: I know it's a bird. I'm on the phone! Buster: It walked on my pillow!",
-    "primarySpeaker": "Lucille",
+    "speakers": "Lucille,Buster",
     "imageUrl": "FCbhIyiXoAk2p9u.jpg"
   },
   {
     "id": "quote-934",
     "quote": "I wine em and dine em, but I don't let them tell me what to do. I don't. Let them tell me. What to do.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-935",
     "quote": "Mom always taught us to curl up in a ball and remain motionless when confronted.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-937",
     "quote": "FAMILY LOVE MICHAEL",
-    "primarySpeaker": "",
+    "speakers": "",
     "imageUrl": "BHnAuRiCQAAmbgs.jpg"
   },
   {
     "id": "quote-940",
     "quote": "What about macaroni -- let me finish -- salad.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-944",
     "quote": "Dignity? Easy for you to say -- I'm the one who has to loofah his stump.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-945",
     "quote": "I will not take this sacred duty lightly. I am going to get you the single healthiest call girl that this town has ever seen.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-946",
     "quote": "So you take your mom to work every day? Bummer. Moms are such a pain in the ass, huh? It's, like, die already! --GOB Bluth",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-951",
     "quote": "Where every day it rains... pennies from heaven.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-952",
     "quote": "YOU'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-962",
     "quote": "What, so the guy we are meeting with can't even grow his own hair? COME ON!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-967",
     "quote": "You know the feeling that you're feeling is what many of us call a feeling.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-968",
     "quote": "It's ok. You be with Yam.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-970",
     "quote": "I was set up. By the Brits. A group of British builders operating outside the O.C...",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-972",
     "quote": "My back is in knots. I haven't had a massage since prison.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-975",
-    "quote": "My husband dumped me and ran off to Vegas with Kitty. That bleached blonde whore!",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-976",
     "quote": "How about a turtle? I've always loved those leathery little snappy faces.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-981",
     "quote": "Rita: I want to have sexual relations. Michael: The mere fact that you call it that tells me you are ready.",
-    "primarySpeaker": ""
+    "speakers": "Rita,Michael"
   },
   {
     "id": "quote-987",
     "quote": "Roger Danish: Um... would you like to try that a little simpler, maybe? Tobias: No.",
-    "primarySpeaker": "Roger Danish",
+    "speakers": "Roger Danish,Tobias",
     "imageUrl": "FALAiSgXsAEzo01.jpg"
   },
   {
     "id": "quote-992",
     "quote": "\"So did you see the new Poof?\" \"His name's Gary and we don't need anymore lawsuits.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-998",
     "quote": "Never. Promise. Crazy. A baby.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-1000",
     "quote": "So, maybe you could, uh, start jete-ing, and stop... je-terrorizing me.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1001",
-    "quote": "You want your belt to buckle, not your chair.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1003",
     "quote": "Let's see some bananas and nuts!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1008",
     "quote": "We're not here to talk nonsense to Bob Loblaw.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1009",
     "quote": "A-coodle-doodle-doo. A-coodle-doodle-doo.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1010",
     "quote": "That's great. So the other 449 families live in fear? Is that what we're saying? I mean, come on!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1011",
     "quote": "\"Maybe, I'll put it in her brownie.\" \"HEY!\" // AD marathon right now on IFC!",
-    "primarySpeaker": ""
+    "speakers": "Oscar"
   },
   {
     "id": "quote-1012",
     "quote": "My love thinks I'm a coward just because I wasted precious hospital resources to avoid my legal obligation.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1013",
     "quote": "Ignore it! It's just something the body does when you shake it!",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1014",
-    "quote": "It's a mainstay of the magician's toolkit... like how clowns always have a rag soaked in ether...",
-    "primarySpeaker": ""
+    "speakers": "Uncle Jack"
   },
   {
     "id": "quote-1016",
     "quote": "\"Up yours, granny!\" \"You couldn't handle it!\"",
-    "primarySpeaker": ""
+    "speakers": "George Sr.,Lucille"
   },
   {
     "id": "quote-1018",
     "quote": "We're brothers, Mom, and we kind of like each other.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1019",
     "quote": "I've used one adjective to describe myself. What is it?",
-    "primarySpeaker": ""
+    "speakers": "Wayne Jarvis"
   },
   {
     "id": "quote-1022",
     "quote": "Actually, he loved galas. All kids do.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-1025",
     "quote": "(sobbing) Old bear! He likes the honey!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1026",
     "quote": "\"Thou shalt protect thy father and honor no one above him unless it be-ith me, thy sweet Lord.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1027",
     "quote": "Ohhh little guy. The tears aren't coming. The tears just aren't coming.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1028",
     "quote": "Coo coo ca chaw. Coo coo ca chaw. Coo coo ca chaw.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1030",
     "quote": "Although George Michael had only got to second base, he'd gone in head first, like Pete Rose.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-1031",
     "quote": "I am having a love affair with this ice cream sandwich.",
-    "primarySpeaker": ""
+    "speakers": "George Sr."
   },
   {
     "id": "quote-1034",
     "quote": "AHHH I KNEW IT!!!",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1035",
     "quote": "Gee, I didn't think the woman I'd be checking out at Spring Break would be Mom.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1036",
     "quote": "Hair up, glasses off.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1037",
     "quote": "Even though sooooo many people in this office are begging for it.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1038",
     "quote": "Evacuate all the schoolchildren!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1039",
     "quote": "OH MY GOD, WE'RE HAVING A FIRE... sale. Oh, the burning!  Amaaaaaaziiiing Graaaace ",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1040",
     "quote": "\"Why are you squeezing me with your body?\" \"It's a hug, Michael. I'm hugging you.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,Lucille"
   },
   {
     "id": "quote-1042",
     "quote": "Buster: [sniffs hand] Oh, God. I'm going to run this through again on Pots & Pans.",
-    "primarySpeaker": "Buster"
+    "speakers": "Buster"
   },
   {
     "id": "quote-1043",
     "quote": "\"GOB is like the cock of the walk, but not you. You are so kind. You're sensitive, like a woman.\" \"That's enough.\"",
-    "primarySpeaker": ""
+    "speakers": "Marta,Michael"
   },
   {
     "id": "quote-1045",
     "quote": "I was going to boil myself alive into a chowder and then be ladled into a giant cauldron to entertain and feed the firemen.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1046",
     "quote": "It's OUR nausea.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1047",
     "quote": "\"I am going to my spin class.\" \"I thought you had vertigo.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB,Lucille Austero"
   },
   {
     "id": "quote-1054",
     "quote": "An assortment of ice creams and sorbets.",
-    "primarySpeaker": ""
+    "speakers": "Stan Sitwell"
   },
   {
     "id": "quote-1055",
     "quote": "Well excuse me for liking the way they frame my junk.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1056",
     "quote": "Maybe it was the other George Michael. You know, the singer-songwriter.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-1057",
     "quote": "A flower in my garden, a mystery in my panties.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1063",
     "quote": "This was a big get for God.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1064",
     "quote": "\"That's the first time we were in the shower since our honeymoon.\" \"And this time, no tears.\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Tobias"
   },
   {
     "id": "quote-1065",
     "quote": "\"I got Michael out of his marriage, didn't I?\" \"Actually, she died.\"",
-    "primarySpeaker": ""
+    "speakers": "Barry Zuckerkorn,Michael"
   },
   {
     "id": "quote-1066",
     "quote": "\"It was for a bit, for Jimmy Kimmel Live.\" \"I don't know who that is and I don't care to find out.\"",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1067",
     "quote": "I didn't mean who... I meant... her?",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-1070",
     "quote": " Whenever I get a wee bit scared I hum a little tune, humdidididi...doo. ",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1074",
     "quote": "TURN THIS SKIFF AROUND.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1075",
     "quote": "YES. ANNYONG. YOUR NAME IS ANNYONG! WE ALL KNOW YOU'RE ANNYONG!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1080",
     "quote": "Sister's my new mother, Mother. And is it just me or is she looking hotter?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1081",
-    "quote": "Larry the surrogate: Interfere? I ought to pull down your pants and spank your ass raw. Michael: I'm sorry, have we met?",
-    "primarySpeaker": "Larry the surrogate"
+    "speakers": "Buster"
   },
   {
     "id": "quote-1082",
     "quote": "Heyyyy Uncle Father Oscar.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1084",
     "quote": "What's up, fizz-ellas.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1088",
     "quote": "Fun and failure both start out the same way.",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-1089",
     "quote": " And the thought of rubbin' you is getting so exciting. Sky rockets in flight. Afternoon delight. ",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1090",
-    "quote": "Suddenly playing with yourself is a scholarly pursuit?",
-    "primarySpeaker": ""
+    "speakers": "Maeby",
+    "imageUrl": "CxADc4cVIAA8e-y.jpg"
   },
   {
     "id": "quote-1091",
     "quote": "Buster, what are you doing with mother's rape horn?",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1092",
     "quote": "Hey, dudes, I'll get you a couple of 64 oz colas to wash down this basket of doughnuts and get your nachos started.",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-1097",
     "quote": "Everybody dance NOW.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1098",
     "quote": "There's a girl in my soup!",
-    "primarySpeaker": ""
+    "speakers": ""
   },
   {
     "id": "quote-1099",
     "quote": "\"Lindsay and I have hit a bit of a rough patch.\" \"Really? When did that start?\" \"Well I dont want to blame it all on 9/11...\"",
-    "primarySpeaker": ""
+    "speakers": "Tobias,Michael"
   },
   {
     "id": "quote-1100",
     "quote": "The matriarch, if you will.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1105",
     "quote": "I call it Tricks --- wait for it -- Around The Office.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1109",
     "quote": "Let's make Ann the backup, okay? Very good way to think about her, as a backup.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1111",
-    "quote": "Why, Michael? So you can fly away from your feelings?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1112",
     "quote": "\"There are very few intelligent, attractive and straight men in this town.\" \"Well, that certainly leaves me out.\"",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1114",
-    "quote": "I just don't want him to point out my cracker ass in front of Ann.",
-    "primarySpeaker": ""
+    "speakers": "Jessie,Tobias"
   },
   {
     "id": "quote-1115",
     "quote": "Douche chill.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1116",
     "quote": "Oh, come on. Don't leave your Uncle T-bag hanging.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1128",
     "quote": "Michael: I'm not interested in you that way. Tobias: What way? Michael: Pick one.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Tobias"
   },
   {
     "id": "quote-1129",
     "quote": "Suddenly he's too much of a big-shot to brush mother's hair.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1133",
     "quote": "Michael: The only thing I found in the fridge was a dead dove in a bag. Gob: You didn't eat that, did you?",
-    "primarySpeaker": "Michael"
-  },
-  {
-    "id": "quote-1134",
-    "quote": "The GOB Chicken Dance ringtone. Caw ca caw!",
-    "primarySpeaker": ""
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-1135",
     "quote": "Why go to a banana stand, when we can make your banana stand.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1136",
     "quote": "Perhaps an attic shall I seek.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1137",
     "quote": "Oh, yes, there absolutely will be a margarita made in my mouth.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1138",
     "quote": "The only person that gets Lucille this excited is Gene.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-1141",
     "quote": "Speaking of settling, how's Ann?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1142",
     "quote": "\"You burn down the storage unit?\" \"Oh, most definitely.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,T-Bone",
+    "imageUrl": "EQSUt-4U8AAH3-n.jpg"
   },
   {
     "id": "quote-1144",
     "quote": "Caw ca caw, caw ca caw, caw ca caw, caw ca caw",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1145",
     "quote": "Steve Holt? The moron jock?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1147",
     "quote": "I'm sure Egg is a great person.",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1148",
     "quote": "Gob: I [bleeped] the business model. Narrator: Actually, they just made out. Gob: Yeah, she had all kinds of orgasms.",
-    "primarySpeaker": "Gob"
+    "speakers": "GOB,Narrator"
   },
   {
     "id": "quote-1149",
     "quote": "If you don't start pulling your weight around here its going to be shape up, or...ship up.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1150",
     "quote": "\"They're not gonna strip, right?\" \"I told them not to, but I can't guarantee their instincts won't kick in.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-1151",
     "quote": "\"They want to break his legs.\" \"It's a good thing he's already got that little scooter.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB,Lucille"
   },
   {
     "id": "quote-1152",
     "quote": "Why am I not going underwater? WHY AM I NOT GOING UNDERWATER?!",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1154",
     "quote": "\"Stop it, stop it. This objectification of women has to stop.\" \"It's just Mom and whores.\"",
-    "primarySpeaker": ""
+    "speakers": "Lindsay,Michael"
   },
   {
     "id": "quote-1155",
     "quote": "\"No, no, it's pronounced a-nal-ra-pist.\" \"It wasn't really the pronunciation that bothered me.\"",
-    "primarySpeaker": ""
+    "speakers": "Tobias,Buster"
   },
   {
     "id": "quote-1156",
     "quote": "She's the belle of the ball",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1157",
-    "quote": "How do we filter out the teases?",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1158",
     "quote": "I was hoping he would be gifted sexually.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1159",
-    "quote": "Monday morning. COME ON!",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-1160",
     "quote": "Mister gay is bleeding! Mister gay!",
-    "primarySpeaker": ""
+    "speakers": "Lupe"
   },
   {
     "id": "quote-1161",
     "quote": "Well, they got the Asian right... 'hotties' might be a stretch.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1162",
     "quote": "Yeah, well, we were probably all so jacked up on amyl and disco music, we didn't notice.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1163",
     "quote": "Look at us, crying like a couple of girls on the last day of camp.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1165",
-    "quote": "Michael: That was Tom Cruise, the actor. Lucille: They said he was some kind of scientist...",
-    "primarySpeaker": "Michael"
+    "speakers": "GOB"
   },
   {
     "id": "quote-1168",
     "quote": "\"Taste the happy, Michael. Taste it.\" \"It tastes kind of like sad.\"",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1170",
-    "quote": "\"Not [Lindsey's] real nose. Got a picture of her when she was younger in a swimcap; she looked like a falcon.\"",
-    "primarySpeaker": ""
+    "speakers": "GOB,Michael"
   },
   {
     "id": "quote-1171",
     "quote": "But we do not... NOT... wag our genitals at each other to make a point!",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1174",
     "quote": "Did I say snog again? Bloody hell.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1175",
     "quote": "\"Right. But, 'Paradise Gardens'?\" \"Yeah... Okay, I can... I can see marinating a chicken in that.\"",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1177",
-    "quote": "Man, that jury's going to fall in love with you. (repeat, but worth it)",
-    "primarySpeaker": ""
+    "speakers": "Michael,George Michael"
   },
   {
     "id": "quote-1178",
     "quote": "Annhog's coming?",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1179",
-    "quote": "Oh, I'm sorry, I forgot... your wife is dead!",
-    "primarySpeaker": ""
+    "speakers": "George Michael"
   },
   {
     "id": "quote-1180",
     "quote": "That's my son you pothead!",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1181",
     "quote": "A trick is something a whore does for money... or cocaine.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1182",
     "quote": " It ain't easy being white. It ain't easy being brown. ",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1183",
     "quote": "\"I'm not a prostitute.\" \"Then I shall let you live!\"",
-    "primarySpeaker": ""
+    "speakers": "Rita,Michael"
   },
   {
     "id": "quote-1184",
     "quote": "The Army had half a day.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1185",
     "quote": "I don't want no part of yo tight-ass country club, ya freak bitch!",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1186",
     "quote": "\"You're losing blood, aren't you?\" \"Probably, my socks are wet.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-1187",
     "quote": "I call it Hot Ham Water.",
-    "primarySpeaker": ""
+    "speakers": "Lindsay"
   },
   {
     "id": "quote-1188",
     "quote": "Let me take off my assistant's skirt and put on my Barbra-Streisand-in-The-Prince-of-Tides ass-masking therapist pantsuit.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1190",
     "quote": "Tobias: As you may or may not know, Lindsay and I have hit a bit of a rough patch. Michael: Really? When did that start? Tobias: Well, I don't want to blame it all on 9/11, but it certainly didn't help.",
-    "primarySpeaker": "Tobias"
+    "speakers": "Tobias,Michael",
+    "imageUrl": "Cpx9_F4VYAAfx3p.jpg"
   },
   {
     "id": "quote-1191",
     "quote": "It's a jetpack, Michael.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1193",
     "quote": "Ah coodle doodle doo. Ah coodle doodle doo. Ah coodle doodle doo.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1196",
     "quote": "No one was making fun of Andy Griffith. I can't emphasize that enough.",
-    "primarySpeaker": ""
+    "speakers": "Narrator"
   },
   {
     "id": "quote-1197",
     "quote": "Popcorn shrimp... with club sauce.",
-    "primarySpeaker": ""
+    "speakers": "Waitress"
   },
   {
     "id": "quote-1198",
     "quote": "Wireless crapability... that one explains itself.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1199",
     "quote": "I know what an erection feels like, Michael.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1201",
     "quote": "Daddy horny, Michael.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1202",
     "quote": "Heyyyyy, hermano.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1203",
     "quote": "I [bleeped] the business model. Yeah, she had all kinds of orgasms.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1206",
-    "quote": "Taste the happy, Michael! Taste it!",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1210",
     "quote": "We need a name. Maybe 'Operation Hot Mother'.",
-    "primarySpeaker": ""
+    "speakers": "Buster"
   },
   {
     "id": "quote-1211",
     "quote": "Go ahead, touch the Cornballer.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1212",
-    "quote": "\"There's been a lot of lying in this family.\" \"And a lot of love!\" \"More lies.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1213",
     "quote": "Hola, is Rosa still alive? No? Well this is not my day.",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1214",
-    "quote": "Daddy horny, Michael. // Happy Fathers Day!",
-    "primarySpeaker": ""
-  },
-  {
-    "id": "quote-1215",
-    "quote": "In prison, you just have to close your eyes and take it, but here you have to close your eyes and give it.",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1218",
     "quote": "STEVE HOLT!: Don't ask \"Can I\"... ask \"I can!\"",
-    "primarySpeaker": ""
+    "speakers": "Steve Holt"
   },
   {
     "id": "quote-1219",
     "quote": "Maybe you don't have enough RAM to understand this, Michael, but there's such a thing as brotherly love.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1221",
     "quote": "Lucille: \"I'll have a vodka rocks\" Michael: \"Mom, it's breakfast time\" Lucille: \"And a piece of toast\"",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Michael"
   },
   {
     "id": "quote-1222",
     "quote": "Waitress: Plate or platter? Lucille: I don't understand the question, and I won't respond to it.",
-    "primarySpeaker": "Waitress"
+    "speakers": "Loretta,Lucille,Waitress"
   },
   {
     "id": "quote-1226",
     "quote": "AND THAT'S WHY YOU DON'T YELL",
-    "primarySpeaker": "",
+    "speakers": "George Sr.",
     "imageUrl": "EzEgOzNWYAMeToi.jpg"
   },
   {
     "id": "quote-1236",
     "quote": "Portugal? Going to live it up down ol' South America, huh, Mikey.",
-    "primarySpeaker": ""
+    "speakers": "GOB"
   },
   {
     "id": "quote-1243",
     "quote": "Michael: I want to tell you everything... if you're willing to listen. Rita: I'm a very good listener. Michael: Great. Start with the misdemeanors and then we're gonna push right on through to the lighter treasons.",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,Rita"
   },
   {
     "id": "quote-1251",
     "quote": "What are you doing? Are you trying to cry?",
-    "primarySpeaker": "",
+    "speakers": "Michael",
     "imageUrl": "EsSmeh5W8AE52oB.jpg"
-  },
-  {
-    "id": "quote-1256",
-    "quote": "It's sorta like an 'inner beauty' pageant.",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-1257",
     "quote": "Within her lies a queen. Let me out that queen.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1258",
     "quote": "And remember, photocopies are not admissible as memories.",
-    "primarySpeaker": "",
+    "speakers": "Detective Munch",
     "imageUrl": "ErVsfxhXIAEYtJt.jpg"
-  },
-  {
-    "id": "quote-1265",
-    "quote": "The blue part here is their land",
-    "primarySpeaker": ""
   },
   {
     "id": "quote-1268",
     "quote": "George Michael: Gangy's having an anniversary party? Michael: Seems that way. George Michael: Is Franklin gonna be there? Gob: See that, Mike. Kids love Franklin. George Michael: I just don't want him to point out my cracker ass in front of Ann.",
-    "primarySpeaker": "George Michael"
+    "speakers": "George Michael,Michael,GOB"
   },
   {
     "id": "quote-1281",
     "quote": "It's like she gets off on being withholding.",
-    "primarySpeaker": "",
+    "speakers": "Buster",
     "imageUrl": "Emu0n26XMAAJnWB.jpg"
   },
   {
     "id": "quote-1282",
     "quote": "\"I will not take this sacred duty lightly. I am going to get you the single healthiest call girl this town has ever seen.\" \"This is why I'm calling it a Witness and not a Best Man. Look all you have to do is watch.\" \"Oh I'm not going to spend this kind of money and not watch.\"",
-    "primarySpeaker": ""
+    "speakers": "Michael"
   },
   {
     "id": "quote-1287",
     "quote": "Ann: George Michael? Was that really you doing those light saber moves? You were incredible. George Michael: I've only gotten better. Michael: You're still doing that?",
-    "primarySpeaker": "Ann"
+    "speakers": "Ann,George Michael,Michael"
   },
   {
     "id": "quote-1292",
     "quote": "Maybe the documents are at the office next to the hot plate with the frayed wires",
-    "primarySpeaker": ""
+    "speakers": "Lucille"
   },
   {
     "id": "quote-1295",
     "quote": "And don't make the water too hot. The scabs come right off.",
-    "primarySpeaker": ""
+    "speakers": "Tobias"
   },
   {
     "id": "quote-1296",
     "quote": "Jessie: Your father's religious now? We'll play that up. It's very sympathetic.\n\nLucille: Yeah. Who doesn't love the Jews?",
-    "primarySpeaker": "Jessie"
+    "speakers": "Jessie,Lucille"
   },
   {
     "id": "quote-1297",
     "quote": "Michael: GOB, listen. Can I ask you a question? Do you remember growing up with a sister?\n\nGOB: Sister? Uh... No, I don't. Not really... ringing any bells.\n\nMichael: Other than Lindsay, of course.\n\nGOB: Oh! Lindsay!",
-    "primarySpeaker": "Michael"
+    "speakers": "Michael,GOB"
   },
   {
     "id": "quote-1298",
     "quote": "Tobias: Why would anyone pay for that $12 to go to the airport?",
-    "primarySpeaker": "Tobias",
+    "speakers": "Tobias",
     "imageUrl": "Ej_9oqiXsAEKV-V.jpg"
   },
   {
     "id": "quote-1304",
     "quote": "George: I cheated. And I lied. And I whored around.",
-    "primarySpeaker": "George",
+    "speakers": "George Sr.",
     "imageUrl": "EjIOlE-XsAItE2v.jpg"
   },
   {
     "id": "quote-1312",
     "quote": "Lucille: Are you sure this isn't her sister?\n\nMrs. Veal: What a lovely thing to say.\n\nMichael: That's an awful thing to say.",
-    "primarySpeaker": "Lucille"
+    "speakers": "Lucille,Mrs. Veal,Michael"
   },
   {
     "id": "quote-1313",
     "quote": "George Michael: Yeah, Ann loves eggs. Sometimes, she puts mayonnaise in her mouth, then she puts the egg in there and does this [Imitates pushing an egg around in his mouth] She calls it a \"mayonegg!\"",
-    "primarySpeaker": "George Michael",
+    "speakers": "George Michael",
     "imageUrl": "Ee16DffWsAEE_0P.jpg"
   },
   {
     "id": "quote-1315",
     "quote": "Wayne: I shall hide behind the couch.",
-    "primarySpeaker": "Wayne"
+    "speakers": "Wayne Jarvis"
   }
 ]

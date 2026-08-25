@@ -9,8 +9,14 @@ class Quote(BaseModel):
 
     id: str = Field(..., description="Unique identifier for the quote")
     quote: str = Field(..., max_length=1000, description="The actual quote text")
-    primarySpeaker: Optional[str] = Field(None, description="Main character delivering the quote")
-    speakers: Optional[list[str]] = Field(None, description="All characters involved in the quote")
+    speakers: str = Field(
+        "",
+        description=(
+            "Characters speaking in the quote, comma-separated in order of "
+            "appearance (e.g. 'Lucille,Michael'). Empty when unknown. Names "
+            "must match app/data/list-of-characters.txt."
+        ),
+    )
     context: Optional[str] = Field(None, description="Episode reference or situational context")
     imageUrl: Optional[str] = Field(None, description="Relative path to image (S3 key)")
 
