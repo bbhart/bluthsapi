@@ -1,16 +1,10 @@
 # Architecture
 
-bluthsapi is a small, read-only REST API that serves Arrested Development quotes. It runs as a FastAPI application on AWS Lambda behind an API Gateway HTTP API, with a static front-end and an offline data pipeline that converts a Twitter archive into the quote database.
+bluthsapi is a small, read-only REST API that serves Arrested Development quotes. It runs as a FastAPI application on AWS Lambda behind an API Gateway HTTP API, with a static front-end. The quote database is a hand-maintained JSON file bundled into the Lambda package.
 
 ```
-                        ┌─────────────────────────── offline pipeline ───────────────────────────┐
-etc/tweets.js ──► scripts/extract_tweets.py ──► etc/staging/*.json ──► scripts/convert_to_quotes.py
- (Twitter                                        (filtering &                      │
-  archive)                                        validation)                      ▼
-                                                                        app/data/quotes.json
-                                                                                   │ (bundled at deploy)
-        ┌──────────────────────── runtime ─────────────────────────────────────────┘
-        ▼
+app/data/quotes.json ─┐ (bundled at deploy)
+                      ▼
 api.lucille2.com ──► API Gateway (HTTP API, throttled) ──► Lambda (Mangum + FastAPI) ──► JSON responses
                                                             │
 public/ static pages (index, prettyquote) ◄─────────────────┘        media images served from S3
@@ -44,15 +38,19 @@ Quotes load once at startup (Lambda cold start) into an in-memory list; there is
 
 Pure HTML/CSS/JS, no build step. `index.html` is the landing page; `prettyquote.html` renders a shareable quote card using the API. Served by FastAPI `StaticFiles` (and therefore through Lambda).
 
-### Data pipeline (`scripts/`)
+### Data tooling (`scripts/`)
 
-One-time/occasional tooling that turns a Twitter archive export (`etc/tweets.js` — not committed; supply your own archive locally) into `app/data/quotes.json`:
+`quotes.json` was originally seeded from an export of the @bluthquotes Twitter
+archive. That was a one-time import and its tooling has been removed; the file is
+now maintained by hand and by pull request.
 
-1. `extract_tweets.py` / `tweet_parser.py` — parse the archive into staging JSON (`etc/staging/`)
-2. `etc/scripts/filter_tweets.py`, `staging_validator.py`, `validate_staging.py` — filter near-duplicates and junk
-3. `speaker_detector.py`, `quote_id_generator.py` — enrich records
-4. `convert_to_quotes.py` — produce the final `quotes.json`
-5. `download_media.py`, `verify_media_files.py` — fetch tweet images for upload to the media S3 bucket
+What remains keeps the speaker data honest:
+
+- `speaker_names.py` — canonical character registry, alias resolution, and the
+  parser that reads speakers out of quote text
+- `normalize_speakers.py` — normalizes the `speakers` field and regenerates
+  `app/data/list-of-characters.txt`; `--check` runs in CI
+- `quote_id_generator.py` — next sequential `quote-N` id
 
 Standard library only; see `scripts/README.md`.
 
