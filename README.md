@@ -1,6 +1,6 @@
 # Arrested Development Quotes API
 
-A read-only REST API serving memorable quotes from the TV show Arrested Development. Built with FastAPI, deployed to AWS Lambda with AWS SAM, and runnable locally with uvicorn or Docker. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together.
+A read-only REST API serving memorable quotes from the TV show Arrested Development. Built with FastAPI, deployed to AWS Lambda with AWS SAM, and runnable locally with uvicorn. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together.
 
 ## Features
 
@@ -24,7 +24,6 @@ A read-only REST API serving memorable quotes from the TV show Arrested Developm
 
 - Python 3.11+ ([download](https://www.python.org/downloads/))
 - uv package manager ([install](https://docs.astral.sh/uv/))
-- Docker (for containerized deployment)
 
 ### Install uv
 
@@ -83,45 +82,6 @@ curl http://localhost:8000/api/quotes/tobias
 
 # View auto-generated API docs
 open http://localhost:8000/docs
-```
-
-## Running with Docker (local)
-
-### Build and Run
-
-```bash
-# Build the Docker image
-docker build -t bluthsapi:latest .
-
-# Run the container
-docker run -d \
-  -p 8000:8000 \
-  -e S3_BASE_URL=https://your-bucket.s3.amazonaws.com \
-  --name bluthsapi \
-  --restart unless-stopped \
-  bluthsapi:latest
-
-# Check logs
-docker logs -f bluthsapi
-
-# Stop container
-docker stop bluthsapi
-```
-
-### Using Docker Compose
-
-```bash
-# One-time: compose reads .env, so create it first
-cp .env.example .env
-
-# Start services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
 ```
 
 ## Configuration
@@ -205,8 +165,6 @@ bluthsapi/
 ├── template.yaml            # AWS SAM / CloudFormation stack
 ├── samconfig.toml           # SAM deploy configuration
 ├── .github/workflows/       # CI: tests on PRs, deploy on push to main
-├── Dockerfile               # Docker build configuration
-├── docker-compose.yml       # Docker Compose setup
 ├── requirements.txt         # Production dependencies
 ├── requirements-dev.txt     # Development dependencies
 ├── .env.example             # Environment template
@@ -221,7 +179,7 @@ bluthsapi/
 - **Server**: Uvicorn (ASGI server)
 - **Validation**: Pydantic
 - **Testing**: pytest with httpx (API tier) and Playwright (e2e tier)
-- **Deployment**: AWS Lambda via AWS SAM (GitHub Actions on push to main); Docker for local runs
+- **Deployment**: AWS Lambda via AWS SAM (GitHub Actions on push to main)
 - **Storage**: Static JSON file, images in AWS S3
 
 ## AWS Lambda Deployment
@@ -232,7 +190,7 @@ This project is configured for serverless deployment to AWS Lambda using AWS SAM
 
 - AWS CLI configured with credentials
 - AWS SAM CLI installed
-- Docker (for building Lambda packages)
+- Docker running (`sam build --use-container` builds inside SAM's image)
 
 ### Deploy to AWS Lambda
 
@@ -260,36 +218,12 @@ No manual setup script needed — everything is provisioned by `sam deploy`. See
 
 If the API is shut down due to budget limits, see [`docs/budget-reset.md`](docs/budget-reset.md) for recovery instructions.
 
-### Other Deployment Options
+### Running it somewhere else
 
-#### Option 1: VPS Deployment (DigitalOcean, Linode, etc.)
-
-```bash
-# SSH into your server
-ssh user@your-server.com
-
-# Clone repository
-git clone https://github.com/bbhart/bluthsapi.git
-cd bluthsapi
-
-# Build and run with Docker
-docker build -t bluthsapi:latest .
-docker run -d -p 80:8000 --env-file .env --name bluthsapi bluthsapi:latest
-```
-
-#### Option 2: Cloud Container Services
-
-- **AWS ECS/Fargate**: Deploy to Amazon ECS
-- **Google Cloud Run**: Serverless container deployment
-- **Azure Container Instances**: Run containers on Azure
-
-#### Option 3: Container Platforms (Free Tier Available)
-
-- **Railway.app**: Auto-deploy from GitHub
-- **Fly.io**: Global container deployment
-- **Render**: Docker-based hosting
-
-See [quickstart.md](specs/001-quotes-api/quickstart.md) for detailed deployment guides.
+There is no container image in this repository. The application is an ordinary
+ASGI app, so anywhere that can run `uvicorn app.main:app` will serve it: a VPS
+under systemd, a PaaS that builds from `requirements.txt`, or your own image if
+you write one. Only `app/` and `public/` are needed at runtime.
 
 ## API Response Format
 
@@ -346,8 +280,7 @@ The API handles the following error scenarios gracefully:
 2. Make changes to `app/` files
 3. Run tests: `pytest`
 4. Test locally: `uvicorn app.main:app --reload`
-5. Test in Docker: `docker build -t bluthsapi:test . && docker run -p 8000:8000 bluthsapi:test`
-6. Commit and push: `git add . && git commit -m "Description" && git push`
+5. Commit and push: `git add . && git commit -m "Description" && git push`
 
 ### Updating Quotes
 
@@ -407,7 +340,6 @@ rights over that content.
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [uv Documentation](https://docs.astral.sh/uv/)
-- [Docker Documentation](https://docs.docker.com/)
 - [API Specification](specs/001-quotes-api/contracts/openapi.yaml)
 - [Implementation Plan](specs/001-quotes-api/plan.md)
 - [Quickstart Guide](specs/001-quotes-api/quickstart.md)

@@ -74,7 +74,7 @@ Media images live in a separate, pre-existing S3 bucket; the API only prefixes i
 
 Push to `main` triggers: validate `quotes.json` → check Lambda package size → run tests → `sam build --use-container` → package to the artifact S3 bucket → `sam deploy` → smoke-test `/health` and `/api/quotes/random` → roll back the Lambda alias on failure. Credentials come from GitHub Actions secrets.
 
-Local development uses `uvicorn` directly or `docker compose up` (see README).
+Local development uses `uvicorn` directly (see README).
 
 ### Tests (`tests/`)
 

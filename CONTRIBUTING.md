@@ -56,7 +56,6 @@ We accept pull requests for:
 - Python 3.11+ ([download](https://www.python.org/downloads/))
 - uv package manager ([install](https://docs.astral.sh/uv/))
 - Git
-- Docker (optional - only needed if you want to test the containerized deployment locally)
 
 ### Setting Up Your Development Environment
 
@@ -144,10 +143,6 @@ pytest tests/api/test_endpoints.py -v
 ```bash
 # Test with uvicorn (hot reload)
 uvicorn app.main:app --reload
-
-# Test with Docker
-docker build -t bluthsapi:test .
-docker run -p 8000:8000 bluthsapi:test
 ```
 
 ## Contributing Quotes
@@ -408,7 +403,7 @@ Write clear, concise commit messages:
 # Good examples
 git commit -m "Add quotes from Season 2 Episode 5"
 git commit -m "Fix case-insensitive speaker matching bug"
-git commit -m "Update README with Docker deployment instructions"
+git commit -m "Update README with local development instructions"
 
 # Less helpful examples
 git commit -m "fixes"

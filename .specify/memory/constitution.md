@@ -77,18 +77,10 @@ Basic README with endpoint list and example responses required.
 - No custom CloudWatch metrics, dashboards, or X-Ray tracing (cost optimization)
 - Log cost target: $0.50-2/month at expected traffic volumes
 
-### Docker Requirements (Legacy/Alternative Deployment)
-- Multi-stage builds for minimal image size
-- Run as non-root user for security
-- Health checks must use lightweight tools (curl preferred) - avoid loading language interpreters
-- Clean up package manager cache to minimize image size (e.g., `rm -rf /var/lib/apt/lists/*`)
-
 ### Health Checks
 - Health check endpoint: GET /health (required for all deployment methods)
 - Returns HTTP 200 on success
 - Used for deployment validation in Lambda
-- Docker health check parameters: interval=30s, timeout=3s, start-period=5s, retries=3
-- Docker health check command format: `curl -f http://localhost:PORT/health || exit 1`
 
 ### Package Management
 - Use uv for Python dependency management (10-100x faster than pip)
