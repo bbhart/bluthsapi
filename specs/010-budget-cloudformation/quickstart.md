@@ -1,13 +1,13 @@
 # Quickstart: Deploy & Verify Budget Resources
 
-Audience: Brian (operator). Assumes AWS CLI configured for account `<aws-account-id>`, region `us-east-1`.
+Audience: the stack operator. Assumes AWS CLI configured for account `<ACCOUNT_ID>`, region `us-east-1`.
 
 ## 1. Pre-deploy cleanup (one-time)
 
 CloudFormation cannot adopt the existing imperatively-created resources by name. Delete them first.
 
 ```bash
-ACCOUNT_ID=<aws-account-id>
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 REGION=us-east-1
 
 # Delete budget actions (if any)
@@ -107,7 +107,7 @@ cat /tmp/out.json   # expect statusCode 200, action: throttle_disabled
 
 ### B) Verify CloudWatch alarm SNS path
 
-Trigger one Lambda error deliberately (e.g., temporarily revoke its `apigatewayv2:UpdateStage` permission, invoke once, restore the permission, wait 5 minutes). Alarm transitions to ALARM and publishes to `BudgetAlertsTopic`; Brian receives an email titled `ALARM: "bluths-api-budget-shutdown-errors"...`.
+Trigger one Lambda error deliberately (e.g., temporarily revoke its `apigatewayv2:UpdateStage` permission, invoke once, restore the permission, wait 5 minutes). Alarm transitions to ALARM and publishes to `BudgetAlertsTopic`; the operator receives an email titled `ALARM: "bluths-api-budget-shutdown-errors"...`.
 
 ### C) Verify month-rollover check
 

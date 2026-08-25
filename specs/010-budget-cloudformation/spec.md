@@ -10,7 +10,7 @@
 ### Session 2026-05-25
 
 - Q: If `BudgetShutdownFunction` is invoked at $30 but fails to set the API Gateway throttle to 0, what's the desired behavior? → A: CloudWatch Alarm on the Lambda's `Errors` metric (≥1 error over 5 min) publishes to `BudgetAlertsTopic`; AWS Budgets' built-in retry still applies.
-- Q: After a $30 shutdown, what should happen when the new billing month starts? → A: No auto-restore. On the 1st of each month, a scheduled check publishes to `BudgetAlertsTopic` if the API is still disabled, instructing Brian to follow `docs/budget-reset.md`.
+- Q: After a $30 shutdown, what should happen when the new billing month starts? → A: No auto-restore. On the 1st of each month, a scheduled check publishes to `BudgetAlertsTopic` if the API is still disabled, instructing the operator to follow `docs/budget-reset.md`.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -31,13 +31,13 @@ The bluths-api budget, SNS topic, email subscription, budget notifications, IAM 
 
 When monthly AWS spend exceeds $20, the subscribed email address receives a warning notification.
 
-**Why this priority**: Brian needs visibility into cost trajectory before the kill switch fires.
+**Why this priority**: the operator needs visibility into cost trajectory before the kill switch fires.
 
 **Independent Test**: Simulate budget threshold breach via the AWS Budgets console (or wait for natural breach) and verify email delivery to `<operator-email>`.
 
 **Acceptance Scenarios**:
 
-1. **Given** actual monthly cost crosses $20, **When** AWS Budgets evaluates the threshold, **Then** SNS publishes to `bluths-api-budget-alerts` and Brian receives an email.
+1. **Given** actual monthly cost crosses $20, **When** AWS Budgets evaluates the threshold, **Then** SNS publishes to `bluths-api-budget-alerts` and the operator receives an email.
 
 ### User Story 3 - Lambda shutdown at $30/month (Priority: P1)
 
@@ -57,7 +57,7 @@ When monthly AWS spend reaches $30, AWS Budgets invokes the `BudgetShutdownFunct
 - **Existing imperative resources block CloudFormation creation**: The pre-deploy cleanup step in the runbook must delete the existing budget, SNS topic, IAM role, and budget action before `sam deploy` runs. Otherwise CloudFormation fails with `AlreadyExists`.
 - **Pending SNS email confirmation**: After the stack creates the email subscription, the address must confirm it. Until confirmed, emails are not delivered. This is documented in the quickstart.
 - **Manual reset after shutdown**: After the Lambda fires, restoring the API requires resetting the throttle. Existing `docs/budget-reset.md` covers this; resource names and outputs in that doc must still resolve. No automatic restoration on month rollover (see FR-013).
-- **API still disabled at start of new billing month**: A scheduled Lambda runs on the 1st of each month, checks the API Gateway `prod` stage throttle, and — if it is still 0 — publishes a reminder email so Brian doesn't unknowingly enter the new month with the API offline (see FR-013, FR-014).
+- **API still disabled at start of new billing month**: A scheduled Lambda runs on the 1st of each month, checks the API Gateway `prod` stage throttle, and — if it is still 0 — publishes a reminder email so the operator doesn't unknowingly enter the new month with the API offline (see FR-013, FR-014).
 - **Budget already in alert state at deploy time**: If actual cost is already >$20 when the new budget is created, AWS Budgets may immediately fire the notification. This is acceptable behavior.
 
 ## Requirements *(mandatory)*
@@ -68,7 +68,7 @@ When monthly AWS spend reaches $30, AWS Budgets invokes the `BudgetShutdownFunct
 - **FR-002**: The CloudFormation stack MUST include: two SNS topics (`bluths-api-budget-alerts` for email, `bluths-api-budget-shutdown-trigger` for Lambda invocation), an SNS topic policy on each granting `budgets.amazonaws.com` publish permission scoped to this AWS account, an SNS email subscription on the alerts topic, an AWS Budget with two notifications (at $20 and $30 absolute thresholds), and an SNS subscription that invokes the `BudgetShutdownFunction:live` alias when the shutdown-trigger topic is published to. NOTE: `AWS::Budgets::BudgetsAction` does not support Lambda targets (only `APPLY_IAM_POLICY`, `APPLY_SCP_POLICY`, `RUN_SSM_DOCUMENTS`), so the Lambda is wired via SNS rather than a Budgets Action.
 - **FR-003**: The AWS Budget MUST have a monthly cost limit of $30 USD.
 - **FR-004**: A notification MUST fire at actual spend > $20 (warning) and publish to the SNS topic, which delivers email to `<operator-email>`.
-- **FR-005**: At actual spend > $30, the $30 budget notification MUST publish to **both** `BudgetAlertsTopic` (so Brian gets an email) and `BudgetShutdownTriggerTopic` (which has an SNS subscription targeting `BudgetShutdownFunction:live`, disabling the API). The $20 notification MUST NOT publish to `BudgetShutdownTriggerTopic` — only the $30 notification triggers the kill switch.
+- **FR-005**: At actual spend > $30, the $30 budget notification MUST publish to **both** `BudgetAlertsTopic` (so the operator gets an email) and `BudgetShutdownTriggerTopic` (which has an SNS subscription targeting `BudgetShutdownFunction:live`, disabling the API). The $20 notification MUST NOT publish to `BudgetShutdownTriggerTopic` — only the $30 notification triggers the kill switch.
 - **FR-006**: The SNS topic policy MUST scope publish permission with `aws:SourceAccount` equal to the deploying account ID to prevent confused-deputy attacks.
 - **FR-007**: The Lambda's `API_GATEWAY_ID` environment variable MUST resolve to `!Ref BluthsHttpApi` (already true in template.yaml).
 - **FR-008**: The deployer's IAM policy (`iam-policy.json`) MUST grant the permissions needed to manage the new resources: `budgets:*` (on `arn:aws:budgets::*:budget/bluths-api-*` and its sub-resources), `sns:*` (on `arn:aws:sns:*:*:bluths-api-*`), `cloudwatch:*` alarm actions (`PutMetricAlarm`, `DescribeAlarms`, `DeleteAlarms`, tag actions on `arn:aws:cloudwatch:*:*:alarm:bluths-api-*`), `events:*` rule actions (`PutRule`, `DeleteRule`, `DescribeRule`, `ListRules`, `PutTargets`, `RemoveTargets`, tag actions on `arn:aws:events:*:*:rule/bluths-api-*`), and the existing `iam:*` scope for `bluths-api-*` roles.
@@ -88,7 +88,7 @@ When monthly AWS spend reaches $30, AWS Budgets invokes the `BudgetShutdownFunct
 - **SNS Topic — Shutdown Trigger (`bluths-api-budget-shutdown-trigger`)**: Separate topic dedicated to triggering the Lambda kill switch. Has a topic policy permitting `budgets.amazonaws.com` to publish (scoped via `aws:SourceAccount`) and a Lambda subscription targeting `BudgetShutdownFunction:live`.
 - **SNS Subscription — Lambda (`BudgetShutdownSubscription`)**: Protocol `lambda`, Endpoint `${BudgetShutdownFunction.Arn}:live`. Created when CloudFormation provisions the subscription.
 - **Lambda Permission (`BudgetShutdownInvokePermission`)**: Grants `sns.amazonaws.com` permission to invoke `BudgetShutdownFunction:live`, scoped via `SourceArn` to `BudgetShutdownTriggerTopic`.
-- **CloudWatch Alarm (`bluths-api-budget-shutdown-errors`)**: Monitors `AWS/Lambda Errors` for the shutdown function; `AlarmActions` publish to `BudgetAlertsTopic` so Brian is notified if the kill switch silently fails.
+- **CloudWatch Alarm (`bluths-api-budget-shutdown-errors`)**: Monitors `AWS/Lambda Errors` for the shutdown function; `AlarmActions` publish to `BudgetAlertsTopic` so the operator is notified if the kill switch silently fails.
 - **Month-Rollover Check Lambda (`bluths-api-month-rollover-check`)**: Read-only Lambda invoked monthly by EventBridge. Calls `apigatewayv2:GetStage` for the `prod` stage; if `ThrottlingRateLimit == 0`, publishes a reminder email to `BudgetAlertsTopic`. Has its own IAM role with only `apigateway:GET` on the prod stage and `sns:Publish` on `BudgetAlertsTopic`.
 - **EventBridge Scheduled Rule (`bluths-api-month-rollover-schedule`)**: Cron expression `cron(5 0 1 * ? *)` (00:05 UTC on the 1st of each month). Target: `MonthRolloverCheckFunction`.
 
@@ -97,7 +97,7 @@ When monthly AWS spend reaches $30, AWS Budgets invokes the `BudgetShutdownFunct
 ### Measurable Outcomes
 
 - **SC-001**: 100% of budget-related AWS resources are provisioned by `sam deploy` (zero imperative shell scripts required for budget setup).
-- **SC-002**: At monthly spend > $20, an email reaches Brian within the AWS Budgets evaluation window (typically <24h after threshold crossing per AWS Budgets SLA).
+- **SC-002**: At monthly spend > $20, an email reaches the operator within the AWS Budgets evaluation window (typically <24h after threshold crossing per AWS Budgets SLA).
 - **SC-003**: At monthly spend > $30, API Gateway `prod` stage throttle is verifiably set to 0 (queryable via `aws apigatewayv2 get-stage`).
 - **SC-004**: `aws/setup-budget.sh` is no longer present in the repo and `README.md` contains no reference to it.
 - **SC-005**: When `BudgetShutdownFunction` raises an error, the CloudWatch alarm `bluths-api-budget-shutdown-errors` transitions to `ALARM` within 5 minutes and an email reaches `<operator-email>`.

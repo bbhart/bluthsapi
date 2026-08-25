@@ -36,7 +36,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest  # For validation tests
+          pip install pytest httpx  # For validation tests (API tier only)
 
       - name: Set up AWS SAM CLI
         uses: aws-actions/setup-sam@v2
@@ -94,9 +94,11 @@ jobs:
           echo "✓ Package size within limits"
           echo "compressed_mb=$COMPRESSED_MB" >> $GITHUB_OUTPUT
 
-      - name: Run unit tests
+      - name: Run API tests
         run: |
-          pytest tests/ -v --tb=short || echo "⚠️  Tests failed but continuing (remove this in production)"
+          # e2e tests need Playwright browsers and run in the tests workflow;
+          # the deploy gate runs the API tier and fails the deploy on failure.
+          pytest tests/api -v --tb=short
 
       # ============================================================
       # STAGE 3: STORE PREVIOUS VERSION (for rollback)
@@ -219,10 +221,10 @@ jobs:
 
       - name: "Test global rate limit (constitution: global throttling only)"
         run: |
-          echo "Testing global rate limit (10 QPS)..."
+          echo "Testing global rate limit (50 QPS deployed; burst of 60 should surface 429s)..."
 
-          # Make 12 concurrent requests, expect some to fail
-          for i in {1..12}; do
+          # Make 60 concurrent requests, expect some to fail
+          for i in {1..60}; do
             curl -s -o /dev/null -w "%{http_code}\n" ${{ steps.endpoint.outputs.url }}/api/quotes/random &
           done
           wait

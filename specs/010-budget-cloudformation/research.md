@@ -23,7 +23,7 @@
 - **Decision**: Set `BudgetLimit.Amount = 30` (USD) with two notifications, both `ThresholdType: ABSOLUTE_VALUE`:
   - Notification 1: `ACTUAL > 20.0` → publishes to `BudgetAlertsTopic` (email only)
   - Notification 2: `ACTUAL > 30.0` → publishes to `BudgetAlertsTopic` (email) AND `BudgetShutdownTriggerTopic` (Lambda)
-- **Rationale**: Brian specified explicit dollar values. Absolute thresholds match those numbers directly and survive future budget-limit changes without silently changing the warning trigger.
+- **Rationale**: the operator specified explicit dollar values. Absolute thresholds match those numbers directly and survive future budget-limit changes without silently changing the warning trigger.
 - **Alternatives considered**:
   - **Percentage thresholds**: rejected — couples warning to the cap.
   - **Two separate budgets**: rejected — doubles AWS Budget cost.
@@ -35,31 +35,31 @@
   - `AllowCloudWatchAlarmsToPublish` — principal `cloudwatch.amazonaws.com`, condition `StringEquals: { aws:SourceAccount: ${AWS::AccountId} }`
 - **Rationale**: The original gap (missing Budgets→SNS publish permission) is fixed by the first statement. The CloudWatch Alarm added in clarification (FR-012) publishes to the same topic and needs its own publish permission. Account-scoped conditions prevent confused-deputy attacks from either service across accounts.
 - **Alternatives considered**:
-  - **Separate SNS topic for alarms**: rejected. Two topics means two confirmations Brian has to click; no benefit beyond separation.
+  - **Separate SNS topic for alarms**: rejected. Two topics means two confirmations the operator has to click; no benefit beyond separation.
   - **No `aws:SourceAccount` condition**: rejected. Allows cross-account abuse.
 
 ## Decision: Lambda failure handling (from clarification 2026-05-25)
 
-- **Decision**: Add a single `AWS::CloudWatch::Alarm` on the `AWS/Lambda Errors` metric for `bluths-api-budget-shutdown`. Threshold ≥1, period 60s, evaluation periods 5 (i.e., any error in a 5-minute window). Statistic `Sum`. `TreatMissingData: notBreaching`. `AlarmActions: [!Ref BudgetAlertsTopic]`. AWS Budgets' built-in action retry (up to 4 attempts over ~24h) is the first line of defense; the alarm guarantees Brian sees a sustained failure.
-- **Rationale**: AWS-provided metric, no custom emission required. $0.10/month per alarm, well inside the constitution's log-cost envelope. Reuses the SNS topic already in scope. Brian retains the operational decision to investigate when the alarm fires.
+- **Decision**: Add a single `AWS::CloudWatch::Alarm` on the `AWS/Lambda Errors` metric for `bluths-api-budget-shutdown`. Threshold ≥1, period 60s, evaluation periods 5 (i.e., any error in a 5-minute window). Statistic `Sum`. `TreatMissingData: notBreaching`. `AlarmActions: [!Ref BudgetAlertsTopic]`. AWS Budgets' built-in action retry (up to 4 attempts over ~24h) is the first line of defense; the alarm guarantees the operator sees a sustained failure.
+- **Rationale**: AWS-provided metric, no custom emission required. $0.10/month per alarm, well inside the constitution's log-cost envelope. Reuses the SNS topic already in scope. the operator retains the operational decision to investigate when the alarm fires.
 - **Alternatives considered**:
-  - **Lambda DLQ (SQS)**: rejected. Adds a queue resource Brian has to monitor. No benefit over an alarm for a Lambda that runs ~once a month.
+  - **Lambda DLQ (SQS)**: rejected. Adds a queue resource the operator has to monitor. No benefit over an alarm for a Lambda that runs ~once a month.
   - **Lambda publishes "failed" message itself before re-raising**: rejected. Couples the shutdown Lambda to SNS and adds an IAM permission to it. Alarms are cleaner.
-  - **No extra observability**: rejected per Brian's clarification — visibility is required.
+  - **No extra observability**: rejected per the operator's clarification — visibility is required.
 
 ## Decision: Month-rollover behavior (from clarification 2026-05-25)
 
 - **Decision**: Build a small read-only Lambda (`bluths-api-month-rollover-check`) invoked by an EventBridge scheduled rule at `cron(5 0 1 * ? *)` (00:05 UTC on the 1st of each month). Handler reads `apigatewayv2:GetStage` for the `prod` stage; if `DefaultRouteSettings.ThrottlingRateLimit == 0`, it publishes to `BudgetAlertsTopic` with subject `"Bluths API still disabled — see docs/budget-reset.md"` and a body containing the API Gateway ID. **No state is modified.**
-- **Rationale**: Brian wants no automatic restoration (a prior-month breach could have been abuse — restoring blindly hands the abuser another month of $30). But he also doesn't want to discover a still-disabled API by accident. A one-shot monthly notification is the minimum viable signal. Read-only constraint (FR-014) keeps blast radius zero.
+- **Rationale**: the operator wants no automatic restoration (a prior-month breach could have been abuse — restoring blindly hands the abuser another month of $30). But they also don’t want to discover a still-disabled API by accident. A one-shot monthly notification is the minimum viable signal. Read-only constraint (FR-014) keeps blast radius zero.
 - **Alternatives considered**:
-  - **EventBridge rule that directly notifies SNS** (no Lambda): rejected. EventBridge can target SNS, but cannot conditionally check throttle state before deciding to notify. Brian doesn't want noise every month.
-  - **Auto-restore on the 1st**: rejected per Brian's clarification.
+  - **EventBridge rule that directly notifies SNS** (no Lambda): rejected. EventBridge can target SNS, but cannot conditionally check throttle state before deciding to notify. the operator doesn't want noise every month.
+  - **Auto-restore on the 1st**: rejected per the operator's clarification.
   - **CloudWatch Alarm on API Gateway request count = 0**: rejected. Noisy during organic quiet periods.
   - **Extend `BudgetShutdownFunction` with an "if invoked by EventBridge, check instead of shut down" branch**: rejected. Violates SRP and complicates the existing handler.
 
 ## Decision: Pre-deploy cleanup
 
-- **Decision**: Quickstart instructs Brian to delete imperatively-created resources before `sam deploy`:
+- **Decision**: Quickstart instructs the operator to delete imperatively-created resources before `sam deploy`:
   - `aws budgets delete-budget --budget-name bluths-api-monthly-budget`
   - Delete budget actions, IAM role + policy, SNS topic
 - **Rationale**: CloudFormation cannot adopt existing resources by name without `cloudformation import`, which requires a per-resource template-mapping ceremony. Delete-and-recreate is simplest.

@@ -34,7 +34,7 @@ description: "Task list for feature 010-budget-cloudformation"
 
 - [X] T001 Read `/Users/bhart/dev/bluthsapi/template.yaml` and confirm `BudgetShutdownFunction` (~line 122) and `BudgetShutdownFunctionRole` (~line 138) match the state captured in `specs/010-budget-cloudformation/data-model.md`
 - [X] T002 [P] Read `/Users/bhart/dev/bluthsapi/specs/010-budget-cloudformation/contracts/budget-resources.yaml` so the target CloudFormation snippet is in working memory
-- [X] T003 [P] Confirm AWS CLI is configured for account `<aws-account-id>`, region `us-east-1`: `aws sts get-caller-identity`
+- [X] T003 [P] Confirm AWS CLI is configured for account `<ACCOUNT_ID>`, region `us-east-1`: `aws sts get-caller-identity`
 
 ---
 
@@ -70,8 +70,8 @@ description: "Task list for feature 010-budget-cloudformation"
 - [X] T014 [P] [US1] Update `/Users/bhart/dev/bluthsapi/README.md` — remove references to `./aws/setup-budget.sh`; replace any manual-setup section with a one-sentence pointer to `template.yaml` and `specs/010-budget-cloudformation/quickstart.md`
 - [X] T015 [US1] Lint and validate: `python3 -c "import yaml; yaml.safe_load(open('/Users/bhart/dev/bluthsapi/template.yaml'))"` and `cd /Users/bhart/dev/bluthsapi && sam validate`
 - [X] T016 [US1] Deploy: `cd /Users/bhart/dev/bluthsapi && sam build && sam deploy --stack-name bluths-api --capabilities CAPABILITY_NAMED_IAM` (or push to main for GH Actions). Wait for `UPDATE_COMPLETE`.
-- [X] T017 [US1] Verify SNS topic policy has **both** principals: `aws sns get-topic-attributes --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-alerts --query 'Attributes.Policy' --output text | jq '.Statement[].Principal.Service'` — should list `budgets.amazonaws.com` and `cloudwatch.amazonaws.com`, both with `aws:SourceAccount` condition `<aws-account-id>`
-- [X] T018 [US1] Verify budget exists with $30 limit: `aws budgets describe-budget --account-id <aws-account-id> --budget-name bluths-api-monthly-budget`
+- [X] T017 [US1] Verify SNS topic policy has **both** principals: `aws sns get-topic-attributes --topic-arn arn:aws:sns:us-east-1:<ACCOUNT_ID>:bluths-api-budget-alerts --query 'Attributes.Policy' --output text | jq '.Statement[].Principal.Service'` — should list `budgets.amazonaws.com` and `cloudwatch.amazonaws.com`, both with `aws:SourceAccount` condition `<ACCOUNT_ID>`
+- [X] T018 [US1] Verify budget exists with $30 limit: `aws budgets describe-budget --account-id <ACCOUNT_ID> --budget-name bluths-api-monthly-budget`
 
 **Checkpoint**: MVP complete — IaC manages budget infrastructure. Cost cap is in place at $30 but no automated alerting/action yet.
 
@@ -79,7 +79,7 @@ description: "Task list for feature 010-budget-cloudformation"
 
 ## Phase 4: User Story 2 — Email warning at $20/month (Priority: P1)
 
-**Goal**: When monthly actual spend exceeds $20, an email lands in Brian's inbox.
+**Goal**: When monthly actual spend exceeds $20, an email lands in the operator's inbox.
 
 **Independent Test**: Simulate breach via AWS Budgets console (or temporarily lower the threshold below current spend and redeploy); confirm email delivery to `<operator-email>`.
 
@@ -88,8 +88,8 @@ description: "Task list for feature 010-budget-cloudformation"
 - [X] T019 [US2] In `/Users/bhart/dev/bluthsapi/template.yaml`, edit `MonthlyBudget.NotificationsWithSubscribers` to add the $20 notification: `Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 20.0, ThresholdType: ABSOLUTE_VALUE }`, `Subscribers: [{ SubscriptionType: SNS, Address: !Ref BudgetAlertsTopic }]`
 - [X] T020 [US2] Lint + validate: `python3 -c "import yaml; yaml.safe_load(open('/Users/bhart/dev/bluthsapi/template.yaml'))"` and `sam validate`
 - [X] T021 [US2] Deploy: `sam build && sam deploy ...`
-- [X] T022 (pending email confirmation by Brian) [US2] Brian confirms the SNS email subscription by clicking the link sent to `<operator-email>`. Verify: `aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-alerts` — SubscriptionArn must not be `PendingConfirmation`.
-- [X] T023 [US2] Verify notification exists: `aws budgets describe-notifications-for-budget --account-id <aws-account-id> --budget-name bluths-api-monthly-budget` — confirm one notification with `Threshold: 20.0`, `ThresholdType: ABSOLUTE_VALUE`, `ComparisonOperator: GREATER_THAN`
+- [X] T022 (pending email confirmation by the operator) [US2] the operator confirms the SNS email subscription by clicking the link sent to `<operator-email>`. Verify: `aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:<ACCOUNT_ID>:bluths-api-budget-alerts` — SubscriptionArn must not be `PendingConfirmation`.
+- [X] T023 [US2] Verify notification exists: `aws budgets describe-notifications-for-budget --account-id <ACCOUNT_ID> --budget-name bluths-api-monthly-budget` — confirm one notification with `Threshold: 20.0`, `ThresholdType: ABSOLUTE_VALUE`, `ComparisonOperator: GREATER_THAN`
 
 **Checkpoint**: Warning email path live. US1+US2 deliver cost cap + early warning.
 
@@ -97,7 +97,7 @@ description: "Task list for feature 010-budget-cloudformation"
 
 ## Phase 5: User Story 3 — Lambda shutdown at $30/month + observability + monthly safety net (Priority: P1)
 
-**Goal**: At $30 actual spend, AWS Budgets invokes the shutdown Lambda and the API is throttled to 0. If the Lambda fails, a CloudWatch Alarm fires to the same SNS topic (FR-012). On the 1st of each month, a read-only Lambda checks the throttle state and emails Brian if the API is still disabled (FR-013, FR-014).
+**Goal**: At $30 actual spend, AWS Budgets invokes the shutdown Lambda and the API is throttled to 0. If the Lambda fails, a CloudWatch Alarm fires to the same SNS topic (FR-012). On the 1st of each month, a read-only Lambda checks the throttle state and emails the operator if the API is still disabled (FR-013, FR-014).
 
 **Independent Test**: (a) `aws lambda invoke` the shutdown Lambda manually — throttle should drop to 0. (b) Trigger a Lambda error and confirm the alarm publishes to SNS within 5 min. (c) Invoke the rollover Lambda manually with the API enabled (no email) and again with it disabled (email arrives).
 
@@ -126,7 +126,7 @@ description: "Task list for feature 010-budget-cloudformation"
 
 - [X] T034 [US3] Lint + validate: `python3 -c "import yaml; yaml.safe_load(open('/Users/bhart/dev/bluthsapi/template.yaml'))"`, `python3 -m py_compile /Users/bhart/dev/bluthsapi/app/month_rollover_check.py`, `sam validate`
 - [X] T035 [US3] Deploy: `cd /Users/bhart/dev/bluthsapi && sam build && sam deploy ...`
-- [X] T036 [US3] Verify $30 → Lambda wiring: (a) `aws budgets describe-notifications-for-budget --account-id <aws-account-id> --budget-name bluths-api-monthly-budget` — confirm the $30 notification has two SNS subscribers (alerts + shutdown-trigger); (b) `aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-shutdown-trigger --query 'Subscriptions[0].{Endpoint:Endpoint,Protocol:Protocol}'` — confirm `Protocol: lambda` and `Endpoint` ends with `:live`; (c) `aws sns get-topic-attributes --topic-arn arn:aws:sns:us-east-1:<aws-account-id>:bluths-api-budget-shutdown-trigger --query 'Attributes.Policy' --output text | jq '.Statement[].Principal.Service'` — confirm `budgets.amazonaws.com` with `aws:SourceAccount` condition
+- [X] T036 [US3] Verify $30 → Lambda wiring: (a) `aws budgets describe-notifications-for-budget --account-id <ACCOUNT_ID> --budget-name bluths-api-monthly-budget` — confirm the $30 notification has two SNS subscribers (alerts + shutdown-trigger); (b) `aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:<ACCOUNT_ID>:bluths-api-budget-shutdown-trigger --query 'Subscriptions[0].{Endpoint:Endpoint,Protocol:Protocol}'` — confirm `Protocol: lambda` and `Endpoint` ends with `:live`; (c) `aws sns get-topic-attributes --topic-arn arn:aws:sns:us-east-1:<ACCOUNT_ID>:bluths-api-budget-shutdown-trigger --query 'Attributes.Policy' --output text | jq '.Statement[].Principal.Service'` — confirm `budgets.amazonaws.com` with `aws:SourceAccount` condition
 - [X] T037 [US3] Verify CloudWatch alarm: `aws cloudwatch describe-alarms --alarm-names bluths-api-budget-shutdown-errors --query 'MetricAlarms[0].{State:StateValue,Actions:AlarmActions,Threshold:Threshold,EvaluationPeriods:EvaluationPeriods}'` — confirm `AlarmActions` contains the topic ARN, `Threshold: 1`, `EvaluationPeriods: 5`
 - [X] T038 [US3] Verify EventBridge schedule and Lambda permission: `aws events describe-rule --name bluths-api-month-rollover-schedule` (expect `State: ENABLED`, `ScheduleExpression: cron(5 0 1 * ? *)`) and `aws events list-targets-by-rule --rule bluths-api-month-rollover-schedule` (expect one target whose `Arn` **ends with `:live`** — qualified alias ARN)
 - [X] T039 [US3] Verify rollover Lambda IAM is **read-only**: `aws iam get-role-policy --role-name bluths-api-month-rollover-role --policy-name ReadOnlyApiAndPublishSns` — confirm only `apigateway:GET` and `sns:Publish` actions; assert absence of any `*:PATCH`, `*:Update*`, or `*:Delete*`
@@ -220,7 +220,7 @@ Task T033: Add MonthRolloverCheckFunctionArn output
 6. US3 sub-phase 3c → monthly safety net.
 7. Polish → docs reconciled, repo grep clean.
 
-Each US3 sub-phase can be deployed separately if Brian prefers smaller increments. Recommended order: 3a → 3b → 3c.
+Each US3 sub-phase can be deployed separately if the operator prefers smaller increments. Recommended order: 3a → 3b → 3c.
 
 ### Single-Developer Strategy
 

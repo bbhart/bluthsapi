@@ -67,7 +67,7 @@ Basic README with endpoint list and example responses required.
 - Use Mangum adapter for FastAPI-to-Lambda compatibility
 
 ### Rate Limiting
-- Global throttling only via API Gateway (10 requests/second default)
+- Global throttling only via API Gateway (50 requests/second in production; see `GlobalRateLimit` in samconfig.toml)
 - No per-IP rate limiting (avoids infrastructure complexity and cost)
 - Return HTTP 429 with Retry-After header when limits exceeded
 - Rate limits must be configurable via API Gateway settings

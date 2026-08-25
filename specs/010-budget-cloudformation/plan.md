@@ -10,7 +10,7 @@ Replace the imperative `aws/setup-budget.sh` budget setup with native CloudForma
 Two reliability/observability additions from clarification session 2026-05-25:
 
 - **CloudWatch Alarm** on the shutdown Lambda's `Errors` metric — publishes to the same SNS topic so a silent kill-switch failure is visible.
-- **Month-rollover check Lambda** invoked on the 1st of each month by EventBridge — read-only; emails Brian if the API is still disabled from a prior-month shutdown, pointing at `docs/budget-reset.md`.
+- **Month-rollover check Lambda** invoked on the 1st of each month by EventBridge — read-only; emails the operator if the API is still disabled from a prior-month shutdown, pointing at `docs/budget-reset.md`.
 
 ## Technical Context
 
@@ -18,7 +18,7 @@ Two reliability/observability additions from clarification session 2026-05-25:
 **Primary Dependencies**: AWS SAM (`AWS::Serverless-2016-10-31`); CloudFormation resource types `AWS::SNS::Topic`, `AWS::SNS::TopicPolicy`, `AWS::SNS::Subscription`, `AWS::Budgets::Budget`, `AWS::IAM::Role`, `AWS::CloudWatch::Alarm`, `AWS::Events::Rule`, `AWS::Lambda::Permission` (used for both SNS→Lambda and EventBridge→Lambda invocation grants); Python `boto3` (already available in Lambda runtime) for the rollover check. NOTE: `AWS::Budgets::BudgetsAction` is NOT used — it does not support Lambda targets in CloudFormation (verified against the live schema). The $30→Lambda path is wired via SNS instead.
 **Storage**: N/A (infrastructure only)
 **Testing**: `sam validate`; manual `aws budgets describe-budget`, `aws sns get-topic-attributes`, `aws cloudwatch describe-alarms`, `aws events list-rules`; simulated breach via AWS Budgets console; manual `aws lambda invoke` for the rollover check
-**Target Platform**: AWS us-east-1, account <aws-account-id>
+**Target Platform**: AWS us-east-1, account <ACCOUNT_ID>
 **Project Type**: Single (infrastructure + one new small Lambda module)
 **Performance Goals**: N/A (the rollover Lambda runs ~12 times/year for <100ms each)
 **Constraints**: Monthly cost cap of $30 USD; resource names must remain stable to keep `docs/budget-reset.md` accurate; rollover Lambda MUST be read-only (FR-014)

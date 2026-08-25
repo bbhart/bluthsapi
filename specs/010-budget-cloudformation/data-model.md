@@ -37,7 +37,7 @@ Resources added to `template.yaml`. Existing resources (`BudgetShutdownFunction`
 | Protocol | `email` |
 | Endpoint | `<operator-email>` |
 
-**State transition**: Created in `PendingConfirmation`. Brian must click the confirmation link AWS emails after first deploy.
+**State transition**: Created in `PendingConfirmation`. the operator must click the confirmation link AWS emails after first deploy.
 
 ## 4. MonthlyBudget — `AWS::Budgets::Budget`
 
@@ -172,7 +172,7 @@ The earlier draft used `AWS::IAM::Role` (`bluths-api-budget-action-role`) and `A
 
 ```
 BudgetAlertsTopic ──┬──> BudgetAlertsTopicPolicy        (allow Budgets + CloudWatch publish)
-                    ├──> BudgetAlertsEmailSubscription   (email to Brian)
+                    ├──> BudgetAlertsEmailSubscription   (email to the operator)
                     ├──> MonthlyBudget                   ($20 + $30 notifications subscribe here)
                     ├──> BudgetShutdownErrorsAlarm       (alarm action)
                     └──> MonthRolloverCheckFunction      (env var SNS_TOPIC_ARN)

@@ -180,7 +180,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: bluths-api-month-rollover-check
-      Description: Reads prod stage throttle; emails Brian if API is still disabled at start of month.
+      Description: Reads prod stage throttle; emails the operator if API is still disabled at start of month.
       CodeUri: .
       Handler: app.month_rollover_check.handler
       Runtime: python3.13

@@ -1,6 +1,6 @@
 # Arrested Development Quotes API
 
-A read-only REST API serving memorable quotes from the TV show Arrested Development. Built with FastAPI and deployed as a Docker container.
+A read-only REST API serving memorable quotes from the TV show Arrested Development. Built with FastAPI, deployed to AWS Lambda with AWS SAM, and runnable locally with uvicorn or Docker. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together.
 
 ## Features
 
@@ -85,7 +85,7 @@ curl http://localhost:8000/api/quotes/tobias
 open http://localhost:8000/docs
 ```
 
-## Docker Deployment
+## Running with Docker (local)
 
 ### Build and Run
 
@@ -111,6 +111,9 @@ docker stop bluthsapi
 ### Using Docker Compose
 
 ```bash
+# One-time: compose reads .env, so create it first
+cp .env.example .env
+
 # Start services
 docker-compose up -d
 
@@ -150,7 +153,10 @@ source .venv/bin/activate
 # Install dev dependencies
 uv pip install -r requirements-dev.txt
 
-# Run all tests
+# One-time: the e2e tier drives a real browser via Playwright
+playwright install chromium
+
+# Run all tests (starts a local uvicorn server automatically)
 pytest
 
 # Run with coverage
@@ -186,12 +192,19 @@ bluthsapi/
 │   └── data/
 │       └── quotes.json      # Quote data
 ├── public/
-│   └── index.html           # Static documentation
+│   ├── index.html           # Landing page / API documentation
+│   └── prettyquote.html     # Shareable quote-card page
 ├── tests/
 │   ├── api/                 # API endpoint tests
 │   ├── e2e/                 # Playwright browser tests
 │   ├── pages/               # Page objects for e2e tests
 │   └── conftest.py          # pytest fixtures
+├── scripts/                 # Twitter-archive → quotes.json pipeline (see scripts/README.md)
+├── docs/                    # Architecture and operational docs
+├── specs/                   # Feature specs (spec-kit workflow)
+├── template.yaml            # AWS SAM / CloudFormation stack
+├── samconfig.toml           # SAM deploy configuration
+├── .github/workflows/       # CI: tests on PRs, deploy on push to main
 ├── Dockerfile               # Docker build configuration
 ├── docker-compose.yml       # Docker Compose setup
 ├── requirements.txt         # Production dependencies
@@ -207,8 +220,8 @@ bluthsapi/
 - **Framework**: FastAPI
 - **Server**: Uvicorn (ASGI server)
 - **Validation**: Pydantic
-- **Testing**: pytest with httpx
-- **Deployment**: Docker
+- **Testing**: pytest with httpx (API tier) and Playwright (e2e tier)
+- **Deployment**: AWS Lambda via AWS SAM (GitHub Actions on push to main); Docker for local runs
 - **Storage**: Static JSON file, images in AWS S3
 
 ## AWS Lambda Deployment
